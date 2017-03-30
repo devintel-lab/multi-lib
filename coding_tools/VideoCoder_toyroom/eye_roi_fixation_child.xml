@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : Config.xml
+    Created on : Feb 10, 2016, 12:30 PM
+    Updated on : July 29, 2016
+    Author     : 
+    Description:
+        This is template of the XXXX coding.  
+		Just change the following variables:
+		
+			id:    The subject name; same as the subject folder.
+			path:  Full path to the subject directory.
+			roi_output_path: can be absolute path or realtive path
+			roi_output_file: empty means to create a file name automatically
+			cstream_output_path: can be absolute path or realtive path
+			cstream_output_file: empty means to create a file name automatically
+                        section_file: if no section_file is specified or the file contains no data, all images should be coded
+			
+-->
+
+<Root>
+	<Experiment>
+			<id> __20170214_19536 </id>
+		<dyadMember> child </dyadMember>
+			<path> t:\multisensory\experiment_12\included </path>
+		<roi_output_path> supporting_files </roi_output_path>
+ 		<roi_output_file> coding_eye_roi_child </roi_output_file>
+   		<cstream_output_path> derived </cstream_output_path>
+		<cstream_output_file> cstream_eye_roi_child </cstream_output_file>
+		<image_offset> 30 </image_offset>
+		<image_step> 1/30 </image_step>
+		<NaN_figure> 26 </NaN_figure>
+	</Experiment>
+	<Section>
+		<section_file> </section_file>
+	</Section>
+</Root>
