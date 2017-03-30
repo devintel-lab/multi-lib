@@ -1,0 +1,6 @@
+highThresh_coeff 0.009043734703108
+lowThresh_coeff 0.006782801027331
+minDist_coeff 0.042392506420817
+
+% this file contains parameters for eye fixation finding algorithm
+% please do not alter this without informing txu@indiana.edu
