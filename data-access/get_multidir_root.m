@@ -13,7 +13,7 @@ function [ multidir ] = get_multidir_root( )
 multidir = getenv('MULTIDIR_ROOT');
 if strcmp(multidir, '')
 %     multidir = '/ein/multiwork';
-    multidir = '/bell/multiwork/';
+    multidir = '\bell\multiwork\';
 end
 
 end

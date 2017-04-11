@@ -90,9 +90,12 @@ if sum(ismember(option, [0 3])) > 0
         'cevent_eye_joint-attend_both_mutual_gaze'
         'cevent_eye_synched-attend_both_mutual_gaze'
         };
-    yargs.categories = 4;
+
     for y = 1:numel(yvars)
-        draw_correlation_plots('all', yvars{y}, cevmeasures, directory, nametags{y}, yargs);
+        yargs.categories = 4;
+%         draw_correlation_plots({'all', 12}, yvars{y}, cevmeasures, directory, nametags{y}, yargs);
+        yargs.categories = 25;
+        draw_correlation_plots(12, yvars{y}, cevmeasures, directory, [nametags{y} '_toyroom'], yargs);
     end
 end
 

@@ -150,7 +150,7 @@ for s = 1:numel(subs)
                     if isfield(args, 'cevent_measures')
                         measures = args.cevent_measures;
                     else
-                        measures = {'individual_prop_by_cat', 'individual_mean_dur_by_cat', 'individual_number_by_cat'};
+                        measures = {'individual_prop_by_cat', 'individual_mean_dur_by_cat', 'individual_freq_by_cat'};
                     end
                 case 'cont'
                     if isfield(args, 'cont_measures')

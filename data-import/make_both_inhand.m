@@ -7,8 +7,10 @@ for s = 1:numel(subs)
     for a = 1:2
         if all(cellfun(@(a) has_variable(subs(s), a), {sprintf('cstream_inhand_left-hand_obj-all_%s'...
                 ,agents{a}), sprintf('cstream_inhand_right-hand_obj-all_%s',agents{a})}))
+            gt = get_variable(subs(s), 'cstream_trials');
             left = get_variable(subs(s), sprintf('cstream_inhand_left-hand_obj-all_%s', agents{a}));
             right = get_variable(subs(s), sprintf('cstream_inhand_right-hand_obj-all_%s', agents{a}));
+            [gt,left,right] = align_cstreams(gt,left,right);
             both = [left(:,2) right(:,2)];
             log = both(:,1) ~= both(:,2);
             both(log,:) = 0;

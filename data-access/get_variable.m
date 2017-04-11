@@ -19,7 +19,7 @@ if ischar(subj_id)
 else
     filename = get_variable_path(subj_id, varname);
 end
-var_data = false;
+var_data = [];
 if ~exist(filename, 'file')
     if ~force
         error('Requested variable doesn''t exist! %d / %s \n(No such file: ''%s'')', ...

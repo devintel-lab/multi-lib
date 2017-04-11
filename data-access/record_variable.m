@@ -13,61 +13,49 @@ function [ filename ] = record_variable( subject_id, variable_name, data )
 %   The return value is the filename where the data was saved.
 %
 
-global RECORDED_VARIABLES
+authorized_members = {
+    'sbf'
+    'txu'
+    'chenyu'
+    };
 
-% if ~ is_variable_documented(variable_name)
-%     display('WARNING!  Variable is not documented yet!')
-% end
-
-
-matlab_user = getenv('MATLAB_USER');
-if isempty(matlab_user)
-    try
-        matlab_user = get_real_user();
-        setenv('MATLAB_USER', matlab_user);
-    catch Err
-        warning('Couldn''t find name of "real" matlab user');
-    end
+if ~is_core_variable(variable_name)
+    error('%s is not a core variable, please use record_additional_variable instead', variable_name);
 end
-
 
 filename = get_variable_path(subject_id, variable_name);
 
+if isempty(getenv('IU_username'))
+    IU_username = input('enter IU username: ', 's');
+    setenv('IU_username', IU_username);
+end
+
+user = getenv('IU_username');
+if ~ismember(user, authorized_members)
+    error('%s is not an authorized member, please contact Chen', user);
+end
 
 sdata.variable = variable_name;
 sdata.data = data;
 sdata.info.stack = get_stack();
-sdata.info.user = matlab_user;
 sdata.info.timestamp = datestr(now);
 sdata.info.subject = subject_id;
 sdata.info.path = filename;
+sdata.info.hostname = getenv('computername');
+sdata.info.user = getenv('IU_username');
 
-[status, hostname] = system('hostname');
-if isequal(status, 0)
-    % strcat strips off the trailing newline \n
-    sdata.info.hostname = strcat(hostname);
-else
-    sdata.info.hostname = [];
-end
-
-
-if getenv('MATLAB_NO_RECORD_VARIABLE')
-    RECORDED_VARIABLES{end+1} = sdata;
-    fprintf('Pretended to save variable "%s" for subject %d\n', variable_name, subject_id);
-else
-    save(filename, 'sdata');
-    fprintf('Saved variable "%s" for subject %d\n', variable_name, subject_id);
-end
-
+save(filename, 'sdata');
+fprintf('Saved variable "%s" for subject %d\n', variable_name, subject_id);
 
 end
+
 
 
 function stack = get_stack()
 try
-   error('Caught');
+    error('Caught');
 catch ME
-   stack = ME.stack(2:end); % don't show get_stack() on the list
+    stack = ME.stack(2:end); % don't show get_stack() on the list
 end
 end
 

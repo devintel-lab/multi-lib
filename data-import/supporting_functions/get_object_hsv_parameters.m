@@ -130,25 +130,35 @@ switch exp_id
         obj_hsv_params.red_v_low_parent = 0.3;
         
     case 16
-        obj_hsv_params.obj_list = [1 2 3];
+        obj_hsv_params.obj_list = [1 2 3 4 5];
         
         obj_hsv_params.blue_h_low = 0.55;
         obj_hsv_params.blue_h_high = 0.70;
-        obj_hsv_params.blue_s_low = 0.3;
+        obj_hsv_params.blue_s_low = 0.4;
 
-        obj_hsv_params.green_h_low = 0.25; %0.25
-        obj_hsv_params.green_h_high = 0.5;
-        obj_hsv_params.green_s_low = 0.40; %0.2
-        
-        obj_hsv_params.red_h_low_child = 0.80;
-        obj_hsv_params.red_h_andhigh_child = 0.975;
+        obj_hsv_params.green_h_low = 0.25;
+        obj_hsv_params.green_h_high = 0.40;
+        obj_hsv_params.green_s_low = 0.5;
+
+        obj_hsv_params.red_h_low_child = 0.96;
+        obj_hsv_params.red_h_orhigh_child = 0.04;
         obj_hsv_params.red_s_low_child = 0.6;
-        obj_hsv_params.red_v_low_child = 0.2;
-
-        obj_hsv_params.red_h_low_parent = 0.78;
-        obj_hsv_params.red_h_orhigh_parent = 0.05;
-        obj_hsv_params.red_s_low_parent = 0.4;
-        obj_hsv_params.red_v_low_parent = 0.3;
+        obj_hsv_params.red_v_low_child = 0.3;
+ 
+        obj_hsv_params.red_h_low_parent = 0.96;
+        obj_hsv_params.red_h_orhigh_parent = 0.04;
+        obj_hsv_params.red_s_low_parent = 0.6;
+        obj_hsv_params.red_v_low_parent = 0.4;
+        
+        obj_hsv_params.yellow_h_low = 0.13;
+        obj_hsv_params.yellow_h_high = 0.25;
+        obj_hsv_params.yellow_s_low = 0.6;
+        obj_hsv_params.yellow_v_low = 0.4;
+        
+        obj_hsv_params.pink_h_low = 0.85;
+        obj_hsv_params.pink_h_high = 0.96;
+        obj_hsv_params.pink_s_low = 0.5;
+        obj_hsv_params.pink_v_low = 0.3;
         
     case 17        
         obj_hsv_params.obj_list = [1 2 3];

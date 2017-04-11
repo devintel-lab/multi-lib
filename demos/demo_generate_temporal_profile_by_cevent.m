@@ -73,7 +73,7 @@ elseif DEMO_ID == 2
          2 2 1;
          3 3 3];
     profile_input.groupid_label = {'target', 'non-target', 'face'};
-
+   
     profile_data = temporal_profile_generate_by_cevent(profile_input);
     temporal_profile_save_csv_plot(profile_data, '.');
 

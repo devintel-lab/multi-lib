@@ -14,7 +14,7 @@ function out = cont2scaled(IDs, varname, refactor, maxval, nbins, rgb1, rgb2)
 %       [1 0 0] for obj3
 %       [0 1 0] for obj2
 %       [0 0 1] for obj1
-% out is a structure intended for direct input into vis_streams function
+% out is a structure intended for direct input into vis_streams_multiwork function
 subs = cIDs(IDs);
 out.sub_list = subs;
 out.data = cell(numel(subs), 1);

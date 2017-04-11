@@ -15,7 +15,7 @@ if sum(ismember(data(:,1), list_subjects())) ~= length(data(:,1))
 end
 
 if ~exist('IDs', 'var') || isempty(IDs)
-    subs = cIDs([]);
+    subs = cIDs('all');
 else
     subs = cIDs(IDs);
 end

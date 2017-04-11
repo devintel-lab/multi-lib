@@ -1,4 +1,4 @@
-function master_derived_toy_room(subexpIDs, option)
+function master_derived_toy_room(subexpIDs, option, flagReliability)
 % postfixation
 % all
 %   trial
@@ -7,6 +7,9 @@ function master_derived_toy_room(subexpIDs, option)
 %   ja
 %   inhand-roi
 
+if ~exist('flagReliability', 'var')
+    flagReliability = 0;
+end
 subs = cIDs(subexpIDs);
 
 for s = 1:numel(subs)
@@ -37,11 +40,19 @@ for s = 1:numel(subs)
         pause(1);
         for a = 1:2
             agent = agents{a};
-            fn = [strrep(root, '\bell\multiwork', '\cantor\temp_backus\multisensory') fs 'derived' fs sprintf('cstream_eye_roi_%s.mat', agent)];
+            if flagReliability
+                fn = [strrep(root, '\bell\multiwork', '\cantor\temp_backus\multisensory') fs 'reliability' fs sprintf('cstream_eye_roi_%s_reliability.mat', agent)];
+            else
+                fn = [strrep(root, '\bell\multiwork', '\cantor\temp_backus\multisensory') fs 'derived' fs sprintf('cstream_eye_roi_%s.mat', agent)];
+            end
             if exist(fn, 'file')
                 load(fn);
                 data = sdata.data;
-                fixations = get_csv_data_v2([root fs 'supporting_files' fs 'fixation_frames_' agent '.txt']);
+                if flagReliability
+                    fixations = get_csv_data_v2([root fs 'reliability' fs 'fixation_frames_' agent '_reliability.txt']);
+                else
+                    fixations = get_csv_data_v2([root fs 'supporting_files' fs 'fixation_frames_' agent '.txt']);
+                end
                 for f = 1:size(fixations, 1)
                     data(fixations(f,1):fixations(f,2),2) = data(fixations(f,3),2);
                 end
@@ -49,9 +60,9 @@ for s = 1:numel(subs)
                 data(log,2) = -1;
                 data(data(:,2)==-1,2) = NaN;
 %                 data(isnan(data(:,2)), 2) = 0;
-                record_variable(sub, ['cstream_eye_roi_' agent], data);
+                record_variable_into_specified_directory(sub, 'reliability', ['cstream_eye_roi_' agent '_reliability'], data);
                 cev = cstream2cevent(data);
-                record_variable(sub, ['cevent_eye_roi_' agent], cev);
+                record_variable_into_specified_directory(sub, 'reliability', ['cevent_eye_roi_' agent '_reliability'], cev);
             end
         end
     end

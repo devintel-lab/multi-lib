@@ -7,7 +7,7 @@ function exceptions = master_data_vis(IDs, option, args)
 % 5 naming_holding_vision_gaze
 
 if ~exist('IDs', 'var') || isempty(IDs)
-    IDs = [];
+    IDs = 'all';
 end
 
 if ~exist('option', 'var') || isempty(option)

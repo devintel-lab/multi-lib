@@ -54,7 +54,7 @@ switch option
         % 'obj#' means the function will grab 'cont_vision_obj1_child',
         % 'cont_vision_obj2_child', and 'cont_vision_obj3_child'
         var_list = {'cevent_inhand_child', 'cevent_eye_roi_child', 'cont_vision_size_obj#_child'};
-        subexpIDs = [3201 3202 3203]; % this can also be a list of experiments
+        subexpIDs = [32]; % this can also be a list of experiments
         filename = '/scratch/multimaster/demo_results/extract_multi_measures/example1.csv';
         args = [];
         extract_multi_measures(var_list, subexpIDs, filename, args);
@@ -63,7 +63,7 @@ switch option
         %% same as above, with with args.persubject = 1 -- each row will be all trials concatenated together. args.persubject = 1 will work with any of examples in this demo
         
         var_list = {'cevent_inhand_child', 'cevent_eye_roi_child', 'cont_vision_size_obj#_child'};
-        subexpIDs = [3201 3202 3203]; % this can also be a list of experiments
+        subexpIDs = [32]; % this can also be a list of experiments
         filename = '/scratch/multimaster/demo_results/extract_multi_measures/example2.csv';
         args.persubject = 1;
         extract_multi_measures(var_list, subexpIDs, filename, args);
@@ -72,10 +72,10 @@ switch option
         %% get data at specific window by specifying args.cevent_name, args.cevent_values, args.label_matrix, and args.label_names -- each row will be one naming instance
         
         var_list = {'cevent_inhand_child', 'cevent_eye_roi_child', 'cont_vision_size_obj#_child'};
-        subexpIDs = [3201 3202 3203]; % this can also be a list of experiments
+        subexpIDs = [32]; % this can also be a list of experiments
         filename = '/scratch/multimaster/demo_results/extract_multi_measures/example3.csv';
         args.cevent_name = 'cevent_speech_naming_local-id'; % these are the windows of time, or instances, from which data will be extracted and measured
-        args.cevent_values = 1:3; % which categories in cevet_name you wish to use
+        args.cevent_values = 1:3; % which categories in cevent_name you wish to use
         %% label_matrix explanation
         % -this is a 3 x 3 matrix, mapping the categories in the var_list
         % variables to those categories in the cevent_name variable.
@@ -121,7 +121,7 @@ switch option
         %% if a subject is missing either the cevent_name, or the variable in var_list, it will fill the csv with NaN values
         
         var_list = {'cevent_inhand_child', 'cevent_eye_roi_does_not_exist', 'cont_vision_size_obj#_child'};
-        subexpIDs = [3201 3202 3203]; % this can also be a list of experiments
+        subexpIDs = [32]; % this can also be a list of experiments
         filename = '/scratch/multimaster/demo_results/extract_multi_measures/example4.csv';
         args = [];
         extract_multi_measures(var_list, subexpIDs, filename, args);
@@ -140,7 +140,7 @@ switch option
         % what is possible, and whatever is extra will be ignored.
         
         var_list = {'cevent_inhand_child', 'cevent_eye_roi_child', 'cont_vision_size_obj#_child', 'cevent_eye_joint-attend_both'};
-        subexpIDs = [3201 3202 3203]; % this can also be a list of experiments
+        subexpIDs = [32]; % this can also be a list of experiments
         filename = '/scratch/multimaster/demo_results/extract_multi_measures/example5.csv';
         args.cevent_name = 'cevent_speech_naming_local-id';
         args.cevent_values = 1:3;
@@ -154,7 +154,7 @@ switch option
     case 6
         %% use custom ranges based on 2 or 3 columns in a csv file
         
-        csvdata = get_csv_form('/scratch/multimaster/demo_results/extract_pairs_multiwork/example1.csv', [2 6]);
+        csvdata = get_csv_form('/scratch/multimaster/demo_results/extract_pairs_multiwork/case1/example1.csv', [2 6]);
         subexpIDs = csvdata.sub_list;
         args.event_ranges = csvdata.ranges; % of if cevent, args.cevent_ranges
         var_list = {'cevent_inhand_child', 'cevent_eye_roi_child', 'cont_vision_size_obj#_child', 'cevent_eye_joint-attend_both'};
@@ -165,7 +165,7 @@ switch option
         %% use the within_ranges parameter. Specifying args.within_ranges = 0 will use in-between cevents as the base time windows. This may be useful for calculating baseline measures.
         
         var_list = {'cevent_inhand_child', 'cevent_eye_roi_child', 'cont_vision_size_obj#_child', 'cevent_eye_joint-attend_both'};
-        subexpIDs = [3201 3202 3203]; % this can also be a list of experiments
+        subexpIDs = [32]; % this can also be a list of experiments
         filename = '/scratch/multimaster/demo_results/extract_multi_measures/example7.csv';
         args.cevent_name = 'cevent_speech_naming_local-id';
         args.cevent_values = 1:3;
@@ -177,7 +177,7 @@ switch option
         %% specify interval and whence parameters to shift your base cevent by a certain amount, and extract data during these shifted time windows. E.g. measure ROI 5 seconds before each inhand.
         
         var_list = {'cevent_eye_roi_child', 'cevent_eye_roi_parent'};
-        subexpIDs = [3201 3202 3203]; % this can also be a list of experiments
+        subexpIDs = [32]; % this can also be a list of experiments
         filename = '/scratch/multimaster/demo_results/extract_multi_measures/example8.csv';
         args.whence = 'start'; % the point of reference, which is either the 'start' of the cevent (onset), or the 'end' of the cevent (offset)
         args.interval = [-5 0]; % the shift relative to the point of reference indicated in whence.
@@ -199,7 +199,7 @@ switch option
         % specify specific measures for cevent and cont based measures
         
         var_list = {'cevent_eye_roi_child', 'cont_vision_size_obj#_child'};
-        subexpIDs = [3201 3202 3203]; % this can also be a list of experiments
+        subexpIDs = [32]; % this can also be a list of experiments
         filename = '/scratch/multimaster/demo_results/extract_multi_measures/example9.csv';
         args.cevent_measures = {'individual_prop'};
         args.cont_measures = {'individual_mean'};

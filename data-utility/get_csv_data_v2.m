@@ -23,7 +23,10 @@ function [out, headers] = get_csv_data_v2(csv, columns, IDs)
 % of commas in each row, including the header lines.
 %
 
-
+root = fullfile(get_multidir_root, 'data_vis', 'correlation');
+if exist(fullfile(root, csv), 'file')
+    csv = fullfile(root, csv);
+end 
 
 [headers, i] = get_csv_headers(csv);
 

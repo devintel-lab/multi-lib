@@ -93,7 +93,7 @@ switch option
         record_cstream = 1;
         
     case 8 % roi sustained 1s
-        min_max_gap = 0.5;
+        min_max_gap = 0.25;
         max_max_gap = 1;
         min_duration = 1;
         variable_name = 'cevent_eye_roi_child';

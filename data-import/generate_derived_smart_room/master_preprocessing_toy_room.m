@@ -1,4 +1,7 @@
-function master_preprocessing_toy_room(kidIDs, expID, option)
+function master_preprocessing_toy_room(kidIDs, expID, option, flagReliability)
+if ~exist('flagReliability', 'var')
+    flagReliability = 0;
+end
 agents = {'child', 'parent'};
 for k = 1:numel(kidIDs)
     kid = kidIDs(k);
@@ -33,7 +36,9 @@ for k = 1:numel(kidIDs)
                 tbvel(tbvel(:,2)>200,2) = NaN;
                 sdata.data = tbvel;
                 sdata.variable = ['cont_eye_xy-speed_' agent];
-                save(fullfile(root,'derived',[sdata.variable '.mat']), 'sdata');
+                if ~flagReliability
+                    save(fullfile(root,'derived',[sdata.variable '.mat']), 'sdata');
+                end
                 frxy = [fr xy];
                 padding = 100;
                 xmax = 720+padding;
@@ -70,27 +75,43 @@ for k = 1:numel(kidIDs)
                 meanframe = round(mean(fixations,2));
                 towrite = fixations;
                 towrite(:,3) = meanframe;
-                write2csv(towrite,fullfile(root,'supporting_files',['fixation_frames_' agent '.txt']), 'onset,offset,middleframe');
+                if flagReliability
+                    if ~exist(fullfile(root, 'reliability'), 'dir')
+                        mkdir(fullfile(root, 'reliability'));
+                    end
+                    write2csv(towrite,fullfile(root,'reliability',['fixation_frames_' agent '_reliability.txt']), 'onset,offset,middleframe');
+                else
+                    write2csv(towrite,fullfile(root,'supporting_files',['fixation_frames_' agent '_reliability.txt']), 'onset,offset,middleframe');
+                end
                 fixations(1:2:end,3) = 1;
                 fixations(2:2:end,3) = 2;
                 frcst = cevent2cstreamtb(fixations, fr);
                 tbcst = [tb frcst(:,2)];
                 sdata.variable = ['cstream_fixations_' agent];
                 sdata.data = tbcst;
-                save(fullfile(root,'derived',['cstream_fixations_' agent]), 'sdata');
+                if ~flagReliability
+                    save(fullfile(root,'derived',['cstream_fixations_' agent]), 'sdata');
+                end
                 tbcev = cstream2cevent(tbcst);
                 sdata.variable = ['cevent_fixations_' agent];
                 sdata.data = tbcev;
-                save(fullfile(root,'derived',['cevent_fixations_' agent]), 'sdata');
+                if ~flagReliability
+                    save(fullfile(root,'derived',['cevent_fixations_' agent]), 'sdata');
+                end
                 fixations(1:2:end,3) = 27;
                 fixations(2:2:end,3) = 28;
                 frcst = cevent2cstreamtb(fixations, fr);
                 frcst(meanframe,2) = -1;
                 log = frcst(:,2) == 0;
                 frcst(log,2) = NaN;
-                codingfile = fullfile(root,'supporting_files', ['coding_eye_roi_' agent '.mat']);
                 sdata.data = frcst;
-                sdata.variable = ['coding_eye_roi_' agent];
+                if flagReliability
+                    codingfile = fullfile(root,'reliability', ['coding_eye_roi_' agent '_reliability.mat']);
+                    sdata.variable = ['coding_eye_roi_' agent '_reliability'];
+                else
+                    codingfile = fullfile(root,'supporting_files', ['coding_eye_roi_' agent '.mat']);
+                    sdata.variable = ['coding_eye_roi_' agent];
+                end
                 save(codingfile, 'sdata');
                 fprintf('Saved file : %s\n', codingfile);
             end

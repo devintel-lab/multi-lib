@@ -46,6 +46,16 @@ bottom = 0;
 
 numdata = numel(celldata);
 
+for d = 1:numel(celldata)
+    cevorcst = celldata{d};
+    if size(cevorcst,2) == 2
+        cev = cstream2cevent(cevorcst);
+    else
+        cev = cevorcst;
+    end
+    celldata{d} = cev;
+end
+
 if isempty(window_times) % create trials, 120 seconds each, starting from earliest timestamp in the data 
     begin_times = zeros(1,numel(celldata));
     end_times = begin_times;
@@ -84,15 +94,9 @@ end
 
 label_pos = [];
 for d = 1:numel(celldata)
-    cevorcst = celldata{d}; % cevent or cstream
-    if ~isempty(cevorcst)
-        
-        if size(cevorcst,2) == 2
-            cev = cstream2cevent(cevorcst);
-        else
-            cev = cevorcst;
-        end
-        
+    cev = celldata{d}; % cevent or cstream
+    if ~isempty(cev)
+
         cellcev = event_extract_ranges(cev, window_times);
 
         for c = 1:numel(cellcev)
@@ -124,5 +128,9 @@ for n = 1:numplots
     set(gca, 'yticklabel', streamlabels);
     set(gca, 'ticklength', [0 0])
 end
+p = pan(h);
+p.Motion = 'horizontal';
+z = zoom(h);
+z.Motion = 'horizontal';
 
 end

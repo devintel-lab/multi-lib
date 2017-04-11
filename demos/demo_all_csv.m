@@ -38,13 +38,13 @@ list_files('cstream inhand child age prop') % will list all files with those sub
 % this function gets data from a csv file
 
 % The only requirement is a valid csv file name
-data = get_csv_data('cevent_inhand-eye_child-child_freq_vs_age.csv');
+data = get_csv_data('cevent_inhand-eye_child-child_freq_vs_age_all.csv');
 
 % Optionally, you can specify a subject list or experiment list
-data = get_csv_data('cevent_inhand-eye_child-child_freq_vs_age.csv', [], [43 32]);
+data = get_csv_data('cevent_inhand-eye_child-child_freq_vs_age_all.csv', [], [43 32]);
 
 % Lastly, you can also specify which columns of data you want
-data = get_csv_data('cevent_inhand-eye_child-child_freq_vs_age.csv', 2, [43 44]);
+data = get_csv_data('cevent_inhand-eye_child-child_freq_vs_age_all.csv', 2, [43 44]);
 
 % data is a structure with these fields:
 % sub_list
@@ -57,13 +57,13 @@ data = get_csv_data('cevent_inhand-eye_child-child_freq_vs_age.csv', 2, [43 44])
 % this function gets data from csv, but grouped together based on input
 % group mapping
 
-csv = 'cstream_inhand_right-hand_obj-all_parent_prop_vs_age.csv';
+csv = 'cstream_inhand_right-hand_obj-all_parent_prop_vs_age_all.csv';
 grouping = [1 2 2 3]; % this means the data for 4301 will be in group1, 4302 and 4303 will be in group2, and 4304 in group3
 IDs = [4301 4302 4303 4304];
 cdata = group_csv_data(csv, grouping, IDs);
 
 %% group_csv_data #2
-csv = 'cstream_inhand_right-hand_obj-all_parent_prop_vs_age.csv';
+csv = 'cstream_inhand_right-hand_obj-all_parent_prop_vs_age_all.csv';
 grouping = '/ein/multiwork/data_vis/grouping_example.csv'; % this is a csv with a list of some subjects in exp 43 in column 1 and the grouping categories in column 2
 IDs = 43; % this is a list of all subjects in 43 -- the script will just take the overlap between these subjects and the subjects indicated in the grouping column1
 cdata = group_csv_data(csv, grouping, IDs);
@@ -72,7 +72,7 @@ cdata = group_csv_data(csv, grouping, IDs);
 % this function will draw a correlation plot but will group data into bins
 % according to grouping input
 
-csv_base = 'cevent_eye_joint-attend_both_freq_vs_age.csv';
+csv_base = 'cevent_eye_joint-attend_both_freq_vs_age_all.csv';
 csv_group = '/ein/multiwork/data_vis/mcdi_example.csv';
 draw_csv_group(csv_base, csv_group);
 
