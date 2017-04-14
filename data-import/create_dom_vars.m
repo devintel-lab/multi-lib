@@ -1,10 +1,6 @@
 function create_dom_vars(subexpIDs, rel_prop, threshold, obj_list, max_threshold)
 
-if numel(num2str(subexpIDs(1))) > 2
-    subs = subexpIDs;
-else
-    subs = list_subjects(subexpIDs);
-end
+subs = subexpIDs;
 
 person = {'child' 'parent'};
 if ~exist('obj_list', 'var') || isempty(obj_list)
@@ -21,7 +17,7 @@ for p = 1 : numel(person)
         names{o} = ['cont_vision_size_' obj{o} '_' person{p}];
     end
     for s = 1 : numel(subs)
-        vars = get_variables(subs(s), names);
+        vars = cellfun(@(a) get_variable(subs(s), a), names, 'un', 0);
         for t = 1 : numel(threshold)
             for r = 1:numel(rel_prop)
                 if exist('max_threshold', 'var')

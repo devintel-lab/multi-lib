@@ -29,7 +29,11 @@ e = 1;
 for s = 1:numel(subs)
     joint_pass = 1; %if stays 1, will run joint_eye_inhand script
     
-    obj_list = [1:get_num_obj(subs(s))];
+    if ismember(sub2exp(subs(s)), [18 23])
+        obj_list = 1:5;
+    else
+        obj_list = 1:3;
+    end
     
     %% trial
     if sum(ismember(modules, {'trial', 'all'})) > 0
@@ -116,7 +120,7 @@ for s = 1:numel(subs)
         fprintf('\nProcessing vision for %d\n', subs(s));
         pause(1);
         try
-            findAndReplaceBlueFrames(subs(s));
+%             findAndReplaceBlueFrames(subs(s));
             make_vision_variables(subs(s), obj_list);
             create_dom_vars(subs(s), [2/3 1/2], [3 5], obj_list); %2/3 is for 2x-, 3 is big and 5 is dominant
             master_make_sustained(subs(s), [1,2,5,6]);
