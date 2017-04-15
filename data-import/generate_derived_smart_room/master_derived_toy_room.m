@@ -43,7 +43,7 @@ for s = 1:numel(subs)
             if flagReliability
                 fn = [root fs 'reliability' fs sprintf('coding_eye_roi_%s_reliability.mat', agent)];
             else
-                fn = [root fs 'derived' fs sprintf('cstream_eye_roi_%s.mat', agent)];
+                fn = [root fs 'derived' fs sprintf('coding_eye_roi_%s.mat', agent)];
             end
             if exist(fn, 'file')
                 load(fn);
