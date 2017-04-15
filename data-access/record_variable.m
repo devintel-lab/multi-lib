@@ -17,6 +17,9 @@ authorized_members = {
     'sbf'
     'txu'
     'chenyu'
+    'glisandr'
+    'antchen'
+    'dhabney'
     };
 
 if ~is_core_variable(variable_name)
