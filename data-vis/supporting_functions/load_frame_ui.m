@@ -160,7 +160,7 @@ else
     startframeidx = floor((axh.UserData.LastPoint-30)*30);
     framelist = startframeidx:1:frameidx;
     linepos = linspace(axh.UserData.LastPoint, axh.CurrentPoint(1), length(framelist));
-    toskip = 5;
+    toskip = 3;
     skip = toskip;
     numdata = length(framelist)*axm.UserData.numsensors;
     axz.UserData.s2.XData = nan(1,numdata);
