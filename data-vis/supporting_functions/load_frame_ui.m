@@ -25,12 +25,12 @@ figure(z); % topdown scatter plot
 axz = axes;
 axz.UserData.s2 = scatter(1,1, 'filled');
 axz.UserData.colors = [
-    0 1 1
-    1 0 1
-    0 .8 1
-    0 .8 .8
-    1 0 .8
-    1 0 .6];
+    0.0784    0.1686    0.5490;
+    0.6353    0.0784    0.1843;
+         0         0    1.0000;
+         0    1.0000    1.0000;
+    0.4941    0.1843    0.5569;
+    1.0000         0    1.0000;];
 % axz.UserData.s2.CData = axz.UserData.colors;
 patch([-400 -400 450 450], [-500 100 100 -500], [45 45 45 45], [0 0.4471 0.7412]);
 x_lim = [-400 450];
@@ -39,6 +39,7 @@ xlim(x_lim);
 ylim(y_lim);
 xlabel('x');
 ylabel('y');
+axz.Title.String = 'accumulated sensor position topdown view';
 
 figure(m);
 axm = axes;
@@ -48,7 +49,8 @@ axm.UserData.vert = [0 0 0; 0 50 0; 50 50 0; 50 0 0; 0 0 50; 0 50 50; 50 50 50; 
 axm.UserData.obj(1) = patch('vertices', axm.UserData.vert, 'faces', [1 2 3 4;5 6 7 8;1 2 6 5;4 3 7 8;1 5 8 4;2 3 7 6], 'facecolor', 'b');
 axm.UserData.obj(2) = patch('vertices', axm.UserData.vert, 'faces', [1 2 3 4;5 6 7 8;1 2 6 5;4 3 7 8;1 5 8 4;2 3 7 6], 'facecolor', 'g');
 axm.UserData.obj(3) = patch('vertices', axm.UserData.vert, 'faces', [1 2 3 4;5 6 7 8;1 2 6 5;4 3 7 8;1 5 8 4;2 3 7 6], 'facecolor', 'r');
-axm.UserData.gazeline = line([NaN NaN NaN NaN NaN], [NaN NaN NaN NaN NaN], [NaN NaN NaN NaN NaN], 'color', 'k', 'linestyle', '--');
+axm.UserData.gazeline_c = line([NaN NaN], [NaN NaN], [NaN NaN], 'color', [0 0.7 1], 'linestyle', '--');
+axm.UserData.gazeline_p = line([NaN NaN], [NaN NaN], [NaN NaN], 'color', [1 0 .6], 'linestyle', '--');
 axm.UserData.sensors = sensors;
 axm.UserData.numsensors = length(sensors);
 axm.UserData.mosdata = mosdata;
@@ -100,12 +102,18 @@ if hit.Button == 1
     axm.UserData.ll.XData(2:3:end) = axm.UserData.mosdata.x(frameidx,:);
     axm.UserData.ll.YData(2:3:end) = axm.UserData.mosdata.y(frameidx,:);
     axm.UserData.ll.ZData(2:3:end) = axm.UserData.mosdata.z(frameidx,:);
-    axm.UserData.gazeline.XData = [NaN NaN NaN NaN NaN];
-    axm.UserData.gazeline.YData = [NaN NaN NaN NaN NaN];
-    axm.UserData.gazeline.ZData = [NaN NaN NaN NaN NaN];
-    axm.UserData.gazeline.XData([1 4]) = axm.UserData.mosdata.x(frameidx, [1 2]);
-    axm.UserData.gazeline.YData([1 4]) = axm.UserData.mosdata.y(frameidx, [1 2]);
-    axm.UserData.gazeline.ZData([1 4]) = axm.UserData.mosdata.z(frameidx, [1 2]);
+    axm.UserData.gazeline_c.XData = [NaN NaN];
+    axm.UserData.gazeline_c.YData = [NaN NaN];
+    axm.UserData.gazeline_c.ZData = [NaN NaN];
+    axm.UserData.gazeline_p.XData = [NaN NaN];
+    axm.UserData.gazeline_p.YData = [NaN NaN];
+    axm.UserData.gazeline_p.ZData = [NaN NaN];
+    axm.UserData.gazeline_c.XData(1) = axm.UserData.mosdata.x(frameidx, 1);
+    axm.UserData.gazeline_c.YData(1) = axm.UserData.mosdata.y(frameidx, 1);
+    axm.UserData.gazeline_c.ZData(1) = axm.UserData.mosdata.z(frameidx, 1);
+    axm.UserData.gazeline_p.XData(1) = axm.UserData.mosdata.x(frameidx, 2);
+    axm.UserData.gazeline_p.YData(1) = axm.UserData.mosdata.y(frameidx, 2);
+    axm.UserData.gazeline_p.ZData(1) = axm.UserData.mosdata.z(frameidx, 2);
     for o = 1:3
         if axm.UserData.inhand.log(frameidx,o) == 1
             newframeidx = axm.UserData.inhand.inhand(frameidx,o);
@@ -128,26 +136,26 @@ if hit.Button == 1
             end
         end
         if axm.UserData.roi(frameidx,1) == o
-            axm.UserData.gazeline.XData(2) = axm.UserData.obj(o).Vertices(1,1);
-            axm.UserData.gazeline.YData(2) = axm.UserData.obj(o).Vertices(1,2);
-            axm.UserData.gazeline.ZData(2) = axm.UserData.obj(o).Vertices(1,3);
+            axm.UserData.gazeline_c.XData(2) = axm.UserData.obj(o).Vertices(1,1);
+            axm.UserData.gazeline_c.YData(2) = axm.UserData.obj(o).Vertices(1,2);
+            axm.UserData.gazeline_c.ZData(2) = axm.UserData.obj(o).Vertices(1,3);
         end
         if axm.UserData.roi(frameidx,2) == o
-            axm.UserData.gazeline.XData(5) = axm.UserData.obj(o).Vertices(1,1);
-            axm.UserData.gazeline.YData(5) = axm.UserData.obj(o).Vertices(1,2);
-            axm.UserData.gazeline.ZData(5) = axm.UserData.obj(o).Vertices(1,3);
+            axm.UserData.gazeline_p.XData(2) = axm.UserData.obj(o).Vertices(1,1);
+            axm.UserData.gazeline_p.YData(2) = axm.UserData.obj(o).Vertices(1,2);
+            axm.UserData.gazeline_p.ZData(2) = axm.UserData.obj(o).Vertices(1,3);
         end
     end
     
     if axm.UserData.roi(frameidx,1) == 4
-        axm.UserData.gazeline.XData(2) = axm.UserData.mosdata.x(frameidx, 2);
-        axm.UserData.gazeline.YData(2) = axm.UserData.mosdata.y(frameidx, 2);
-        axm.UserData.gazeline.ZData(2) = axm.UserData.mosdata.z(frameidx, 2);
+        axm.UserData.gazeline_c.XData(2) = axm.UserData.mosdata.x(frameidx, 2);
+        axm.UserData.gazeline_c.YData(2) = axm.UserData.mosdata.y(frameidx, 2);
+        axm.UserData.gazeline_c.ZData(2) = axm.UserData.mosdata.z(frameidx, 2);
     end
     if axm.UserData.roi(frameidx,2) == 4
-        axm.UserData.gazeline.XData(5) = axm.UserData.mosdata.x(frameidx, 1);
-        axm.UserData.gazeline.YData(5) = axm.UserData.mosdata.y(frameidx, 1);
-        axm.UserData.gazeline.ZData(5) = axm.UserData.mosdata.z(frameidx, 1);
+        axm.UserData.gazeline_p.XData(2) = axm.UserData.mosdata.x(frameidx, 1);
+        axm.UserData.gazeline_p.YData(2) = axm.UserData.mosdata.y(frameidx, 1);
+        axm.UserData.gazeline_p.ZData(2) = axm.UserData.mosdata.z(frameidx, 1);
     end
     
     for cc = 1:length(b.UserData.camIDs)
@@ -196,12 +204,18 @@ else
         axm.UserData.ll.XData(2:3:end) = axm.UserData.mosdata.x(framelist(s),:);
         axm.UserData.ll.YData(2:3:end) = axm.UserData.mosdata.y(framelist(s),:);
         axm.UserData.ll.ZData(2:3:end) = axm.UserData.mosdata.z(framelist(s),:);
-        axm.UserData.gazeline.XData = [NaN NaN NaN NaN NaN];
-        axm.UserData.gazeline.YData = [NaN NaN NaN NaN NaN];
-        axm.UserData.gazeline.ZData = [NaN NaN NaN NaN NaN];
-        axm.UserData.gazeline.XData([1 4]) = axm.UserData.mosdata.x(framelist(s), [1 2]);
-        axm.UserData.gazeline.YData([1 4]) = axm.UserData.mosdata.y(framelist(s), [1 2]);
-        axm.UserData.gazeline.ZData([1 4]) = axm.UserData.mosdata.z(framelist(s), [1 2]);
+        axm.UserData.gazeline_c.XData = [NaN NaN];
+        axm.UserData.gazeline_c.YData = [NaN NaN];
+        axm.UserData.gazeline_c.ZData = [NaN NaN];
+        axm.UserData.gazeline_p.XData = [NaN NaN];
+        axm.UserData.gazeline_p.YData = [NaN NaN];
+        axm.UserData.gazeline_p.ZData = [NaN NaN];
+        axm.UserData.gazeline_c.XData(1) = axm.UserData.mosdata.x(framelist(s), 1);
+        axm.UserData.gazeline_c.YData(1) = axm.UserData.mosdata.y(framelist(s), 1);
+        axm.UserData.gazeline_c.ZData(1) = axm.UserData.mosdata.z(framelist(s), 1);
+        axm.UserData.gazeline_p.XData(1) = axm.UserData.mosdata.x(framelist(s), 2);
+        axm.UserData.gazeline_p.YData(1) = axm.UserData.mosdata.y(framelist(s), 2);
+        axm.UserData.gazeline_p.ZData(1) = axm.UserData.mosdata.z(framelist(s), 2);
         for o = 1:3
             if axm.UserData.inhand.log(framelist(s),o) ~= 1
                 idx = axm.UserData.inhand.inhand(framelist(s),o);
@@ -213,25 +227,25 @@ else
                 axm.UserData.obj(o).Vertices(:,3) = axm.UserData.vert(:,3) + axm.UserData.tablez;
             end
             if axm.UserData.roi(framelist(s),1) == o
-                axm.UserData.gazeline.XData(2) = axm.UserData.obj(o).Vertices(1,1);
-                axm.UserData.gazeline.YData(2) = axm.UserData.obj(o).Vertices(1,2);
-                axm.UserData.gazeline.ZData(2) = axm.UserData.obj(o).Vertices(1,3);
+                axm.UserData.gazeline_c.XData(2) = axm.UserData.obj(o).Vertices(1,1);
+                axm.UserData.gazeline_c.YData(2) = axm.UserData.obj(o).Vertices(1,2);
+                axm.UserData.gazeline_c.ZData(2) = axm.UserData.obj(o).Vertices(1,3);
             end
             if axm.UserData.roi(framelist(s),2) == o
-                axm.UserData.gazeline.XData(5) = axm.UserData.obj(o).Vertices(1,1);
-                axm.UserData.gazeline.YData(5) = axm.UserData.obj(o).Vertices(1,2);
-                axm.UserData.gazeline.ZData(5) = axm.UserData.obj(o).Vertices(1,3);
+                axm.UserData.gazeline_p.XData(2) = axm.UserData.obj(o).Vertices(1,1);
+                axm.UserData.gazeline_p.YData(2) = axm.UserData.obj(o).Vertices(1,2);
+                axm.UserData.gazeline_p.ZData(2) = axm.UserData.obj(o).Vertices(1,3);
             end
         end
         if axm.UserData.roi(framelist(s),1) == 4
-            axm.UserData.gazeline.XData(2) = axm.UserData.mosdata.x(framelist(s), 2);
-            axm.UserData.gazeline.YData(2) = axm.UserData.mosdata.y(framelist(s), 2);
-            axm.UserData.gazeline.ZData(2) = axm.UserData.mosdata.z(framelist(s), 2);
+            axm.UserData.gazeline_c.XData(2) = axm.UserData.mosdata.x(framelist(s), 2);
+            axm.UserData.gazeline_c.YData(2) = axm.UserData.mosdata.y(framelist(s), 2);
+            axm.UserData.gazeline_c.ZData(2) = axm.UserData.mosdata.z(framelist(s), 2);
         end
         if axm.UserData.roi(framelist(s),2) == 4
-            axm.UserData.gazeline.XData(5) = axm.UserData.mosdata.x(framelist(s), 1);
-            axm.UserData.gazeline.YData(5) = axm.UserData.mosdata.y(framelist(s), 1);
-            axm.UserData.gazeline.ZData(5) = axm.UserData.mosdata.z(framelist(s), 1);
+            axm.UserData.gazeline_p.XData(2) = axm.UserData.mosdata.x(framelist(s), 1);
+            axm.UserData.gazeline_p.YData(2) = axm.UserData.mosdata.y(framelist(s), 1);
+            axm.UserData.gazeline_p.ZData(2) = axm.UserData.mosdata.z(framelist(s), 1);
         end
         
 
