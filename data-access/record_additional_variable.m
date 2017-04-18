@@ -14,7 +14,10 @@ function [ filename ] = record_additional_variable( subject_id, variable_name, d
 %
 
 if is_core_variable(variable_name)
-    error('%s is a core variable, cannot overwrite', variable_name);
+    fprintf('====== NOT SAVED ========\n');
+    warning('%s is a core variable, cannot overwrite', variable_name);
+    fprintf('=========================\n');
+    return;
 end
 
 filename = get_variable_path(subject_id, variable_name);

@@ -20,10 +20,14 @@ authorized_members = {
     'glisandr'
     'antchen'
     'dhabney'
+    'ctay'
     };
 
 if ~is_core_variable(variable_name)
-    error('%s is not a core variable, please use record_additional_variable instead', variable_name);
+    fprintf('====== NOT SAVED ========\n');
+    warning('%s is not a core variable, please use record_additional_variable instead', variable_name);
+    fprintf('=========================\n');
+    return;
 end
 
 filename = get_variable_path(subject_id, variable_name);
@@ -35,7 +39,10 @@ end
 
 user = getenv('IU_username');
 if ~ismember(user, authorized_members)
-    error('%s is not an authorized member, please contact Chen', user);
+    fprintf('\n====== NOT SAVED ========\n');
+    warning('%s is not an authorized member, please contact Chen', user);
+    fprintf('===========================\n');
+    return;
 end
 
 sdata.variable = variable_name;
