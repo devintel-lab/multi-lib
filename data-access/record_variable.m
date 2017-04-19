@@ -21,6 +21,13 @@ authorized_members = {
     'antchen'
     'dhabney'
     'ctay'
+    'yayzhang'
+    'ssuanda'
+    'csuarezr'
+    'chen75'
+    'leslone'
+    'drpearcy'
+    'nprandal'
     };
 
 if ~is_core_variable(variable_name)
