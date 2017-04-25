@@ -40,7 +40,7 @@ center_min_dist_all = NaN(N, obj_num+2);
 
 fprintf('frame       ');
 
-for j=1:N        
+for j=1:8300        
     fprintf('\b\b\b\b\b\b%5d:', seq_no(j));
     jpg = jpg_list(j).name;       
     img = imread(fullfile(jpg_folder, jpg));

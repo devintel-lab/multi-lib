@@ -48,7 +48,11 @@ alldata = cell(numel(stream_files),1);
 args.colors = set_colors(args.colors);
 
 for f = 1:numel(stream_files)
-    alldata{f} = load_data_from_file(stream_files{f}, args.stream_files_numheaders(f), args.stream_files_columns{f});
+    if ischar(stream_files{f})
+        alldata{f} = load_data_from_file(stream_files{f}, args.stream_files_numheaders(f), args.stream_files_columns{f});
+    else
+        alldata{f} = stream_files{f};
+    end
 end
 
 if ischar(window_times_file)
@@ -57,9 +61,14 @@ else
     window_times = window_times_file;
 end
 
-h = vis_streams_data(alldata, window_times, streamlabels, args);
-
-if exist('savefilename', 'var') && ~isempty(savefilename)
-    export_fig(h, savefilename, '-png', '-a1', '-nocrop');
+if ~all(cellfun(@isempty, alldata))
+    % then, has some data
+    h = vis_streams_data(alldata, window_times, streamlabels, args);
+    
+    if exist('savefilename', 'var') && ~isempty(savefilename)
+        export_fig(h, savefilename, '-png', '-a1', '-nocrop');
+    end
+else
+    h = figure();
 end
 end

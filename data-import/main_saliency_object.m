@@ -1,4 +1,4 @@
-function main_saliency_object_v4(subid, corp, channel)
+function main_saliency_object(subid, corp, channel)
 %corp is 'child' or 'parent'
 %channel is 'I' 'M' or 'O'
 %subid can be a list of subjects
@@ -7,7 +7,7 @@ if numel(subid) > 1
     for s = 1: numel(subid)
         fprintf('%d out of %d\n', s, numel(subid));
         try
-        main_saliency_object_v4(subid(s), corp, channel);
+        main_saliency_object(subid(s), corp, channel);
         catch
             continue
         end

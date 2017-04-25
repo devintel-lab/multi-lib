@@ -1,9 +1,9 @@
-function main_object_position_v2(subid, corp)
+function main_object_position(subid, corp)
 
 if numel(subid) > 1
     for s = 1 : numel(subid)
         fprintf('%d out of %d\n', s, numel(subid));
-        main_object_position_v2(subid(s), corp);
+        main_object_position(subid(s), corp);
     end
     return
 end

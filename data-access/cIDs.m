@@ -28,7 +28,8 @@ end
     
 
 table = read_subject_table();
-table = table(63:end,:);
+log = table(:,2) > 9;
+table = table(log,:);
 
 subwithout = ismember(table(:,1), without);
 expwithout = ismember(table(:,2), without);

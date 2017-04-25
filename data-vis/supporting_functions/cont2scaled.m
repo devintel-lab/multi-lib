@@ -1,4 +1,4 @@
-function out = cont2scaled(IDs, varname, refactor, maxval, nbins, rgb1, rgb2)
+function out = cont2scaled(subid, varname, refactor, maxval, nbins, rgb1, rgb2)
 % refactor - downsample data by this amount
 %    suggested value : 5
 % maxval - upper bound, represented by the darkest color
@@ -15,32 +15,24 @@ function out = cont2scaled(IDs, varname, refactor, maxval, nbins, rgb1, rgb2)
 %       [0 1 0] for obj2
 %       [0 0 1] for obj1
 % out is a structure intended for direct input into vis_streams_multiwork function
-subs = cIDs(IDs);
-out.sub_list = subs;
-out.data = cell(numel(subs), 1);
-for s = 1:numel(subs)
-    data = get_chunks(varname, subs(s));
-    for d = 1:numel(data)
-        %         col2o = data{d};
-        if ~isempty(data{d})
-            col2 = data{d}(:,2);
-            col2(col2 > maxval) = maxval;
-            col2 = downsample(col2, refactor);
-            %         col2d = col2;
-            col2 = round(col2 / maxval * nbins);
-            col2(col2 == 0) = 1;
-            x = (linspace(data{d}(1,1), data{d}(end,1), size(col2, 1)))';
-            data{d} = [x, col2];
-            %         plot(col2o(:,1), col2o(:,2));
-            %         hold on;
-            %         plot(x, col2d, 'color', 'green');
-        end
-    end
-    out.data{s,1} = data;
+
+out = [];
+if has_variable(subid, varname)
+    data = get_variable(subid, varname);
+    col2 = data(:,2);
+    col2(col2 > maxval) = maxval;
+    col2 = downsample(col2, refactor);
+
+    col2 = round(col2 / maxval * nbins);
+    col2(col2 == 0) = 1;
+    x = (linspace(data(1,1), data(end,1), size(col2, 1)))';
+    data = [x, col2];
+%     data = cstream2cevent(data);
+
+    colors = gradcolormap(rgb1, rgb2, nbins);
+    out.data = data;
+    out.args.draw_edge = 0;
+    out.args.colors = colors;
+    out.args.isCont = 1;
 end
-log = cellfun(@(a) all(isempty(a)), out.data);
-out.sub_list(log) = [];
-out.data(log) = [];
-out.colors = gradcolormap(rgb1, rgb2, nbins);
-out.edge = 0;
 end

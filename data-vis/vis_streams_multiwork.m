@@ -22,14 +22,16 @@ if ~isfield(args, 'colors')
     args.colors = [];
 end
 
-args.colors = set_colors(args.colors);
-
 [subs,subtable,subpaths] = cIDs(subexpIDs);
 
 for s = 1:numel(subs)
     filenames = cell(numel(vars), 1);
     for v = 1:numel(vars)
-        filenames{v,1} = fullfile(subpaths{s}, [vars{v} '.mat']);
+        if ischar(vars{v})
+            filenames{v,1} = fullfile(subpaths{s}, [vars{v} '.mat']);
+        else
+            filenames{v,1} = vars{v};
+        end
     end
     if isfield(args, 'window_times_variable')
         window_times_file = fullfile(subpaths{s}, [args.window_times_variable '.mat']);

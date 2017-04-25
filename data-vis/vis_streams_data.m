@@ -1,4 +1,10 @@
 function h = vis_streams_data(celldata, window_times, streamlabels, args)
+% each element of celldata is a cstream or cevent data
+% {cev1, cev2, cev3}
+% the element can also be another cell, B, where B{1} is cev or cstream and B{2} is a colorset
+% {cev1, {cev2, colormap}, cev3}
+% this is useful if you want one of the cevents to have a unique colormap, such as when we have a continuous stream converted to cevent
+
 if ischar(celldata)
     switch celldata
         case 'demo1'
@@ -26,6 +32,10 @@ if ~isfield(args, 'draw_edge')
     args.draw_edge = 1;
 end
 
+if ~isfield(args, 'isCont')
+    args.isCont = 0;
+end
+
 if ~exist('streamlabels', 'var') || isempty(streamlabels)
     for c = 1:numel(celldata)
         streamlabels{1,c} = sprintf('%d', c);
@@ -48,12 +58,14 @@ numdata = numel(celldata);
 
 for d = 1:numel(celldata)
     cevorcst = celldata{d};
-    if size(cevorcst,2) == 2
-        cev = cstream2cevent(cevorcst);
-    else
-        cev = cevorcst;
+    if ~isstruct(cevorcst)
+        if size(cevorcst,2) == 2
+            cev = cstream2cevent(cevorcst);
+        else
+            cev = cevorcst;
+        end
+        celldata{d} = cev;
     end
-    celldata{d} = cev;
 end
 
 if isempty(window_times) % create trials, 120 seconds each, starting from earliest timestamp in the data 
@@ -93,23 +105,38 @@ for n = 1:numplots
 end
 
 label_pos = [];
+cont_colormap = [];
 for d = 1:numel(celldata)
+    this_args = args;
     cev = celldata{d}; % cevent or cstream
     if ~isempty(cev)
-
-        cellcev = event_extract_ranges(cev, window_times);
-
+        if isstruct(cev) && ~isempty(cev.data)
+            this_args = cev.args;
+            cev = cev.data;
+        end
+        if this_args.isCont
+            cellcev = cont_extract_ranges(cev, window_times);
+        else
+            cellcev = event_extract_ranges(cev, window_times);
+        end
         for c = 1:numel(cellcev)
             axes(axh{c});
             cevpart = cellcev{c};
             if ~isempty(cevpart)
-                for i = 1:size(cevpart, 1)
-                    tmp = cevpart(i,:);
-                    width = tmp(2) - tmp(1);
-                    if width > 0
-                        r = rectangle('Position', [tmp(1), bottom, width, 1], 'facecolor', args.colors(tmp(3),:), 'edgecolor', 'none');
-                        if args.draw_edge
-                            set(r, 'edgecolor', 'black', 'linewidth', 0.5);
+                if this_args.isCont
+                    cm_size = size(cont_colormap, 1);
+                    cont_colormap = cat(1, cont_colormap, this_args.colors);
+                    im = imagesc('CData', cevpart(:,2)'+cm_size, 'XData', cevpart(:,1), 'YData', bottom+.5);
+                    im.CDataMapping = 'direct';
+                else
+                    for i = 1:size(cevpart, 1)
+                        tmp = cevpart(i,:);
+                        width = tmp(2) - tmp(1);
+                        if width > 0
+                            r = rectangle('Position', [tmp(1), bottom, width, 1], 'facecolor', this_args.colors(tmp(3),:), 'edgecolor', 'none');
+                            if this_args.draw_edge
+                                set(r, 'edgecolor', 'black', 'linewidth', 0.5);
+                            end
                         end
                     end
                 end
@@ -121,7 +148,7 @@ for d = 1:numel(celldata)
     bottom = bottom + 1 + space;
 
 end
-
+colormap(cont_colormap);
 for n = 1:numplots
     axes(axh{n});
     set(gca, 'ytick', label_pos);

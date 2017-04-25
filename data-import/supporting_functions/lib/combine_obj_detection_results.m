@@ -79,8 +79,8 @@ if num_img == 4
     combined_img(:, width/2) = 1;
 elseif num_img == 6
     combined_img(height/2, :) = 1;
-    combined_img(:, width/3) = 1;
-    combined_img(:, width/3*2) = 1;
+    combined_img(:, floor(width/3)) = 1;
+    combined_img(:, floor(width/3*2)) = 1;
 else
     error('Currently, this script only works for segmented images with 4 or 6 panels');
 end

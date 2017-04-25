@@ -29,7 +29,10 @@ m = figure('position', [1025 564 560 420]); % motion
 b = figure('position', [1026 100 284 372]); % frames
 z = figure('position', [1325 100 483 371]);
 
+fprintf('\nInstructions\n\tDown Arrow - next subject\n\tUp Arrow - prev subject\n\tLeft Click cstream to set begin point\n\tRight Click cstream to set end point\n');
+
 h.UserData.idx = 1;
+
 [subs,~,subpaths] = cIDs(subexpIDs);
 
 % varCheck = cat(1, varListrequired, varList);
