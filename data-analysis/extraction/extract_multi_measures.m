@@ -13,6 +13,7 @@ Any argument that is supported by get_chunks (thus,
 get_variable_by_grouping) is also supported here.
 
 %}
+
 if ~exist('args', 'var') || isempty(args)
     args = struct([]);
 end

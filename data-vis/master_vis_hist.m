@@ -1,10 +1,10 @@
-function master_vis_hist(option)
+function master_vis_hist(subexpIDs, option)
 
-directory = fullfile(get_multidir_root, 'data_vis', 'vis_hist');
+directory = fullfile(get_multidir_root, 'data_vis_new', 'vis_hist');
 
 switch option
     case 1
-        subexpIDs = cIDs('all');
+        subs = cIDs(subexpIDs);
         varnames = {
             'cevent_eye_roi_child'
             'cevent_eye_roi_parent'
@@ -21,11 +21,11 @@ switch option
         flag_savefig = 1;
         for v = 1:numel(varnames)
             varname = varnames{v};
-            vis_hist(subexpIDs, varname, edges, directory, varname, flag_savefig);
+            vis_hist(subs, varname, edges, directory, varname, flag_savefig);
         end
         
     case 2
-        subexpIDs = cIDs('all');
+        subs = cIDs({subexpIDs, 12});
         varnames = {
             'cont_motion_pos-speed_right-hand_child'
             'cont_motion_pos-speed_left-hand_child'
@@ -35,11 +35,12 @@ switch option
         flag_savefig = 1;
         for v = 1:numel(varnames)
             varname = varnames{v};
-            vis_hist(subexpIDs, varname, edges, directory, varname, flag_savefig);
+            vis_hist(subs, varname, edges, directory, varname, flag_savefig);
         end
         
+        
     case 3
-        subexpIDs = cIDs('all');
+        subs = cIDs({subexpIDs, 12});
         varnames = {
             'cont_motion_rot-speed_head_child'
             'cont_motion_rot-speed_head_parent'
@@ -48,11 +49,11 @@ switch option
         flag_savefig = 1;
         for v = 1:numel(varnames)
             varname = varnames{v};
-            vis_hist(subexpIDs, varname, edges, directory, varname, flag_savefig);
+            vis_hist(subs, varname, edges, directory, varname, flag_savefig);
         end
         
     case 4
-        subexpIDs = cIDs('all');
+        subs = cIDs({subexpIDs, 12});
         varnames = {
             'cont_vision_size_obj1_child'
             'cont_vision_size_obj1_parent'};
@@ -60,6 +61,7 @@ switch option
         flag_savefig = 1;
         for v = 1:numel(varnames)
             varname = varnames{v};
-            vis_hist(subexpIDs, varname, edges, directory, varname, flag_savefig);
+            vis_hist(subs, varname, edges, directory, varname, flag_savefig);
         end
+        
 end

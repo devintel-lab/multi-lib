@@ -1,4 +1,5 @@
-function run_cross_correlation_plots()
+function run_cross_correlation_plots(subexpIDs)
+subs = cIDs(subexpIDs);
 
 vars = {
     'cevent_speech_naming_local-id'
@@ -18,9 +19,9 @@ for c = 1:size(combinations,1)
     try
         c1 = combinations(c,1);
         c2 = combinations(c,2);
-        outputfolder = fullfile(get_multidir_root, 'data_vis', 'cross_correlation');
+        outputfolder = fullfile(get_multidir_root, 'data_vis_new', 'cross_correlation');
         outputfilename = [nametags{c1}, '_', nametags{c2}];
-        draw_cross_correlation_plots([], vars{c1}, vars{c2}, [-10 10], outputfolder, outputfilename);
+        draw_cross_correlation_plots(subs, vars{c1}, vars{c2}, [-10 10], outputfolder, outputfilename);
     catch ME
         continue;
     end

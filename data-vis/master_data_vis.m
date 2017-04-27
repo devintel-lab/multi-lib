@@ -1,8 +1,10 @@
-function master_data_vis2(subexpIDs, option, args)
-subs = cIDs(subexpIDs);
+function master_data_vis(subexpIDs, option)
+
+root = fullfile(get_multidir_root(), 'data_vis_new');
+
 switch option
-    
     case 1
+        subs = cIDs({subexpIDs, [12 14]});
         for s = 1:numel(subs)
             var_list = {
                 cont2scaled(subs(s), 'cont_vision_size_obj1_child', 5, 10, 50, [1 1 1], [0 0 1]);
@@ -15,13 +17,18 @@ switch option
                 cont2scaled(subs(s), 'cont_vision_size_obj3_parent', 5, 10, 50, [1 1 1], [1 0 0]);
                 'cevent_speech_naming_local-id';
                 };
-            stream_labels = {'child 1-size', 'child 2-size', 'child 3-size', 'child eye', ...
-                'parent eye', 'parent 1-size', 'parent 2-size', 'parent 3-size', 'naming'};
-            vis_streams_multiwork(subs(s), var_list, stream_labels, fullfile(get_multidir_root(), 'data_vis', 'cont_1'));
+            
+            stream_labels = {'child size 1', 'child size 2', 'child size 3', 'ceye', 'peye', 'parent size 1', 'parent size 2', 'parent size 3'};
+            vis_streams_multiwork(subs(s), var_list, stream_labels, fullfile(root, 'cont_1'));
         end
+        
     case 2
+        subs = cIDs({subexpIDs, 12});
+        stream_labels = {'child left pos', 'child right pos', 'child head pos', ...
+            'parent head pos', 'parent left pos', 'parent right pos',...
+            'child head rot', 'parent head rot'};
+        colors = set_colors();
         for s = 1:numel(subs)
-            colors = set_colors();
             var_list = {
                 cont2scaled(subs(s), 'cont_motion_pos-speed_left-hand_child', 5, 150, 50, [1 1 1], colors(1,:));
                 cont2scaled(subs(s), 'cont_motion_pos-speed_right-hand_child', 5, 150, 50, [1 1 1], colors(2,:));
@@ -32,14 +39,12 @@ switch option
                 cont2scaled(subs(s), 'cont_motion_rot-speed_head_child', 5, 150, 50, [1 1 1], colors(7,:));
                 cont2scaled(subs(s), 'cont_motion_rot-speed_head_parent', 5, 150, 50, [1 1 1], colors(8,:));
                 };
-            stream_labels = {'child left pos', 'child right pos', 'child head pos', ...
-                'parent head pos', 'parent left pos', 'parent right pos',...
-                'child head rot', 'parent head rot'};
-            vis_streams_multiwork(subs(s), var_list, stream_labels, fullfile(get_multidir_root(), 'data_vis', 'cont_2'));
+            vis_streams_multiwork(subs(s), var_list, stream_labels, fullfile(root, 'cont_2'));
         end
         
-    case 3
         
+    case 3
+        subs = cIDs(subexpIDs);
         var_list = {
             'cevent_eye_roi_child';
             'cevent_eye_roi_parent';
@@ -54,10 +59,11 @@ switch option
             };
         stream_labels = {'child eye', 'parent eye', 'child left', 'child right', ...
             'parent left', 'parent right', 'joint-attend', 'joint-synched', 'child dominant', 'naming'};
-        vis_streams_multiwork(subs, var_list, stream_labels, fullfile(get_multidir_root(), 'data_vis', 'cstream_1'));
+        vis_streams_multiwork(subs, var_list, stream_labels, fullfile(root, 'cstream_1'));
         
         
     case 4
+        subs = cIDs(subexpIDs);
         var_list = {
             'cevent_inhand-eye_child-child'
             'cevent_inhand-eye_parent-child'
@@ -71,8 +77,14 @@ switch option
             'parent-eye/parent-hand', 'parent-eye/child-inhand', 'joint-attend',...
             'synched-attend', 'naming'};
         
-        vis_streams_multiwork(subs, var_list, stream_labels, fullfile(get_multidir_root(), 'data_vis', 'cstream_2'));
+        vis_streams_multiwork(subs, var_list, stream_labels, fullfile(root, 'cstream_2'));
+        
+        
     case 5
+        subs = cIDs(subexpIDs);
+        stream_labels = {'child eye', 'parent eye', 'sust JA', ...
+            'child L-hand', 'child R-hand', 'parent L-hand', 'parent R-hand', ...
+            'child size1', 'child size2', 'child size3', 'naming'};
         for s = 1:numel(subs)
             var_list = {
                 'cevent_eye_roi_child';
@@ -87,10 +99,39 @@ switch option
                 cont2scaled(subs(s), 'cont_vision_size_obj3_child', 5, 10, 50, [1 1 1], [1 0 0]);
                 'cevent_speech_utterance';
                 };
-            stream_labels = {'child eye', 'parent eye', 'sust JA', ...
-                'child L-hand', 'child R-hand', 'parent L-hand', 'parent R-hand', ...
-                'child size1', 'child size2', 'child size3', 'naming'};
-            vis_streams_multiwork(subs(s), var_list, stream_labels, fullfile(get_multidir_root(), 'data_vis', 'cstream_cont_1'));
+            
+            vis_streams_multiwork(subs(s), var_list, stream_labels, fullfile(root, 'cstream_cont_1'));
         end
-end
+        
+    case 6
+        subs = cIDs(subexpIDs);
+        var_list = {
+            'cstream_inhand_left-hand_obj-all_child'
+            'cstream_inhand_left-hand_obj-all_child'
+            'cevent_eye_roi_child'
+            'cevent_eye_joint-attend_child-lead_both'
+            'cevent_eye_joint-attend_both'
+            'cevent_eye_roi_parent'
+            'cstream_inhand_left-hand_obj-all_parent'
+            'cstream_inhand_right-hand_obj-all_parent'
+            };
+        stream_labels = {'chandleft', 'chandright', 'ceye', 'JA_c_lead', 'JA', 'peye', 'phandleft', 'phandright'};
+        
+        vis_streams_multiwork(subs, var_list, stream_labels, fullfile(root, 'cstream_3'));
+        
+    case 7
+        subs = cIDs(subexpIDs);
+        var_list = {
+            'cstream_inhand_left-hand_obj-all_child'
+            'cstream_inhand_left-hand_obj-all_child'
+            'cevent_eye_roi_child'
+            'cevent_eye_joint-attend_parent-lead_both'
+            'cevent_eye_joint-attend_both'
+            'cevent_eye_roi_parent'
+            'cstream_inhand_left-hand_obj-all_parent'
+            'cstream_inhand_right-hand_obj-all_parent'
+            };
+        stream_labels = {'chandleft', 'chandright', 'ceye', 'JA_p_lead', 'JA', 'peye', 'phandleft', 'phandright'};
+        
+        vis_streams_multiwork(subs, var_list, stream_labels, fullfile(root, 'cstream_4'));
 end

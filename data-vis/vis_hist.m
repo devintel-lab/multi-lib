@@ -21,6 +21,7 @@ end
 allx = cell(numel(subs), 1);
 hsubs = [];
 for s = 1:numel(subs)
+    fprintf('%d\n', subs(s));
     if has_variable(subs(s), varname)
         hsubs = cat(1, hsubs, subs(s));
         data = get_variable_by_trial_cat(subs(s), varname);
@@ -59,7 +60,7 @@ if flag_savefig
     figure;
     set(gcf, 'visible', 'on');
     set(gcf, 'position', [100 100 1280 720]);
-    if ~isempty(strfind(varname, 'cont'))
+    if contains(varname, 'cont')
         countdata = normdata;
         ymax = 1;
     end
