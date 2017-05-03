@@ -93,7 +93,7 @@ switch option
         
         for y = 1:numel(yvars)
             yargs.categories = 4;
-            %         draw_correlation_plots({subs, 12}, yvars{y}, cevmeasures, directory, nametags{y}, yargs);
+            draw_correlation_plots({subs, 12}, yvars{y}, cevmeasures, directory, nametags{y}, yargs);
             yargs.categories = 25;
             draw_correlation_plots(12, yvars{y}, cevmeasures, directory, [nametags{y} '_toyroom'], yargs);
         end

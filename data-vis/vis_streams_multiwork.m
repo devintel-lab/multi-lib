@@ -1,6 +1,6 @@
 function vis_streams_multiwork(subexpIDs, vars, streamlabels, directory, args)
 % see demo_vis_streams_multiwork for documentation
-if ischar(subexpIDs) && ~isempty(strfind(subexpIDs, 'demo'))
+if ischar(subexpIDs) && contains(subexpIDs, 'demo')
     switch subexpIDs
         case 'demo1'
             subexpIDs = [7206, 7207];
@@ -59,7 +59,7 @@ for s = 1:numel(subs)
             close(h);
         end
     catch ME
-        fprintf(1, '%d : %s', ME.message);
+        format_error_message(ME, sprintf('%d', subs(s)));
         continue;
     end
 end

@@ -1,12 +1,9 @@
 clear;
 subs = 'all';
+diary('exception_log.txt');
 
-try
-    for a = [1 2 3 4 5 6 7]
-        master_data_vis(subs, a);
-    end
-catch ME
-    disp(ME);
+for a = [1 2 3 4 5 6 7]
+    master_data_vis(subs, a);
 end
 
 try
@@ -15,13 +12,6 @@ catch ME
     disp(ME)
 end
 
-try
-    for a = [1 2 3]
-        run_correlation_plots(subs, a);
-    end
-catch ME
-    disp(ME);
-end
 
 try
     for a = [1 2 3 4]
@@ -37,3 +27,5 @@ try
 catch ME
     disp(ME);
 end
+
+diary off
