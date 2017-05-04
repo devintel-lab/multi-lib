@@ -6,20 +6,25 @@ switch option
     case 1
         subs = cIDs({subexpIDs, [12 14]});
         for s = 1:numel(subs)
-            var_list = {
-                cont2scaled(subs(s), 'cont_vision_size_obj1_child', 5, 10, 50, [1 1 1], [0 0 1]);
-                cont2scaled(subs(s), 'cont_vision_size_obj2_child', 5, 10, 50, [1 1 1], [0 1 0]);
-                cont2scaled(subs(s), 'cont_vision_size_obj3_child', 5, 10, 50, [1 1 1], [1 0 0]);
-                'cevent_eye_roi_child';
-                'cevent_eye_roi_parent';
-                cont2scaled(subs(s), 'cont_vision_size_obj1_parent', 5, 10, 50, [1 1 1], [0 0 1]);
-                cont2scaled(subs(s), 'cont_vision_size_obj2_parent', 5, 10, 50, [1 1 1], [0 1 0]);
-                cont2scaled(subs(s), 'cont_vision_size_obj3_parent', 5, 10, 50, [1 1 1], [1 0 0]);
-                'cevent_speech_naming_local-id';
-                };
-            
-            stream_labels = {'child size 1', 'child size 2', 'child size 3', 'ceye', 'peye', 'parent size 1', 'parent size 2', 'parent size 3'};
-            vis_streams_multiwork(subs(s), var_list, stream_labels, fullfile(root, 'cont_1'));
+            try
+                var_list = {
+                    cont2scaled(subs(s), 'cont_vision_size_obj1_child', 5, 10, 50, [1 1 1], [0 0 1]);
+                    cont2scaled(subs(s), 'cont_vision_size_obj2_child', 5, 10, 50, [1 1 1], [0 1 0]);
+                    cont2scaled(subs(s), 'cont_vision_size_obj3_child', 5, 10, 50, [1 1 1], [1 0 0]);
+                    'cevent_eye_roi_child';
+                    'cevent_eye_roi_parent';
+                    cont2scaled(subs(s), 'cont_vision_size_obj1_parent', 5, 10, 50, [1 1 1], [0 0 1]);
+                    cont2scaled(subs(s), 'cont_vision_size_obj2_parent', 5, 10, 50, [1 1 1], [0 1 0]);
+                    cont2scaled(subs(s), 'cont_vision_size_obj3_parent', 5, 10, 50, [1 1 1], [1 0 0]);
+                    'cevent_speech_naming_local-id';
+                    };
+                
+                stream_labels = {'child size 1', 'child size 2', 'child size 3', 'ceye', 'peye', 'parent size 1', 'parent size 2', 'parent size 3'};
+                vis_streams_multiwork(subs(s), var_list, stream_labels, fullfile(root, 'cont_1'));
+            catch ME
+                format_error_message(ME, sprintf('%d', subs(s)));
+                continue
+            end
         end
         
     case 2
@@ -29,17 +34,22 @@ switch option
             'child head rot', 'parent head rot'};
         colors = set_colors();
         for s = 1:numel(subs)
-            var_list = {
-                cont2scaled(subs(s), 'cont_motion_pos-speed_left-hand_child', 5, 150, 50, [1 1 1], colors(1,:));
-                cont2scaled(subs(s), 'cont_motion_pos-speed_right-hand_child', 5, 150, 50, [1 1 1], colors(2,:));
-                cont2scaled(subs(s), 'cont_motion_pos-speed_head_child', 5, 150, 50, [1 1 1], colors(3,:));
-                cont2scaled(subs(s), 'cont_motion_pos-speed_head_parent', 5, 150, 50, [1 1 1], colors(4,:));
-                cont2scaled(subs(s), 'cont_motion_pos-speed_left-hand_parent', 5, 150, 50, [1 1 1], colors(5,:));
-                cont2scaled(subs(s), 'cont_motion_pos-speed_right-hand_parent', 5, 150, 50, [1 1 1], colors(6,:));
-                cont2scaled(subs(s), 'cont_motion_rot-speed_head_child', 5, 150, 50, [1 1 1], colors(7,:));
-                cont2scaled(subs(s), 'cont_motion_rot-speed_head_parent', 5, 150, 50, [1 1 1], colors(8,:));
-                };
-            vis_streams_multiwork(subs(s), var_list, stream_labels, fullfile(root, 'cont_2'));
+            try
+                var_list = {
+                    cont2scaled(subs(s), 'cont_motion_pos-speed_left-hand_child', 5, 150, 50, [1 1 1], colors(1,:));
+                    cont2scaled(subs(s), 'cont_motion_pos-speed_right-hand_child', 5, 150, 50, [1 1 1], colors(2,:));
+                    cont2scaled(subs(s), 'cont_motion_pos-speed_head_child', 5, 150, 50, [1 1 1], colors(3,:));
+                    cont2scaled(subs(s), 'cont_motion_pos-speed_head_parent', 5, 150, 50, [1 1 1], colors(4,:));
+                    cont2scaled(subs(s), 'cont_motion_pos-speed_left-hand_parent', 5, 150, 50, [1 1 1], colors(5,:));
+                    cont2scaled(subs(s), 'cont_motion_pos-speed_right-hand_parent', 5, 150, 50, [1 1 1], colors(6,:));
+                    cont2scaled(subs(s), 'cont_motion_rot-speed_head_child', 5, 150, 50, [1 1 1], colors(7,:));
+                    cont2scaled(subs(s), 'cont_motion_rot-speed_head_parent', 5, 150, 50, [1 1 1], colors(8,:));
+                    };
+                vis_streams_multiwork(subs(s), var_list, stream_labels, fullfile(root, 'cont_2'));
+            catch ME
+                format_error_message(ME, sprintf('%d', subs(s)));
+                continue
+            end
         end
         
         
@@ -86,21 +96,26 @@ switch option
             'child L-hand', 'child R-hand', 'parent L-hand', 'parent R-hand', ...
             'child size1', 'child size2', 'child size3', 'naming'};
         for s = 1:numel(subs)
-            var_list = {
-                'cevent_eye_roi_child';
-                'cevent_eye_roi_parent';
-                'cevent_eye_joint-attend_both';
-                'cstream_inhand_left-hand_obj-all_child';
-                'cstream_inhand_right-hand_obj-all_child';
-                'cstream_inhand_left-hand_obj-all_parent';
-                'cstream_inhand_right-hand_obj-all_parent';
-                cont2scaled(subs(s), 'cont_vision_size_obj1_child', 5, 10, 50, [1 1 1], [0 0 1]);
-                cont2scaled(subs(s), 'cont_vision_size_obj2_child', 5, 10, 50, [1 1 1], [0 1 0]);
-                cont2scaled(subs(s), 'cont_vision_size_obj3_child', 5, 10, 50, [1 1 1], [1 0 0]);
-                'cevent_speech_utterance';
-                };
-            
-            vis_streams_multiwork(subs(s), var_list, stream_labels, fullfile(root, 'cstream_cont_1'));
+            try
+                var_list = {
+                    'cevent_eye_roi_child';
+                    'cevent_eye_roi_parent';
+                    'cevent_eye_joint-attend_both';
+                    'cstream_inhand_left-hand_obj-all_child';
+                    'cstream_inhand_right-hand_obj-all_child';
+                    'cstream_inhand_left-hand_obj-all_parent';
+                    'cstream_inhand_right-hand_obj-all_parent';
+                    cont2scaled(subs(s), 'cont_vision_size_obj1_child', 5, 10, 50, [1 1 1], [0 0 1]);
+                    cont2scaled(subs(s), 'cont_vision_size_obj2_child', 5, 10, 50, [1 1 1], [0 1 0]);
+                    cont2scaled(subs(s), 'cont_vision_size_obj3_child', 5, 10, 50, [1 1 1], [1 0 0]);
+                    'cevent_speech_utterance';
+                    };
+                
+                vis_streams_multiwork(subs(s), var_list, stream_labels, fullfile(root, 'cstream_cont_1'));
+            catch ME
+                format_error_message(ME, sprintf('%d', subs(s)));
+                continue
+            end
         end
         
     case 6

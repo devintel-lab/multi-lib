@@ -1,6 +1,6 @@
 clear;
 subs = 'all';
-diary('exception_log.txt');
+diary('/space/CORE/scheduled_tasks/exception_log.txt');
 
 for a = [1 2 3 4 5 6 7]
     master_data_vis(subs, a);
