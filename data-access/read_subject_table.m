@@ -9,14 +9,30 @@ function subjects = read_subject_table()
 % "permission denied" errors.  In this case, read_subject_table will retry
 % up to 5 times, waiting a short time between tries.
 %
+global global_subject_table;
+global global_last_read;
 
+if isempty(global_subject_table)
+    global_subject_table = load([ get_multidir_root() filesep() 'subject_table.txt']);
+    global_last_read = datetime('now');
+end
+
+current = datetime('now');
+one_hour = duration(1,0,0);
+last_read_duration = current - global_last_read;
+if last_read_duration > one_hour
+    global_subject_table = []; % if it's been an hour since the last read, re-read next time
+end
+
+subjects = global_subject_table;
+return;
 for tries = 1:5
     try
         subjects = do_read();
         break
     catch ReadError
         if strcmp(ReadError.identifier, 'MATLAB:load:permissionDenied')
-            disp(sprintf('Error reading subject table, retrying %d\n', tries));
+            fprintf('Error reading subject table, retrying %d\n', tries);
             pause(0.5);
         else
             throw(ReadError)

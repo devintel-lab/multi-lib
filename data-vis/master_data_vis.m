@@ -4,7 +4,7 @@ root = fullfile(get_multidir_root(), 'data_vis_new');
 
 switch option
     case 1
-        subs = cIDs({subexpIDs, [12 14]});
+        subs = cIDs({subexpIDs, [12]});
         for s = 1:numel(subs)
             try
                 var_list = {
@@ -19,7 +19,7 @@ switch option
                     'cevent_speech_naming_local-id';
                     };
                 
-                stream_labels = {'child size 1', 'child size 2', 'child size 3', 'ceye', 'peye', 'parent size 1', 'parent size 2', 'parent size 3'};
+                stream_labels = {'child size 1', 'child size 2', 'child size 3', 'ceye', 'peye', 'parent size 1', 'parent size 2', 'parent size 3', 'speech'};
                 vis_streams_multiwork(subs(s), var_list, stream_labels, fullfile(root, 'cont_1'));
             catch ME
                 format_error_message(ME, sprintf('%d', subs(s)));
@@ -91,7 +91,7 @@ switch option
         
         
     case 5
-        subs = cIDs(subexpIDs);
+        subs = cIDs(subexpIDs, 12);
         stream_labels = {'child eye', 'parent eye', 'sust JA', ...
             'child L-hand', 'child R-hand', 'parent L-hand', 'parent R-hand', ...
             'child size1', 'child size2', 'child size3', 'naming'};
