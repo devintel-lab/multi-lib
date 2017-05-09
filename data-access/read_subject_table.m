@@ -16,6 +16,7 @@ if isempty(global_subject_table)
     global_subject_table = load([ get_multidir_root() filesep() 'subject_table.txt']);
     global_last_read = datetime('now');
 end
+subjects = global_subject_table;
 
 current = datetime('now');
 one_hour = duration(1,0,0);
@@ -24,8 +25,8 @@ if last_read_duration > one_hour
     global_subject_table = []; % if it's been an hour since the last read, re-read next time
 end
 
-subjects = global_subject_table;
 return;
+
 for tries = 1:5
     try
         subjects = do_read();
