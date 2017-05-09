@@ -64,7 +64,7 @@ for ridx = 1:size(ranges, 1)
 end
 
 if ~is_trial
-    cevents_shuffled = cevents_shuffled(is_trial{:});
+    cevents_shuffled = vertcat(cevents_shuffled{:});
 end
 
 
