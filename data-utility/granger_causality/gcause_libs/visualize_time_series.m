@@ -415,20 +415,12 @@ for fidx = 1:num_figures
             save_format = args.save_format;
         end
     
-        if isfield(args, 'figure_visible') && ~args.figure_visible
-            saveas(h, [save_name '_' int2str(fidx) '.' save_format]);
+        set(h,'PaperPositionMode','auto');
+%         if isfield(args, 'figure_visible') && ~args.figure_visible
+        if num_figures < 2
+            saveas(h, [save_name '.' save_format]);
         else
-            if isfield(args, 'set_position')
-                set(gcf, 'Position', args.set_position);
-                pause(1)
-            end
-
-            ftmp = getframe(gcf);              %# Capture the current window
-            if fidx > 1
-                imwrite(ftmp.cdata, [save_name '_' int2str(fidx) '.' save_format]);  %# Save the frame data
-            else
-                imwrite(ftmp.cdata, [save_name '.' save_format]);  %# Save the frame data
-            end
+            saveas(h, [save_name '_' int2str(fidx) '.' save_format]);
         end
         
         if isfield(args, 'pause_before_save') && args.pause_before_save

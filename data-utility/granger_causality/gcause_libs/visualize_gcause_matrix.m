@@ -7,7 +7,7 @@ num_vars = length(var_module_list);
 
 plot_xlim = [0 num_vars];
 plot_ylim = [0 num_vars];
-h = figure();
+h = figure('Visible', 'Off');
 hold on;
 % plot row by row
 for rowidx = 1:num_vars
