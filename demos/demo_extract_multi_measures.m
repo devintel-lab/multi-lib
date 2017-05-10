@@ -14,37 +14,77 @@ function demo_extract_multi_measures(option)
 % The measures you specify control for the granularity of the output
 % args.cevent_measures
 %       -- cell array of strings, any of the following
-%               'prop'
-%               'freq'
-%               'mean_dur'
-%               'median_dur'
-%               'number'
+%               'individual_prop_by_cat'      (default)
+%               'individual_freq_by_cat'      (default)
+%               'individual_mean_dur_by_cat'  (default)
+%               'individual_median_dur_by_cat'
+%               'individual_number_by_cat'
 %
 % args.cont_measures
 %       -- cell array of strings, any of the following
-%               'mean'
-%               'std'
-%               'median'
-%               'min'
-%               'max'
+%               'individual_mean'             (default)
+%               'individual_median'           (default)
+%               'individual_std'
+%               'individual_min'
+%               'individual_max'
 %
-% Note: can append 'by_cat' to the end of the measures to show a breakdown
-% of each statistic per category (or, object)
-%       -- e.g. 'prop_by_cat'
+% 
+% Note: can remove the suffix '_by_cat' from the end of the measures to show get one aggregated statistic across all categories
+%       -- e.g. 'individual_prop'
 %
 % args.persubject
-%       -- if 1, statistics are aggregated and the output
+%       -- If 1, statistics are aggregated across events and the output
 %          contains one row per subject
-%       -- There are two ways to aggregate statistics across instances, weighted
-%          mean or unweighted mean. See args.persubject_weighted
 % 
 % args.cevent_name
+%       -- string, cevent variable name -- Defines the windows of time to extract data from.
+%          Meaning, for args.cevent_name = 'cevent_speech_utterance', each
+%          variable in var_list will be cut to each utterance event.
+%       -- In the output file, each row will contain statistics for one
+%          event. Therefore, if subject 3201 has 30 utterance events, there will
+%          be 30 rows for subject 3201 in the output file, with statistics during each utterance.
+%       -- By default, this is set to 'cevent_trials'
+% 
 % args.cevent_values
+%       -- array of integers, indicating the categories to include from the cevent in args.cevent_name
+%       -- e.g., for args.cevent_name = 'cevent_eye_roi_child', then
+%          args.cevent_values = [1 2 3 4];
+%       -- must be specified if args.cevent_name is specified
+% 
 % args.label_matrix
+%       -- NxM array, where N is number of unique categories in the variables indicated in var_list, and
+%          M is the number of unique categories in args.cevent_name
+%       -- This option will concatenate data based on target / others mapping. That is, the output will put all target values into column 1, and others into column 2.
+%       -- e.g. if var_list = {'cevent_eye_roi_child'} and args.cevent_name = 'cevent_speech_naming_local-id'            
+%       -- args.label_matrix = [1 2 2 3;   % naming object 1
+%                               2 1 2 3;   % naming object 2
+%                               2 2 1 3;]  % naming object 3
+%                    ROI object 1 2 3 4
+%       -- The values in the matrix refer to the columns of the output .csv results.
+%       -- array(1,1) = 1, meaning when naming is object 1, and eye ROI is 1, then put the resulting statistic into column 1
+%       -- array(2,1) = 2, meaning when naming is object 2, and eye ROI is 1, then put the resulting statistic into column 2
+%       -- array(3,4) = 3, meaning when naming is object 3, and eye ROI is 4 (face), then put the resulting statistic into column 3
+%       -- So in this example, whenever naming matches the ROI object, we put that statistic into the first column of the output .csv
+% 
 % args.label_names
+%       -- cell array of strings, user-defined labels of the output columns after re-mapping based on args.label_matrix
+%       -- e.g. {'target', 'others', 'face'}, for values 1, 2, and 3, respectively
+% 
 % args.whence
+%       -- string, 'start', 'end', or 'startend'
+%       -- this parameter, when combined with args.interval, allows you to shift the args.cevent_name window times by a certain amount. The shift can be respect to the start, end, or full event.
 % args.interval
+%       -- array of 2 numbers, [t1 t2], where t1 and t2 refer to the offset to apply in each args.cevent_name window times.
+%       -- e.g., [-5 1] and whence = 'start', then we take the onset of each cevent and add -5 seconds to get new onset. Likewise, we add 1 second to onset to get new offset.
+%       -- therefore, if the original event was [45 55], then
+%          if args.whence = 'start', then new event is [40 46]
+%          if args.whence = 'end', then new event is [50 56]
+%          if args.whence = 'startend', then new event is [40 56]
+%
 % args.within_ranges
+%       -- 1 or 0
+%       -- if 0, then we get the complement of args.cevent_name, or event_NOT.
+%       -- Note, there is not category, so it effectively turns it into an event based analysis. Therefore, not compatible with label_matrix
 
 switch option
     
