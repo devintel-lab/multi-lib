@@ -58,7 +58,6 @@ normdata = normdata ./ repmat(totals, size(normdata, 1), 1);
 ymax = max(max(countdata(:, 1:end-1)));
 if flag_savefig
     figure;
-    set(gcf, 'visible', 'on');
     set(gcf, 'position', [100 100 1280 720]);
     if contains(varname, 'cont')
         countdata = normdata;

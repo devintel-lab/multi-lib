@@ -1,7 +1,7 @@
 clear;
 subs = 'all';
 diary('/space/CORE/scheduled_tasks/exception_log.txt');
-
+set(0, 'DefaultFigureVisible', 'off');
 try
     for a = [1 2 3 4 5 6 7]
         master_data_vis(subs, a);

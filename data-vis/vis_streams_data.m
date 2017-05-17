@@ -90,7 +90,7 @@ end
 
 numplots = size(window_times,1);
 
-h = figure('visible', 'on', 'position', [50 100 1280 720]);
+h = figure('position', [50 100 1280 720]);
 axh = cell(numplots,1);
 for n = 1:numplots
     axh{n,1} = axes();

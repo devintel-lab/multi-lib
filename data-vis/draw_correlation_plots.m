@@ -3,7 +3,7 @@ try
     if ~exist(directory, 'dir')
         error('%s does not exist, please create it first\n', directory);
     end
-    vis = 'off';
+
     if ~exist('modes', 'var') || isempty(modes)
         modes = [1 2 3];
     end
@@ -53,7 +53,7 @@ try
                 measure = measures{m};
                 figure;
                 gscatter(age, d(:,m+3), d(:,2));% get_colors_v2(unique(d(:,2))));
-                set(gcf, 'position', [100 100 1280 720], 'visible', vis);
+                set(gcf, 'position', [100 100 1280 720]);
                 title(strfix(nametag));
                 ylabel(strfix(measure));
                 xlabel('age');
@@ -82,7 +82,7 @@ try
                     measure = measures{m};
                     figure;
                     gscatter(tage, td(:,m+3), td(:,2));
-                    set(gcf, 'position', [100 100 1280 720], 'visible', vis);
+                    set(gcf, 'position', [100 100 1280 720]);
                     title(strfix(nametag));
                     ylabel(strfix(measure));
                     xlabel('age');
@@ -112,7 +112,7 @@ try
                     measure = measures{m};
                     figure;
                     gscatter(idx, md(:,m+3), md(:,2));
-                    set(gcf, 'position', [100 100 1280 720], 'visible', vis);
+                    set(gcf, 'position', [100 100 1280 720]);
                     title(strfix(nametag));
                     ylabel(strfix(measure));
                     xlabel('age');
