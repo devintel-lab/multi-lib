@@ -13,39 +13,19 @@ function [ filename ] = record_variable( subject_id, variable_name, data )
 %   The return value is the filename where the data was saved.
 %
 
-authorized_members = {
-    'sbf'
-    'txu'
-    'chenyu'
-    'glisandr'
-    'antchen'
-    'dhabney'
-    'ctay'
-    'yayzhang'
-    'ssuanda'
-    'csuarezr'
-    'chen75'
-    'leslone'
-    'drpearcy'
-    'nprandal'
-    };
-
 if ~is_core_variable(variable_name)
     fprintf('====== NOT SAVED ========\n');
-    warning('%s is not a core variable, please use record_additional_variable instead', variable_name);
+    warning('%s is not a core variable, please use record_additional_variable instead. Or, have Chen add this variable to core_variable_list.txt', variable_name);
     fprintf('=========================\n');
     return;
 end
 
 filename = get_variable_path(subject_id, variable_name);
 
-if isempty(getenv('IU_username'))
-    IU_username = input('enter IU username: ', 's');
-    setenv('IU_username', IU_username);
-end
+request_IU_username();
 
 user = getenv('IU_username');
-if ~ismember(user, authorized_members)
+if ~is_authorized_member(user)
     fprintf('\n====== NOT SAVED ========\n');
     warning('%s is not an authorized member, please contact Chen', user);
     fprintf('===========================\n');
