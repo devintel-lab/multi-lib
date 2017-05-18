@@ -120,7 +120,7 @@ for d = 1:numel(celldata)
             cellcev = event_extract_ranges(cev, window_times);
         end
         for c = 1:numel(cellcev)
-            axes(axh{c});
+            h.CurrentAxes = axh{c};
             cevpart = cellcev{c};
             if ~isempty(cevpart)
                 if this_args.isCont
@@ -150,7 +150,7 @@ for d = 1:numel(celldata)
 end
 colormap(cont_colormap);
 for n = 1:numplots
-    axes(axh{n});
+    h.CurrentAxes = axh{n};
     set(gca, 'ytick', label_pos);
     set(gca, 'yticklabel', streamlabels);
     set(gca, 'ticklength', [0 0])
