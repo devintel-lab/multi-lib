@@ -25,7 +25,7 @@ filename = get_variable_path(subject_id, variable_name);
 request_IU_username();
 
 user = getenv('IU_username');
-if ~is_authorized_member(user)
+if ~is_core_member(user)
     fprintf('\n====== NOT SAVED ========\n');
     warning('%s is not an authorized member, please contact Chen', user);
     fprintf('===========================\n');
