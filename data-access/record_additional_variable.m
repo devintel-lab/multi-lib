@@ -1,17 +1,15 @@
 function [ filename ] = record_additional_variable( subject_id, variable_name, data )
 %Records the given data under the given subject and name.
-%   record_variable(SUBJECT_ID, VARIABLE_NAME, DATA)
+%   record_additional_variable(SUBJECT_ID, VARIABLE_NAME, DATA)
 %
 %   Finds the filename that the data should be recorded in, using
 %   get_variable_path.  Then, creates the little structure that goes in
 %   that file, and records the data there using MATLAB's SAVE function.
 %
-%   If the given variable name does not have documentation, for now the
-%   function will complain, but eventually the data will not be saved in
-%   the requested place, but instead will be put in a temporary directory.
-%
 %   The return value is the filename where the data was saved.
 %
+%   This function is to be used for non-core variables. That is, variables that are part of the regular pre-processing steps.
+%   You should use this function for any variable that is specific to your analysis or project.
 
 if is_core_variable(variable_name)
     fprintf('====== NOT SAVED ========\n');

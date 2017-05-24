@@ -6,11 +6,8 @@ function [ filename ] = record_variable( subject_id, variable_name, data )
 %   get_variable_path.  Then, creates the little structure that goes in
 %   that file, and records the data there using MATLAB's SAVE function.
 %
-%   If the given variable name does not have documentation, for now the
-%   function will complain, but eventually the data will not be saved in
-%   the requested place, but instead will be put in a temporary directory.
-%
 %   The return value is the filename where the data was saved.
+%   This function is intended to save core variables only. You should use record_additional_variable for project specific variables.
 %
 
 if ~is_core_variable(variable_name)

@@ -1,4 +1,12 @@
 function delete_variables(IDs, var_list)
+% Overview: remove variables from the derived folders on multiwork. Please use with caution.
+% e.g. delete_variables(72, 'cevent_eye_roi_child_test') will remove that variable for each subject in 72 that has the file
+% Required:
+%   IDs : array of experiments or subjects.
+%   var_list : cell array of strings, representing the files to remove.
+% The function will first backup the variables into a folder on extra_p\, just in case one needs to restore the deleted variables.
+% This function will not allow you to delete core variables unless you are authorized to do so.
+
 subs = cIDs(IDs);
 
 if ~iscell(var_list)
