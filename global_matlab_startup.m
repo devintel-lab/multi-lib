@@ -3,4 +3,4 @@
 % addpath(genpath('r:\repository\multi-lib\'));
 % matlab_startup
 % 
-% therefore, if you want all computers to run additional startup commands, place them here.
+% therefore, if you want all computers to run additional startup commands, place them here. 
