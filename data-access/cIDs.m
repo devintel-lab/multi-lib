@@ -67,7 +67,7 @@ else
 end
 for t = 1:size(parttable,1)
     tmp = parttable(t,:);
-    path = sprintf('%sexperiment_%d%sincluded%s__%d_%d%s%s%s', root, tmp(2), fs, fs, tmp(3), tmp(4), fs, derived);
+    path = sprintf('%s%sexperiment_%d%sincluded%s__%d_%d%s%s%s', root, fs, tmp(2), fs, fs, tmp(3), tmp(4), fs, derived);
     paths{t,1} = path;
 end
 
