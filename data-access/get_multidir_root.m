@@ -14,7 +14,9 @@ multidir = getenv('MULTIDIR_ROOT');
 if strcmp(multidir, '')
 %     multidir = '/ein/multiwork';
     sep = filesep();
-    multidir = [sep 'bell' sep 'multiwork'];
+	root_path = strsplit(userpath, sep);
+	root_path = root_path{1};
+    multidir = [root_path sep 'bell' sep 'multiwork'];
 end
 
 end
