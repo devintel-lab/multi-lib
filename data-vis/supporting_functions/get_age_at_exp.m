@@ -1,4 +1,4 @@
-function [ageout, gendout, log, subs] = get_age_at_exp(IDs)
+function [ageout, gendout, log, subjout] = get_age_at_exp(IDs)
 subs = cIDs(IDs);
 
 expIDs = unique(sub2exp(subs));
@@ -18,10 +18,12 @@ if ~isempty(expIDs)
     [log,idx] = ismember(subs, subjects);
     gendout = gender(idx(idx~=0));
     ageout = ages(idx(idx~=0));
+    subjout = subjects(idx(idx~=0));
 else
     ageout = [];
     gendout = [];
     log = [];
+    subjout = [];
 end
 
 end
