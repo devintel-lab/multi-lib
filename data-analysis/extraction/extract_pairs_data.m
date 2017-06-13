@@ -85,19 +85,48 @@ if ~isempty(cev1data) && ~isempty(cev2data)
             allpairs(:,11) = bothcat;
         end
         
-        % if firstflag, force 1-1 mapping
         uidx = unique(allpairs(:,4));
         idx_keep = [];
-        for u = 1:numel(uidx)
-            idx1 = find_first_last_n(allpairs(:,4), uidx(u), args.first_n_cev1, 'first');
-            idx2 = find_first_last_n(allpairs(:,4), uidx(u), args.last_n_cev1, 'last');
-            idx3 = find_first_last_n(allpairs(:,9), uidx(u), args.first_n_cev2, 'first');
-            idx4 = find_first_last_n(allpairs(:,9), uidx(u), args.last_n_cev2, 'last');
-            idx_keep = cat(1, idx_keep, idx1, idx2, idx3, idx4);
+        if ~isempty(args.first_n_cev1)
+            for u = 1:numel(uidx)
+                idx_first = find(allpairs(:,4) == uidx(u), args.first_n_cev1, 'first');
+                idx_keep = cat(1, idx_keep, idx_first);
+            end
+        end
+        if ~isempty(args.last_n_cev1)
+            for u = 1:numel(uidx)
+                idx_last = find(allpairs(:,4) == uidx(u), args.last_n_cev1, 'last');
+                idx_keep = cat(1, idx_keep, idx_last);
+            end
         end
         
         idx_keep = unique(idx_keep);
-        allpairs = allpairs(idx_keep, :);
+        
+        if ~isempty(idx_keep)
+            allpairs = allpairs(idx_keep, :);
+        end
+        
+        uidx = unique(allpairs(:,9));
+        idx_keep = [];
+        if ~isempty(args.first_n_cev2)
+            for u = 1:numel(uidx)
+                idx_first = find(allpairs(:,9) == uidx(u), args.first_n_cev2, 'first');
+                idx_keep = cat(1, idx_keep, idx_first);
+            end
+        end
+        if ~isempty(args.last_n_cev2)
+            for u = 1:numel(uidx)
+                idx_last = find(allpairs(:,9) == uidx(u), args.last_n_cev2, 'last');
+                idx_keep = cat(1, idx_keep, idx_last);
+            end
+        end
+        
+        idx_keep = unique(idx_keep);
+        
+        if ~isempty(idx_keep)
+            allpairs = allpairs(idx_keep, :);
+        end
+        
         allpairs(:,5) = []; % get rid of first trial column, it is redundant
         log = ~ismember(cev1data(:,4), allpairs(:,4));
         cev1wo = cev1data(log,:);
@@ -119,14 +148,6 @@ more_dif = t2 - t1;
 log = more_dif > -0.001;
 if exist('thres', 'var')
     log = log & more_dif >= thres;
-end
-end
-
-function idx_column = find_first_last_n(idx_column, idx, n, first_last)
-if ~isempty(n)
-    idx_column = find(idx_column==idx, n, first_last);
-else
-    idx_column = (1:size(idx_column, 1))';
 end
 end
 
