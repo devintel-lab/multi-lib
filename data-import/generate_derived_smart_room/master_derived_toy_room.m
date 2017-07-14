@@ -51,7 +51,7 @@ for s = 1:numel(subs)
                 if flagReliability
                     fixations = get_csv_data_v2([root fs 'reliability' fs 'fixation_frames_' agent '_reliability.txt']);
                 else
-                    fixations = get_csv_data_v2([root fs 'supporting_files' fs 'fixation_frames_' agent '.txt']);
+                    fixations = get_csv_data_v2([root fs 'supporting_files' fs 'fixation_frames_' agent '_reliability.txt']);
                 end
                 for f = 1:size(fixations, 1)
                     data(fixations(f,1):fixations(f,2),2) = data(fixations(f,3),2);
