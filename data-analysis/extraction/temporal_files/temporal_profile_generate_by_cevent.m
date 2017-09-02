@@ -278,7 +278,7 @@ for sidx = 1:length(sub_list)
                 chunks_one_new(:, 1) = chunks_one_new(:, 1) - range_one(1);
                 length_one = size(chunks_one_new, 1);
 
-                if length_one < length_profile
+                if length_one ~= length_profile
                     chunk_ts = timeseries(chunks_one_new(:, 2:end), chunks_one_new(:, 1));
                     chunk_ts = resample(chunk_ts, time_base_ts, 'zoh');
                     chunks_one_new = horzcat(get(chunk_ts, 'Time'), get(chunk_ts, 'Data'));
@@ -350,7 +350,7 @@ for sidx = 1:length(sub_list)
                 chunks_one_new(:, 1) = chunks_one_new(:, 1) - range_one(1);
                 length_one = size(chunks_one_new, 1);
 
-                if length_one < length_profile
+                if length_one ~= length_profile
                     chunk_ts = timeseries(chunks_one_new(:, 2:end), chunks_one_new(:, 1));
                     chunk_ts = resample(chunk_ts, time_base_ts, 'zoh');
                     chunks_one_new = horzcat(get(chunk_ts, 'Time'), get(chunk_ts, 'Data'));

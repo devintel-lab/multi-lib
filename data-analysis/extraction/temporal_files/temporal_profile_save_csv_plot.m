@@ -4,7 +4,7 @@ if nargin < 2
     save_dir = '.';
 end
 
-expr_module = 'eye_roi|inhand|naming|vision_size|joint';
+expr_module = 'eye_roi|inhand|naming|vision_size|joint|ballrolling';
 cevent_name = profile_data.cevent_name;
 var_name = profile_data.var_name;
 
@@ -21,9 +21,17 @@ else
 end
 
 str_module_cevent = regexp(cevent_name, expr_module, 'match');
-str_module_cevent = str_module_cevent{1};
+if ~isempty(str_module_cevent)
+    str_module_cevent = str_module_cevent{1};
+else
+    str_module_cevent = 'cevent_module';
+end
 str_module_var = regexp(example_var_name, expr_module, 'match');
-str_module_var = str_module_var{1};
+if ~isempty(str_module_cevent)
+    str_module_var = str_module_var{1};
+else
+    str_module_var = 'var_module';
+end
 
 time_base = profile_data.time_base;
 num_groupids = length(profile_data.group_list);
