@@ -118,7 +118,7 @@ for s = 1:numel(subs)
                 prefixdata{s,1} = [subs(s) sub2exp(subs(s)) s];
             else
                 irsize = size(extra.individual_ranges);
-                ir = nan(irsize(1), 3);
+                ir = zeros(irsize(1), 3);
                 ir(:,1:irsize(2)) = extra.individual_ranges;
                 % splits up cevent ranges into trials so that we can easily
                 % tag the trial number to each cevent
@@ -209,9 +209,9 @@ for s = 1:numel(subs)
                 end
                 
                 if by_cat
-                    prearray = nan(numrow, length(numcol{1,v}{1,w}));
+                    prearray = zeros(numrow, length(numcol{1,v}{1,w}));
                 else
-                    prearray = nan(numrow, 1);
+                    prearray = zeros(numrow, 1);
                 end
                 
                 if isempty(stats{s,v}{w})
