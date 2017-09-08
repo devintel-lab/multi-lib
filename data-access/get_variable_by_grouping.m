@@ -588,9 +588,10 @@ case 'trialcevent'
         else
             error('Either cevent_name or cevent_ranges have to be specified!');
         end
+
+        cevent_data = event_extract_ranges(cevent_data, trials_one);
+        cevent_data = vertcat(cevent_data{:});
         
-        %         cevent_data = event_extract_ranges(cevent_data, trials_one);
-        %         cevent_data = vertcat(cevent_data{:});
         if ~isempty(cevent_data)
             cevent_data = cevent_category_equals(...
                 cevent_data, grouping_args.cevent_values);
@@ -607,6 +608,7 @@ case 'trialcevent'
                 cevent_data = cevent_data(x_dur_mask, :);
             end
         end
+        
         if ~isempty(cevent_data)
             if isfield(grouping_args, 'whence') && isfield(grouping_args, 'interval')
                 % when we shift time windows, make sure cevent_data
@@ -629,11 +631,7 @@ case 'trialcevent'
                 % and filter these out
                 cevent_data_ind = cellfun(@(a,b) a(a(:,4) == b, [1 2 3]), cevent_data_ind, num2cell(trials_one(:,3)), 'un', 0);
                 % recombine all data
-                cevent_data = vertcat(cevent_data_ind{:});                
-                
-            else
-                cevent_data = event_extract_ranges(cevent_data, trials_one);
-                cevent_data = vertcat(cevent_data{:});
+                cevent_data = vertcat(cevent_data_ind{:});
             end
             
             if isfield(grouping_args, 'within_ranges') && ~grouping_args.within_ranges
