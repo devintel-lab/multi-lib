@@ -21,7 +21,6 @@ function master_smi(subID, flag, filename)
 %   96  missing
 %   
 %filename = 'Raw Data - Raw Data';
-numOfAOIs = input('Please enter the number of AOIs in this study\n>> ');
 disp('[*] Creating data files, please wait...')
 sep = filesep();
 
@@ -69,6 +68,20 @@ numOfCleanData = numel(recordingTime);
 x = zeros(numOfCleanData, 1);
 y = zeros(numOfCleanData, 1);
 aoi = zeros(numOfCleanData, 1);
+
+%Number of AOIs in the study
+numOfAOIs = 0;
+listOfAOIs = {};
+for i = 1:numOfCleanData
+    if ~any(strcmp(cellaoi{i}, listOfAOIs)) &&...
+            ~strcmp(cellaoi{i}, 'White Space') &&...
+            ~strcmp(cellaoi{i}, '-')
+        numOfAOIs = numOfAOIs + 1;
+        listOfAOIs = horzcat(listOfAOIs, cellaoi{i});
+    end
+end
+disp(['[*] There are ' num2str(numOfAOIs) ' AOIs in this study'])
+
 for i = 1:numOfCleanData
     if strcmp(cellx{i}, '-')
         x(i) = NaN;
