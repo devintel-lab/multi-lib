@@ -59,16 +59,16 @@ subs = parttable(:,1);
 
 paths = cell(size(parttable,1), 1);
 fs = filesep();
-root = get_multidir_root;
+% root = get_multidir_root;
 if flagDerived
     derived = ['derived' fs];
 else
     derived = '';
 end
-for t = 1:size(parttable,1)
-    tmp = parttable(t,:);
-    path = sprintf('%s%sexperiment_%d%sincluded%s__%d_%d%s%s%s', root, fs, tmp(2), fs, fs, tmp(3), tmp(4), fs, derived);
-    paths{t,1} = path;
+for sidx = 1:length(subs)
+    sub_id = subs(sidx);
+    sub_path = [get_subject_dir(sub_id), fs, derived];
+    paths{sidx,1} = sub_path;
 end
 
 end
