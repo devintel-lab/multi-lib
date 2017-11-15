@@ -25,7 +25,7 @@ disp('[*] Creating data files, please wait...')
 sep = filesep();
 
 if ~exist('flag', 'var')
-    flag = all;
+    flag = 'all';
 end
 
 if ~exist('filename', 'var')
