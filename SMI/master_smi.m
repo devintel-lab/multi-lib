@@ -263,143 +263,77 @@ for i = 1:size(revisedData, 1)
     end
 end
 
+%recording data
 switch flag
     
     case 'overall'
         %----cont2----
-        sdata.variable = 'cont2_eye_xy_child';
-        sdata.data = cont2_eye_xy_child;
-        save([path 'cont2_eye_xy_child.mat'], 'sdata')
-
+        record_variable(subID, 'cont2_eye_xy_child', cont2_eye_xy_child)
         %-----roi-----
-        sdata.variable = 'cstream_eye_roi_child';
-        sdata.data = cstream_eye_roi_child;
-        save([path 'cstream_eye_roi_child.mat'], 'sdata')
-
-        sdata.variable = 'cevent_eye_roi_child';
-        sdata.data = cstream2cevent(cstream_eye_roi_child);
-        save([path 'cevent_eye_roi_child'], 'sdata')
-
+        record_variable(subID, 'cstream_eye_roi_child', cstream_eye_roi_child)
+        record_variable(subID, 'cevent_eye_roi_child', cstream2cevent(cstream_eye_roi_child))
         %---fixation---
-        sdata.variable = 'cstream_eye_roi_fixation_child';
-        sdata.data = cstream_eye_roi_fixation_child;
-        save([path 'cstream_eye_roi_fixation_child.mat'], 'sdata')
-        
-        sdata.variable = 'cevent_eye_roi_fixation_child';
-        sdata.data = cstream2cevent(cstream_eye_roi_fixation_child);
-        save([path 'cevent_eye_roi_fixation_child'], 'sdata')
-        
+        record_variable(subID, 'cstream_eye_roi_fixation_child', cstream_eye_roi_fixation_child)
+        record_variable(subID, 'cstream_eye_roi_fixation_child', cstream2cevent(cstream_eye_roi_fixation_child)        
         %----Saccade----
-        sdata.variable = 'cstream_eye_roi_saccade_child';
-        sdata.data = cstream_eye_roi_saccade_child;
-        save([path 'cstream_eye_roi_saccade_child.mat'], 'sdata')
-
+        record_additional_variable(subID, 'cstream_eye_roi_saccade_child', cstream_eye_roi_saccade_child)       
         %-----Blink-----
-        sdata.variable = 'cstream_eye_roi_blink_child';
-        sdata.data = cstream_eye_roi_blink_child;
-        save([path 'cstream_eye_roi_blink_child.mat'], 'sdata')
-
+        record_additional_variable(subID, 'cstream_eye_roi_blink_child', cstream_eye_roi_blink_child)
         %---Undefined---
-        sdata.variable = 'cstream_eye_roi_undefined_child';
-        sdata.data = cstream_eye_roi_undefined_child;
-        save([path 'cstream_eye_roi_undefined_child.mat'], 'sdata')
-        
+        record_additional_variable(subID, 'cstream_eye_roi_undefined_child', cstream_eye_roi_undefined_child)
         %----Missing----
-        sdata.variable = 'cstream_eye_roi_missing_child';
-        sdata.data = cstream_eye_roi_missing_child;
-        save([path 'cstream_eye_roi_missing_child.mat'], 'sdata')
-        
+        record_additional_variable(subID, 'cstream_eye_roi_missing_child', cstream_eye_roi_missing_child)
         %----trials----
-        sdata.variable = 'cevent_trials';
-        sdata.data = cevent_trials;
-        save([path 'cevent_trials.mat'], 'sdata')
+        record_variable(subID, 'cevent_trials', cevent_trials)
         
     case 'all'
         %----cont2----
-        sdata.variable = 'cont2_eye_xy_child';
-        sdata.data = cont2_eye_xy_child;
-        save([path 'cont2_eye_xy_child.mat'], 'sdata')
-
+        record_variable(subID, 'cont2_eye_xy_child', cont2_eye_xy_child)
         %-----roi-----
-        sdata.variable = 'cstream_eye_roi_child';
-        sdata.data = cstream_eye_roi_child;
-        save([path 'cstream_eye_roi_child.mat'], 'sdata')
-
-        sdata.variable = 'cevent_eye_roi_child';
-        sdata.data = cstream2cevent(cstream_eye_roi_child);
-        save([path 'cevent_eye_roi_child'], 'sdata')
-
+        record_variable(subID, 'cstream_eye_roi_child', cstream_eye_roi_child)
+        record_variable(subID, 'cevent_eye_roi_child', cstream2cevent(cstream_eye_roi_child))
         %---fixation---
-        sdata.variable = 'cstream_eye_roi_fixation_child';
-        sdata.data = cstream_eye_roi_fixation_child;
-        save([path 'cstream_eye_roi_fixation_child.mat'], 'sdata')
-        
-        sdata.variable = 'cevent_eye_roi_fixation_child';
-        sdata.data = cstream2cevent(cstream_eye_roi_fixation_child);
-        save([path 'cevent_eye_roi_fixation_child'], 'sdata')
-        
+        record_variable(subID, 'cstream_eye_roi_fixation_child', cstream_eye_roi_fixation_child)
+        record_variable(subID, 'cstream_eye_roi_fixation_child', cstream2cevent(cstream_eye_roi_fixation_child)
         %----trials----
-        sdata.variable = 'cevent_trials';
-        sdata.data = cevent_trials;
-        save([path 'cevent_trials.mat'], 'sdata')
+        record_variable(subID, 'cevent_trials', cevent_trials)
         
     case 'roi'
         %-----roi-----
-        sdata.variable = 'cstream_eye_roi_child';
-        sdata.data = cstream_eye_roi_child;
-        save([path 'cstream_eye_roi_child.mat'], 'sdata')
-
-        sdata.variable = 'cevent_eye_roi_child';
-        sdata.data = cstream2cevent(cstream_eye_roi_child);
-        save([path 'cevent_eye_roi_child'], 'sdata')
+        record_variable(subID, 'cstream_eye_roi_child', cstream_eye_roi_child)
+        record_variable(subID, 'cevent_eye_roi_child', cstream2cevent(cstream_eye_roi_child))
         
     case 'fixroi'
         %---fixation---
-        sdata.variable = 'cstream_eye_roi_fixation_child';
-        sdata.data = cstream_eye_roi_fixation_child;
-        save([path 'cstream_eye_roi_fixation_child.mat'], 'sdata')
-        
-        sdata.variable = 'cevent_eye_roi_fixation_child';
-        sdata.data = cstream2cevent(cstream_eye_roi_fixation_child);
-        save([path 'cevent_eye_roi_fixation_child'], 'sdata')
+        record_variable(subID, 'cstream_eye_roi_fixation_child', cstream_eye_roi_fixation_child)
+        record_variable(subID, 'cstream_eye_roi_fixation_child', cstream2cevent(cstream_eye_roi_fixation_child)
         
     case 'trials'
         %----trials----
-        sdata.variable = 'cevent_trials';
-        sdata.data = cevent_trials;
-        save([path 'cevent_trials.mat'], 'sdata')
+        record_variable(subID, 'cevent_trials', cevent_trials)
         
     case 'cont2xy'
         %----cont2----
-        sdata.variable = 'cont2_eye_xy_child';
-        sdata.data = cont2_eye_xy_child;
-        save([path 'cont2_eye_xy_child.mat'], 'sdata')
+        record_variable(subID, 'cont2_eye_xy_child', cont2_eye_xy_child)
         
     case 'blinkroi'
         %-----Blink-----
-        sdata.variable = 'cstream_eye_roi_blink_child';
-        sdata.data = cstream_eye_roi_blink_child;
-        save([path 'cstream_eye_roi_blink_child.mat'], 'sdata')
+        record_additional_variable(subID, 'cstream_eye_roi_blink_child', cstream_eye_roi_blink_child)
         
     case 'saccaderoi'
         %----Saccade----
-        sdata.variable = 'cstream_eye_roi_saccade_child';
-        sdata.data = cstream_eye_roi_saccade_child;
-        save([path 'cstream_eye_roi_saccade_child.mat'], 'sdata')
+        record_additional_variable(subID, 'cstream_eye_roi_saccade_child', cstream_eye_roi_saccade_child)
         
     case 'undefined'
         %---Undefined---
-        sdata.variable = 'cstream_eye_roi_undefined_child';
-        sdata.data = cstream_eye_roi_undefined_child;
-        save([path 'cstream_eye_roi_undefined_child.mat'], 'sdata')
+        record_additional_variable(subID, 'cstream_eye_roi_undefined_child', cstream_eye_roi_undefined_child)
         
     case 'missing'
         %----Missing----
-        sdata.variable = 'cstream_eye_roi_missing_child';
-        sdata.data = cstream_eye_roi_missing_child;
-        save([path 'cstream_eye_roi_missing_child.mat'], 'sdata')
+        record_additional_variable(subID, 'cstream_eye_roi_missing_child', cstream_eye_roi_missing_child)
     otherwise
         disp('[-] Not a valid flag')
+        return
 end
 disp('[+] Data files created')
 end
