@@ -2,7 +2,7 @@ function lookup_results = lookup_variable_script(lookup_param, lookup_string)
 % This function searches for the script that generated the variable
 % specified by the user.
 % 
-% USE CASE 1:
+% USE CASE 1: search for one specific variable.
 % >> lookup_results = lookup_variable_script('cont2_eye_xy_child')
 % 
 % lookup_results =
