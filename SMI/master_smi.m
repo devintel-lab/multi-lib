@@ -63,7 +63,7 @@ stimulus = {T.Stimulus{indexToBeIncluded}};
 categoryRight = {T.CategoryRight{indexToBeIncluded}};
 cellx = {T.PointOfRegardRightX_px_{indexToBeIncluded}};
 celly = {T.PointOfRegardRightY_px_{indexToBeIncluded}};
-cellaoi = {T.AOINameRight{indexToBeIncluded}};
+cellaoi = {T.AOINameRight{indexToBeIncluded}}';
 numOfCleanData = numel(recordingTime);
 x = zeros(numOfCleanData, 1);
 y = zeros(numOfCleanData, 1);
@@ -81,8 +81,8 @@ for i = 1:numOfCleanData
     end
 end
 disp(['[*] There are ' num2str(numOfAOIs) ' AOIs in this study'])
-
 for i = 1:numOfCleanData
+    
     if strcmp(cellx{i}, '-')
         x(i) = NaN;
     else
@@ -274,7 +274,7 @@ switch flag
         record_variable(subID, 'cevent_eye_roi_child', cstream2cevent(cstream_eye_roi_child))
         %---fixation---
         record_variable(subID, 'cstream_eye_roi_fixation_child', cstream_eye_roi_fixation_child)
-        record_variable(subID, 'cstream_eye_roi_fixation_child', cstream2cevent(cstream_eye_roi_fixation_child)        
+        record_variable(subID, 'cevent_eye_roi_fixation_child', cstream2cevent(cstream_eye_roi_fixation_child))        
         %----Saccade----
         record_additional_variable(subID, 'cstream_eye_roi_saccade_child', cstream_eye_roi_saccade_child)       
         %-----Blink-----
@@ -294,7 +294,7 @@ switch flag
         record_variable(subID, 'cevent_eye_roi_child', cstream2cevent(cstream_eye_roi_child))
         %---fixation---
         record_variable(subID, 'cstream_eye_roi_fixation_child', cstream_eye_roi_fixation_child)
-        record_variable(subID, 'cstream_eye_roi_fixation_child', cstream2cevent(cstream_eye_roi_fixation_child)
+        record_variable(subID, 'cevent_eye_roi_fixation_child', cstream2cevent(cstream_eye_roi_fixation_child))
         %----trials----
         record_variable(subID, 'cevent_trials', cevent_trials)
         
@@ -306,7 +306,7 @@ switch flag
     case 'fixroi'
         %---fixation---
         record_variable(subID, 'cstream_eye_roi_fixation_child', cstream_eye_roi_fixation_child)
-        record_variable(subID, 'cstream_eye_roi_fixation_child', cstream2cevent(cstream_eye_roi_fixation_child)
+        record_variable(subID, 'cevent_eye_roi_fixation_child', cstream2cevent(cstream_eye_roi_fixation_child))
         
     case 'trials'
         %----trials----
