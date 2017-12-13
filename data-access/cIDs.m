@@ -19,7 +19,7 @@ if ~exist('IDs', 'var') || isempty(IDs)
 end
 
 if ischar(IDs) && strcmp(IDs, 'all')
-    IDs = [12 14 17 29 32 34 35 39 41 43 44 49 70 71 72 73 74 75];
+    IDs = [12 14 17 29 32 34 35 39 41 43 44 49 65 66 67 68 69 70 71 72 73 74 75];
 end
 
 if ~exist('flagDerived', 'var') || isempty(flagDerived)
