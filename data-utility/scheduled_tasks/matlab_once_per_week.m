@@ -1,6 +1,8 @@
 clear;
 subs = 'all';
-diary('/space/CORE/scheduled_tasks/exception_log.txt');
+dir_matlab = 'c:';
+path_log = fullfile(dir_matlab, 'space', 'CORE', 'scheduled_tasks', 'exception_log.txt');
+diary(path_log);
 set(0, 'DefaultFigureVisible', 'off');
 
 
