@@ -1,46 +1,121 @@
 function colors = set_colors(n)
 
-if exist('n', 'var') && ~isempty(n)
+predefined_colors = [
+         0         0    1.0000
+         0    1.0000         0
+    1.0000         0         0
+    1.0000         0    1.0000
+    1.0000    0.8276         0
+         0    0.3448         0
+    0.5172    0.5172    1.0000
+    0.6207    0.3103    0.2759
+         0    1.0000    0.7586
+         0    0.5172    0.5862
+         0         0    0.4828
+    0.5862    0.8276    0.3103
+    0.9655    0.6207    0.8621
+    0.8276    0.0690    1.0000
+    0.4828    0.1034    0.4138
+    0.9655    0.0690    0.3793
+    1.0000    0.7586    0.5172
+    0.1379    0.1379    0.0345
+    0.5517    0.6552    0.4828
+    0.9655    0.5172    0.0345
+    0.5172    0.4483         0
+    0.4483    0.9655    1.0000
+    0.6207    0.7586    1.0000
+    0.4483    0.3793    0.4828
+    0.6207         0         0
+         0    0.3103    1.0000
+         0    0.2759    0.5862
+    0.8276    1.0000         0
+    0.7241    0.3103    0.8276
+    0.2414         0    0.1034
+    0.9310    1.0000    0.6897
+    1.0000    0.4828    0.3793
+    0.2759    1.0000    0.4828
+    0.0690    0.6552    0.3793
+    0.8276    0.6552    0.6552
+    0.8276    0.3103    0.5172
+    0.4138         0    0.7586
+    0.1724    0.3793    0.2759
+         0    0.5862    0.9655
+    0.0345    0.2414    0.3103
+    0.6552    0.3448    0.0345
+    0.4483    0.3793    0.2414
+    0.0345    0.5862         0
+    0.6207    0.4138    0.7241
+    1.0000    1.0000    0.4483
+    0.6552    0.9655    0.7931
+    0.5862    0.6897    0.7241
+    0.6897    0.6897    0.0345
+    0.1724         0    0.3103
+         0    0.7931    1.0000
+    0.3103    0.1379         0
+         0    0.7241    0.6552
+    0.6207         0    0.2069
+    0.3103    0.4828    0.6897
+    0.1034    0.2759    0.7586
+    0.3448    0.8276         0
+    0.4483    0.5862    0.2069
+    0.8966    0.6552    0.2069
+    0.9655    0.5517    0.5862
+    0.4138    0.0690    0.5517];
+num_colors = 60;
+
+if nargin > 0
     if numel(n) == 1
-        colors = ones(n,3);
-        for i = 1 : n
-            fprintf('set color for category %d\n', i);
-            colors(i,:) = uisetcolor();
+        if n < 11
+            colors = ones(n,3);
+            for i = 1 : n
+                fprintf('set color for category %d\n', i);
+                colors(i,:) = uisetcolor();
+            end
+        else
+            fprintf(['Too many color categories, please enter color matrix ' ....
+                'in this case. Now the program will apply predefined colors.\n']);
+            if n <= num_colors
+                colors = predefined_colors(1:n, :);
+            else
+                new_colors = distinguishable_colors(n+1);
+                colors = [
+                    predefined_colors(1:4, :)
+                    new_colors(6:end, :)];
+            end
         end
     elseif size(n,2) == 3
         colors = n;
     end
 else
-    colors = [
-        0         0    1.0000
-        0    1.0000         0
-        1.0000         0         0
-        1.0000         0    1.0000
-        1.0000    1.0000         0
-        0    1.0000    1.0000
-        0.5020         0    1.0000
-        1.0000         0    0.5020
-        1.0000    0.5020         0
-        0.8392    0.8392    0.8392
-        0.8275    0.8510    1.0000
-        0.7804    1.0000    0.9922
-        0.8157    1.0000    0.8314
-        1.0000    0.8588    0.8314
-        0.3451    0.8824    0.8824
-        0.7373    0.2941    0.7725
-        0.4118    0.7765    0.6510
-        0.9412    0.9608    0.5725
-        0.6784    0.8078    0.5922
-        0.3059    0.5451    0.7137
-        0.5255    0.3098    0.9255
-        0.8392    0.3804    0.5725
-        0.3451    0.1216    0.3882
-        0.4235    0.4745    0.3216
-        0.1725    0.3333    0.3294
-        0.2784    0.2824    0.4824
-        0.0745    0.5804    0.1529
-        ];
-    colors = repmat(colors, 10,1);
+    colors = predefined_colors;
 end
+
+is_plot_colors = false;
+if is_plot_colors
+    num_colors = size(colors, 1);
+    h_colormap = figure('Position', [20 20 300 1000], 'Visible', 'off'); % 
+    size_unit = 20;
+    hold on;
+    for i = 1:num_colors
+        colorone = colors(i, :);
+        plot_x = [3 3 7 7];
+        upper_y = (num_colors-i+1) * size_unit;
+        lower_y = (num_colors-i) * size_unit+size_unit/10;
+        plot_y = [lower_y upper_y upper_y lower_y];
+        fill(plot_x, plot_y, colorone, 'EdgeColor', 'k');
+        text(mean(plot_x), mean(plot_y), sprintf('%d', i), 'HorizontalAlignment', 'center');
+    end
+    xlim([2 8]);
+    ylim([0 (num_colors+1)*size_unit]);
+    % set(gca, 'XTick',[]);
+    % set(gca, 'YTick',[]);
+    set(gca,'Visible','off');
+    hold off;
+    title_str = 'colormap';
+    text(mean(plot_x), -size_unit, title_str, 'HorizontalAlignment', 'center');
+    set(h_colormap,'PaperPositionMode','auto');
+    saveas(h_colormap, [title_str '.png']);
+end
+
 
 end
