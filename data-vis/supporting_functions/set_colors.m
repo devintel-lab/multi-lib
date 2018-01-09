@@ -85,6 +85,8 @@ if nargin > 0
         end
     elseif size(n,2) == 3
         colors = n;
+    else
+        colors = predefined_colors;
     end
 else
     colors = predefined_colors;
@@ -111,7 +113,7 @@ if is_plot_colors
     % set(gca, 'YTick',[]);
     set(gca,'Visible','off');
     hold off;
-    title_str = 'colormap';
+    title_str = 'plot_colormap';
     text(mean(plot_x), -size_unit, title_str, 'HorizontalAlignment', 'center');
     set(h_colormap,'PaperPositionMode','auto');
     saveas(h_colormap, [title_str '.png']);
