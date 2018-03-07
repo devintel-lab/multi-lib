@@ -80,6 +80,8 @@ for s = 1:numel(subs)
                     record_variable(sub, ['cstream_eye_roi_' agent], cst);
                     record_variable(sub, ['cevent_eye_roi_' agent], cev);
                 end
+
+                record_eyegaze_toyroom(sub, agent); % added by Sven to automatically generate cont2_eye_xy_child/parent
             end
         end
     end
