@@ -1,6 +1,6 @@
 function colors = set_colors(n)
 
-num_colors = 100;
+num_colors = 150;
 
 multisensory_colors = [
          0         0    1.0000
@@ -14,14 +14,28 @@ predefined_colors = [
 
 if nargin > 0
     if numel(n) == 1
-        if n <= num_colors + 4
-            colors = predefined_colors;
+        if n < 11
+            colors = ones(n,3);
+            for i = 1 : n
+                fprintf('set color for category %d\n', i);
+                colors(i,:) = uisetcolor();
+            end
         else
-            new_colors = distinguishable_colors(n);
-            colors = [
-                multisensory_colors
-                new_colors(6:end, :)];
+            fprintf(['Too many color categories, please enter color matrix ' ....
+                'in this case. Now the program will apply predefined colors.\n']);
+            if n <= num_colors+4
+                colors = predefined_colors(1:n, :);
+            else
+                new_colors = distinguishable_colors(n+1);
+                colors = [
+                    predefined_colors(1:4, :)
+                    new_colors(6:end, :)];
+            end
         end
+    elseif size(n,2) == 3
+        colors = n;
+    else
+        colors = predefined_colors;
     end
 else
     colors = predefined_colors;
@@ -89,34 +103,7 @@ end
 %     0.9655    0.5517    0.5862
 %     0.4138    0.0690    0.5517];
 % 
-% if nargin > 0
-%     if numel(n) == 1
-%         if n < 11
-%             colors = ones(n,3);
-%             for i = 1 : n
-%                 fprintf('set color for category %d\n', i);
-%                 colors(i,:) = uisetcolor();
-%             end
-%         else
-%             fprintf(['Too many color categories, please enter color matrix ' ....
-%                 'in this case. Now the program will apply predefined colors.\n']);
-%             if n <= num_colors
-%                 colors = predefined_colors(1:n, :);
-%             else
-%                 new_colors = distinguishable_colors(n+1);
-%                 colors = [
-%                     predefined_colors(1:4, :)
-%                     new_colors(6:end, :)];
-%             end
-%         end
-%     elseif size(n,2) == 3
-%         colors = n;
-%     else
-%         colors = predefined_colors;
-%     end
-% else
-%     colors = predefined_colors;
-% end
+
 
 is_plot_colors = false;
 if is_plot_colors
