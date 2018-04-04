@@ -71,7 +71,7 @@ y = zeros(numOfCleanData, 1);
 aoi = zeros(numOfCleanData, 1);
 
 %Ask for the deigned number of AOIs
-deignedNumberOfAOIs = input('How many AOIs in this study?/n>>');
+designedNumberOfAOIs = input('How many AOIs in this study?/n>>');
 
 %Ask for the number of trials in each block
 numOfTrialsInEachBlock = input('How many trials in each block?/n>>');
@@ -106,7 +106,7 @@ for i = 1:numOfCleanData
     if strcmp(cellaoi{i}, '-')
         aoi(i) = 96;
     elseif strcmp(cellaoi{i}, 'White Space')
-        aoi(i) = deignedNumberOfAOIs + 1;
+        aoi(i) = designedNumberOfAOIs + 1;
     else
         aoi(i) = str2num(cellaoi{i});
     end
