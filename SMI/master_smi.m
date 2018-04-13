@@ -71,10 +71,16 @@ y = zeros(numOfCleanData, 1);
 aoi = zeros(numOfCleanData, 1);
 
 %Ask for the deigned number of AOIs
-designedNumberOfAOIs = input('How many AOIs in this study?/n>>');
+deignedNumberOfAOIs = input('How many AOIs in this study?\n>>');
 
 %Ask for the number of trials in each block
-numOfTrialsInEachBlock = input('How many trials in each block?/n>>');
+numOfTrialsInEachBlock = input('How many trials in each block?\n>>');
+
+%Ask for the minDuration
+minDuration = input('The minDuration of small sgements? (in seconds E.g. 0.25) cevent duration less than this number will be removed.\n>>');
+
+%Ask for the maxGap
+maxGap = input('The maxGap that can be merged? (in seconds E.g. 0.5) cevent gap duration less than this number will be merged. No more than 1 sec.\n>>');
 
 %Actual number of AOIs in this study
 numOfAOIs = 0;
@@ -106,7 +112,7 @@ for i = 1:numOfCleanData
     if strcmp(cellaoi{i}, '-')
         aoi(i) = 96;
     elseif strcmp(cellaoi{i}, 'White Space')
-        aoi(i) = designedNumberOfAOIs + 1;
+        aoi(i) = deignedNumberOfAOIs + 1;
     else
         aoi(i) = str2num(cellaoi{i});
     end
@@ -217,7 +223,7 @@ end
 
 %====================================
 cont2_eye_xy_child = [];
-cstream_eye_roi_child = [];
+cstream_eye_roi_child_all = [];
 cstream_eye_roi_fixation_child = [];
 cstream_eye_roi_saccade_child = [];
 cstream_eye_roi_blink_child = [];
@@ -229,9 +235,10 @@ for i = 1:size(revisedData, 1)
     cont2_eye_xy_child(i, 1) = revisedData{i, 1};
     cont2_eye_xy_child(i, 2) = revisedData{i, 3};
     cont2_eye_xy_child(i, 3) = revisedData{i, 4};
-    cstream_eye_roi_child(i, 1) = revisedData{i, 1};
-    cstream_eye_roi_child(i, 2) = revisedData{i, 5};
-    if strcmp(revisedData{i, 2}, 'Fixation') && 96 ~= revisedData{i, 5}
+    cstream_eye_roi_child_all(i, 1) = revisedData{i, 1};
+    cstream_eye_roi_child_all(i, 2) = revisedData{i, 5};
+    %---fixation---(raw)
+    if strcmp(revisedData{i, 2}, 'Fixation') && (96 ~= revisedData{i, 5})
         cstream_eye_roi_fixation_child(i, 1) = revisedData{i, 1};
         cstream_eye_roi_fixation_child(i, 2) = revisedData{i, 5};
         %fixCounter = fixCounter + 1;
@@ -243,8 +250,8 @@ for i = 1:size(revisedData, 1)
     if strcmp(revisedData{i, 2}, 'Saccade')
         cstream_eye_roi_saccade_child(i, 1) = revisedData{i, 1};
         cstream_eye_roi_saccade_child(i, 2) = revisedData{i, 5};
-        cstream_eye_roi_child(i, 1) = revisedData{i, 1};
-        cstream_eye_roi_child(i, 2) = 98;
+        cstream_eye_roi_child_all(i, 1) = revisedData{i, 1};
+        cstream_eye_roi_child_all(i, 2) = 98;
     else
         cstream_eye_roi_saccade_child(i, 1) = revisedData{i, 1};
         cstream_eye_roi_saccade_child(i, 2) = 0;
@@ -253,8 +260,8 @@ for i = 1:size(revisedData, 1)
     if strcmp(revisedData{i, 2}, 'Blink')
         cstream_eye_roi_blink_child(i, 1) = revisedData{i, 1};
         cstream_eye_roi_blink_child(i, 2) = revisedData{i, 5};
-        cstream_eye_roi_child(i, 1) = revisedData{i, 1};
-        cstream_eye_roi_child(i, 2) = 99;
+        cstream_eye_roi_child_all(i, 1) = revisedData{i, 1};
+        cstream_eye_roi_child_all(i, 2) = 99;
     else
         cstream_eye_roi_blink_child(i, 1) = revisedData{i, 1};
         cstream_eye_roi_blink_child(i, 2) = 0;
@@ -263,8 +270,8 @@ for i = 1:size(revisedData, 1)
     if strcmp(revisedData{i, 2}, '-')
         cstream_eye_roi_undefined_child(i, 1) = revisedData{i, 1};
         cstream_eye_roi_undefined_child(i, 2) = revisedData{i, 5};
-        cstream_eye_roi_child(i, 1) = revisedData{i, 1};
-        cstream_eye_roi_child(i, 2) = 97;
+        cstream_eye_roi_child_all(i, 1) = revisedData{i, 1};
+        cstream_eye_roi_child_all(i, 2) = 97;
     else
         cstream_eye_roi_undefined_child(i, 1) = revisedData{i, 1};
         cstream_eye_roi_undefined_child(i, 2) = 0;
@@ -273,8 +280,8 @@ for i = 1:size(revisedData, 1)
     if 96 == revisedData{i, 5}
         cstream_eye_roi_missing_child(i, 1) = revisedData{i, 1};
         cstream_eye_roi_missing_child(i, 2) = revisedData{i, 5};
-        cstream_eye_roi_child(i, 1) = revisedData{i, 1};
-        cstream_eye_roi_child(i, 2) = 96;
+        cstream_eye_roi_child_all(i, 1) = revisedData{i, 1};
+        cstream_eye_roi_child_all(i, 2) = 96;
     else
         cstream_eye_roi_missing_child(i, 1) = revisedData{i, 1};
         cstream_eye_roi_missing_child(i, 2) = 0;
@@ -288,11 +295,15 @@ switch flag
         %----cont2----
         record_variable(subID, 'cont2_eye_xy_child', cont2_eye_xy_child)
         %-----roi-----
-        record_variable(subID, 'cstream_eye_roi_child', cstream_eye_roi_child)
-        record_variable(subID, 'cevent_eye_roi_child', cstream2cevent(cstream_eye_roi_child))
-        %---fixation---
+        record_additional_variable(subID, 'cstream_eye_roi_child_all', cstream_eye_roi_child_all)
+        record_additional_variable(subID, 'cevent_eye_roi_child_all', cstream2cevent(cstream_eye_roi_child_all))
+        %---fixation---(raw)
         record_variable(subID, 'cstream_eye_roi_fixation_child', cstream_eye_roi_fixation_child)
-        record_variable(subID, 'cevent_eye_roi_fixation_child', cstream2cevent(cstream_eye_roi_fixation_child))        
+        record_variable(subID, 'cevent_eye_roi_fixation_child', cstream2cevent(cstream_eye_roi_fixation_child))
+        %---fixation---(merged)
+        record_variable(subID, ...
+            'cevent_eye_roi_child', ...
+            cevent_merge_segments(cevent_remove_small_segments(cstream2cevent(cstream_eye_roi_fixation_child), minDuration), maxGap))
         %----Saccade----
         record_additional_variable(subID, 'cstream_eye_roi_saccade_child', cstream_eye_roi_saccade_child)       
         %-----Blink-----
@@ -311,11 +322,15 @@ switch flag
         %----cont2----
         record_variable(subID, 'cont2_eye_xy_child', cont2_eye_xy_child)
         %-----roi-----
-        record_variable(subID, 'cstream_eye_roi_child', cstream_eye_roi_child)
-        record_variable(subID, 'cevent_eye_roi_child', cstream2cevent(cstream_eye_roi_child))
-        %---fixation---
+        record_additional_variable(subID, 'cstream_eye_roi_child_all', cstream_eye_roi_child_all)
+        record_additional_variable(subID, 'cevent_eye_roi_child_all', cstream2cevent(cstream_eye_roi_child_all))
+        %---fixation---(raw)
         record_variable(subID, 'cstream_eye_roi_fixation_child', cstream_eye_roi_fixation_child)
         record_variable(subID, 'cevent_eye_roi_fixation_child', cstream2cevent(cstream_eye_roi_fixation_child))
+        %---fixation---(merged)
+        record_variable(subID, ...
+            'cevent_eye_roi_child', ...
+            cevent_merge_segments(cevent_remove_small_segments(cstream2cevent(cstream_eye_roi_fixation_child), minDuration), maxGap))
         %----trials----
         record_variable(subID, 'cevent_trials', cevent_trials)
         %----blocks----
@@ -323,13 +338,17 @@ switch flag
         
     case 'roi'
         %-----roi-----
-        record_variable(subID, 'cstream_eye_roi_child', cstream_eye_roi_child)
-        record_variable(subID, 'cevent_eye_roi_child', cstream2cevent(cstream_eye_roi_child))
+        record_additional_variable(subID, 'cstream_eye_roi_child_all', cstream_eye_roi_child_all)
+        record_additional_variable(subID, 'cevent_eye_roi_child_all', cstream2cevent(cstream_eye_roi_child_all))
         
     case 'fixroi'
-        %---fixation---
+        %---fixation---(raw)
         record_variable(subID, 'cstream_eye_roi_fixation_child', cstream_eye_roi_fixation_child)
         record_variable(subID, 'cevent_eye_roi_fixation_child', cstream2cevent(cstream_eye_roi_fixation_child))
+        %---fixation---(merged)
+        record_variable(subID, ...
+            'cevent_eye_roi_child', ...
+            cevent_merge_segments(cevent_remove_small_segments(cstream2cevent(cstream_eye_roi_fixation_child), minDuration), maxGap))
         
     case 'trials'
         %----trials----
@@ -363,4 +382,5 @@ switch flag
         return
 end
 disp('[+] Data files created')
+vis_smi(subID)
 end
