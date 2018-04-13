@@ -231,7 +231,7 @@ for i = 1:size(revisedData, 1)
     cont2_eye_xy_child(i, 3) = revisedData{i, 4};
     cstream_eye_roi_child(i, 1) = revisedData{i, 1};
     cstream_eye_roi_child(i, 2) = revisedData{i, 5};
-    if strcmp(revisedData{i, 2}, 'Fixation')
+    if strcmp(revisedData{i, 2}, 'Fixation') && 96 ~= revisedData{i, 5}
         cstream_eye_roi_fixation_child(i, 1) = revisedData{i, 1};
         cstream_eye_roi_fixation_child(i, 2) = revisedData{i, 5};
         %fixCounter = fixCounter + 1;
