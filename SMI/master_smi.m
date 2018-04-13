@@ -70,8 +70,8 @@ x = zeros(numOfCleanData, 1);
 y = zeros(numOfCleanData, 1);
 aoi = zeros(numOfCleanData, 1);
 
-%Ask for the deigned number of AOIs
-deignedNumberOfAOIs = input('How many AOIs in this study?\n>>');
+%Ask for the designed number of AOIs
+designedNumberOfAOIs = input('How many AOIs in this study?\n>>');
 
 %Ask for the number of trials in each block
 numOfTrialsInEachBlock = input('How many trials in each block?\n>>');
