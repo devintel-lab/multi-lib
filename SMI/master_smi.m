@@ -112,7 +112,7 @@ for i = 1:numOfCleanData
     if strcmp(cellaoi{i}, '-')
         aoi(i) = 96;
     elseif strcmp(cellaoi{i}, 'White Space')
-        aoi(i) = deignedNumberOfAOIs + 1;
+        aoi(i) = designedNumberOfAOIs + 1;
     else
         aoi(i) = str2num(cellaoi{i});
     end
