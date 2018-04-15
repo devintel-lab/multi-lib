@@ -14,15 +14,15 @@ predefined_colors = [
 
 if nargin > 0
     if numel(n) == 1
-        if n < 11
+        if n <= 0
             colors = ones(n,3);
             for i = 1 : n
                 fprintf('set color for category %d\n', i);
                 colors(i,:) = uisetcolor();
             end
         else
-            fprintf(['Too many color categories, please enter color matrix ' ....
-                'in this case. Now the program will apply predefined colors.\n']);
+%             fprintf(['Too many color categories, please enter color matrix ' ....
+%                 'in this case. Now the program will apply predefined colors.\n']);
             if n <= num_colors+4
                 colors = predefined_colors(1:n, :);
             else
