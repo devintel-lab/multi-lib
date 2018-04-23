@@ -10,7 +10,7 @@ multisensory_colors = [
 predefined_colors = distinguishable_colors(num_colors);
 predefined_colors = [
     multisensory_colors
-    predefined_colors(4:n, :)];
+    predefined_colors(4:end, :)];
 
 if nargin > 0
     if numel(n) == 1
