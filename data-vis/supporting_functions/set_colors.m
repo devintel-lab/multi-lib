@@ -1,4 +1,4 @@
-function colors = set_colors(n)
+function colors = set_colors(n, is_plot_colors)
 
 num_colors = 150;
 
@@ -104,8 +104,10 @@ end
 %     0.4138    0.0690    0.5517];
 % 
 
+if nargin < 2
+    is_plot_colors = false;
+end
 
-is_plot_colors = false;
 if is_plot_colors
     num_colors = size(colors, 1);
     h_colormap = figure('Position', [20 20 300 1000], 'Visible', 'off'); % 
@@ -126,11 +128,12 @@ if is_plot_colors
     % set(gca, 'YTick',[]);
     set(gca,'Visible','off');
     hold off;
-    title_str = 'plot_colormap';
+    title_str = sprintf('colormap %d colors', num_colors);
     text(mean(plot_x), -size_unit, title_str, 'HorizontalAlignment', 'center');
     set(h_colormap,'PaperPositionMode','auto');
     saveas(h_colormap, [title_str '.png']);
 end
+
 
 
 end
