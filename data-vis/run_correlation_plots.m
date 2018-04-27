@@ -2,7 +2,9 @@ function run_correlation_plots(subexpIDs, option)
 
 subs = cIDs(subexpIDs);
 
-directory = fullfile(get_multidir_root, 'data_vis_new', 'correlation');
+vis_savepath = get_dir_vis();
+
+directory = fullfile(vis_savepath, 'correlation');
 cevmeasures = {'prop', 'mean_dur', 'freq'};
 contmeasures = {'mean'};
 

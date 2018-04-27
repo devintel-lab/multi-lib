@@ -8,7 +8,10 @@ vars = {
     'cevent_eye_joint-attend_both'
     'cevent_speech_naming_local-id'};
 labels = vars;
-root = fullfile(get_multidir_root, 'data_vis_new','objects_stats');
+
+vis_savepath = get_dir_vis();
+root = fullfile(vis_savepath,'objects_stats');
+
 [~,table] = cIDs(subexpIDs);
 exps = unique(table(:,2));
 for e = 1:numel(exps)

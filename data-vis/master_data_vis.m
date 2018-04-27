@@ -1,6 +1,6 @@
 function master_data_vis(subexpIDs, option)
 
-root = fullfile(get_multidir_root(), 'data_vis_new');
+vis_savepath = get_dir_vis();
 
 switch option
     case 1
@@ -20,7 +20,7 @@ switch option
                     };
                 
                 stream_labels = {'child size 1', 'child size 2', 'child size 3', 'ceye', 'peye', 'parent size 1', 'parent size 2', 'parent size 3', 'speech'};
-                vis_streams_multiwork(subs(s), var_list, stream_labels, fullfile(root, 'cont_1'));
+                vis_streams_multiwork(subs(s), var_list, stream_labels, fullfile(vis_savepath, 'cont_1'));
             catch ME
                 format_error_message(ME, sprintf('%d', subs(s)));
                 continue
@@ -45,7 +45,7 @@ switch option
                     cont2scaled(subs(s), 'cont_motion_rot-speed_head_child', 5, 150, 50, [1 1 1], colors(7,:));
                     cont2scaled(subs(s), 'cont_motion_rot-speed_head_parent', 5, 150, 50, [1 1 1], colors(8,:));
                     };
-                vis_streams_multiwork(subs(s), var_list, stream_labels, fullfile(root, 'cont_2'));
+                vis_streams_multiwork(subs(s), var_list, stream_labels, fullfile(vis_savepath, 'cont_2'));
             catch ME
                 format_error_message(ME, sprintf('%d', subs(s)));
                 continue
@@ -69,7 +69,7 @@ switch option
             };
         stream_labels = {'child eye', 'parent eye', 'child left', 'child right', ...
             'parent left', 'parent right', 'joint-attend', 'joint-synched', 'child dominant', 'naming'};
-        vis_streams_multiwork(subs, var_list, stream_labels, fullfile(root, 'cstream_1'));
+        vis_streams_multiwork(subs, var_list, stream_labels, fullfile(vis_savepath, 'cstream_1'));
         
         
     case 4
@@ -87,7 +87,7 @@ switch option
             'parent-eye/parent-hand', 'parent-eye/child-inhand', 'joint-attend',...
             'synched-attend', 'naming'};
         
-        vis_streams_multiwork(subs, var_list, stream_labels, fullfile(root, 'cstream_2'));
+        vis_streams_multiwork(subs, var_list, stream_labels, fullfile(vis_savepath, 'cstream_2'));
         
         
     case 5
@@ -111,7 +111,7 @@ switch option
                     'cevent_speech_utterance';
                     };
                 
-                vis_streams_multiwork(subs(s), var_list, stream_labels, fullfile(root, 'cstream_cont_1'));
+                vis_streams_multiwork(subs(s), var_list, stream_labels, fullfile(vis_savepath, 'cstream_cont_1'));
             catch ME
                 format_error_message(ME, sprintf('%d', subs(s)));
                 continue
@@ -132,7 +132,7 @@ switch option
             };
         stream_labels = {'chandleft', 'chandright', 'ceye', 'JA_c_lead', 'JA', 'peye', 'phandleft', 'phandright'};
         
-        vis_streams_multiwork(subs, var_list, stream_labels, fullfile(root, 'cstream_3'));
+        vis_streams_multiwork(subs, var_list, stream_labels, fullfile(vis_savepath, 'cstream_3'));
         
     case 7
         subs = cIDs(subexpIDs);
@@ -148,5 +148,5 @@ switch option
             };
         stream_labels = {'chandleft', 'chandright', 'ceye', 'JA_p_lead', 'JA', 'peye', 'phandleft', 'phandright'};
         
-        vis_streams_multiwork(subs, var_list, stream_labels, fullfile(root, 'cstream_4'));
+        vis_streams_multiwork(subs, var_list, stream_labels, fullfile(vis_savepath, 'cstream_4'));
 end

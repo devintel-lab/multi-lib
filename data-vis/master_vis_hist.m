@@ -1,6 +1,7 @@
 function master_vis_hist(subexpIDs, option)
 
-directory = fullfile(get_multidir_root, 'data_vis_new', 'vis_hist');
+vis_savepath = get_dir_vis();
+directory = fullfile(vis_savepath, 'vis_hist');
 
 switch option
     case 1
