@@ -46,11 +46,11 @@ trialsToBeIncluded = [1:numOfData];
 stimulusToBeIncluded = [1:numOfData];
 for i = 1:numel(trialsToBeExcluded)
     trialsToBeIncluded = intersect(trialsToBeIncluded, ...
-        find(~strcmp(trialsToBeIncluded{i}, T.Trial)));
+        find(~strcmp(trialsToBeExcluded{i}, T.Trial)));
 end
 for i = 1:numel(stimulusToBeExcluded)
     stimulusToBeIncluded = intersect(stimulusToBeIncluded, ...
-        find(~strcmp(stimulusToBeIncluded{i}, T.Stimulus)));
+        find(~strcmp(stimulusToBeExcluded{i}, T.Stimulus)));
 end
 categoryGroupToBeIncluded = find(strcmp('Eye', T.CategoryGroup));
 indexToBeIncluded = intersect(trialsToBeIncluded, stimulusToBeIncluded);
