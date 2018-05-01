@@ -1,43 +1,32 @@
-function colors = set_colors(n, is_plot_colors)
+function colors = set_colors(n, is_plot_colormap)
 
-num_colors = 150;
-
+NUM_DEFAULT = 150;
 multisensory_colors = [
          0         0    1.0000
          0    1.0000         0
     1.0000         0         0
     1.0000         0    1.0000];
-predefined_colors = distinguishable_colors(num_colors);
+
+is_color_set = false;
+
+if nargin < 1
+    num_colors = NUM_DEFAULT;
+else
+    if numel(n) == 1
+        num_colors = n;
+    elseif size(n,2) == 3
+        colors = n;
+        is_color_set = true;
+    end
+end
+
+predefined_colors = distinguishable_colors(num_colors+1);
 predefined_colors = [
     multisensory_colors
     predefined_colors(6:end, :)];
 
-if nargin > 0
-    if numel(n) == 1
-        if n <= 0
-            colors = ones(n,3);
-            for i = 1 : n
-                fprintf('set color for category %d\n', i);
-                colors(i,:) = uisetcolor();
-            end
-        else
-%             fprintf(['Too many color categories, please enter color matrix ' ....
-%                 'in this case. Now the program will apply predefined colors.\n']);
-            if n <= num_colors+4
-                colors = predefined_colors(1:n, :);
-            else
-                new_colors = distinguishable_colors(n+1);
-                colors = [
-                    predefined_colors(1:4, :)
-                    new_colors(6:end, :)];
-            end
-        end
-    elseif size(n,2) == 3
-        colors = n;
-    else
-        colors = predefined_colors;
-    end
-else
+
+if ~is_color_set
     colors = predefined_colors;
 end
 
@@ -105,10 +94,10 @@ end
 % 
 
 if nargin < 2
-    is_plot_colors = false;
+    is_plot_colormap = false;
 end
 
-if is_plot_colors
+if is_plot_colormap
     num_colors = size(colors, 1);
     h_colormap = figure('Position', [20 20 300 1000], 'Visible', 'off'); % 
     size_unit = 20;
@@ -133,7 +122,5 @@ if is_plot_colors
     set(h_colormap,'PaperPositionMode','auto');
     saveas(h_colormap, [title_str '.png']);
 end
-
-
 
 end
