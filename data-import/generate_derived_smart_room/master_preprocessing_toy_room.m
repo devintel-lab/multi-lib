@@ -1,4 +1,10 @@
 function master_preprocessing_toy_room(kidIDs, expID, option, flagReliability)
+% This function reads from info file and eye_txt files after yarbus
+% generates the following list of files:
+%   1. timing.mat
+%   2. fixation_frames_{child|parent}_reliability.mat
+%   3. coding_eye_roi_{child|parent}.mat
+
 if ~exist('flagReliability', 'var')
     flagReliability = 0;
 end
@@ -12,6 +18,7 @@ for k = 1:numel(kidIDs)
     trialInfo.camRate = 30;
     trialInfo.camTime = 30;
     save(fullfile(root,'derived','timing.mat'), 'trialInfo');
+    
     if sum(ismember(option, {'prefixation', 'all'})) > 0
         fid = fopen(fullfile(root,'supporting_files','extract_range.txt'), 'r');
         exr = textscan(fid, '[%d]');
@@ -22,6 +29,8 @@ for k = 1:numel(kidIDs)
             agent = agents{a};
             fn = fullfile(root,'supporting_files',[agent '_eye.txt']);
             if exist(fn, 'file')
+                % read eye tracking data from the child|parent_eye.txt
+                % after yarbus calibration
                 [data,info] = parse_yarbus(fn);
                 frames = data{info.frameCount};
                 data = [data{info.porX} data{info.porY}];
@@ -114,8 +123,11 @@ for k = 1:numel(kidIDs)
                 end
                 save(codingfile, 'sdata');
                 fprintf('Saved file : %s\n', codingfile);
+            else
+                warning('File %s does not exist. Please check.', fn);
             end
         end
     end
 end
+
 end
