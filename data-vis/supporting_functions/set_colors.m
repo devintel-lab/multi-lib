@@ -8,10 +8,9 @@ multisensory_colors = [
     1.0000         0    1.0000];
 
 is_color_set = false;
+num_colors = NUM_DEFAULT;
 
-if nargin < 1
-    num_colors = NUM_DEFAULT;
-else
+if nargin >= 1
     if numel(n) == 1
         num_colors = n;
     elseif size(n,2) == 3
