@@ -17,16 +17,15 @@ else
     elseif size(n,2) == 3
         colors = n;
         is_color_set = true;
+        num_colors = size(n,2);
     end
 end
 
-predefined_colors = distinguishable_colors(num_colors+1);
-predefined_colors = [
-    multisensory_colors
-    predefined_colors(6:end, :)];
-
-
 if ~is_color_set
+    predefined_colors = distinguishable_colors(num_colors+1);
+    predefined_colors = [
+        multisensory_colors
+        predefined_colors(6:end, :)];
     colors = predefined_colors;
 end
 
