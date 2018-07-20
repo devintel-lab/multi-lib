@@ -139,7 +139,7 @@ for s = 1:numel(subs)
     end
     
     %% motion
-    if sum(ismember(modules, {'motion', 'all'})) > 0
+    if sum(ismember(option, {'motion', 'all'})) > 0
         fprintf('\nProcessing motion for %d\n', subs(s));
         pause(1);
         run_motion_all(subs(s));
