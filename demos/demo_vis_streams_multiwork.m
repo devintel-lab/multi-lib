@@ -96,5 +96,14 @@ switch option
         % note that directory = '.' will save in the current directory
         vis_streams_multiwork(subexpIDs, vars, streamlabels, directory, args);
         
+    case 6
+        % args.window_times_variable can be a matrix as well
+        subexpIDs = [1202 1203 1204]; % can also be experiment list
+        vars = {'cevent_eye_roi_child', 'cevent_eye_roi_parent', 'cevent_eye_joint-attend_both'};
+        args.window_times_variable = [30 280; 280 530; 530 780]; % this variable was created just as an example
+        streamlabels = {'ceye', 'peye', 'ja'};
+        directory = '/scratch/multimaster/demo_results/vis_streams_multiwork/case6';
+        vis_streams_multiwork(subexpIDs, vars, streamlabels, directory, args);
+        
 end
 end
