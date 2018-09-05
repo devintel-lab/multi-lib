@@ -102,7 +102,7 @@ switch option
         vars = {'cevent_eye_roi_child', 'cevent_eye_roi_parent', 'cevent_eye_joint-attend_both'};
         args.window_times_variable = [30 280; 280 530; 530 780]; % this variable was created just as an example
         streamlabels = {'ceye', 'peye', 'ja'};
-        directory = '/scratch/multimaster/demo_results/vis_streams_multiwork/case6';
+        directory = '';
         vis_streams_multiwork(subexpIDs, vars, streamlabels, directory, args);
         
 end

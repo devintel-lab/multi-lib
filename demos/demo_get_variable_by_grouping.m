@@ -250,8 +250,8 @@ case 5
     %       WHENCE is 'end' and interval is [-1 3], this mean extract data from
     %       1 second before the offset to 3 seconds after the offset of each
     %       event. 
-    input.whence = 'start';
-    input.interval = [0 5];
+    input.whence = 'startend';
+    input.interval = [0 0];
     
     [chunks, extra] = get_variable_by_grouping('sub', input.sub_list, input.var_name, ...
         input.grouping, input);
