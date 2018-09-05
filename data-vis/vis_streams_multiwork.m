@@ -35,7 +35,7 @@ for s = 1:numel(subs)
             end
         end
         if isfield(args, 'window_times_variable')
-            if ischar(window_times_file)
+            if ischar(args.window_times_variable)
                 window_times_file = fullfile(subpaths{s}, [args.window_times_variable '.mat']);
             else
                 window_times_file = args.window_times_variable;
