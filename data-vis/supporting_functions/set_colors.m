@@ -122,7 +122,7 @@ if is_plot_colormap
             text(mean(plot_x), mean(plot_y), sprintf('%d', coloridx), 'HorizontalAlignment', 'center');
         end
         xlim([2 8]);
-        ylim([0 (PLOT_MAX_ROWS+1)*size_unit]);
+        ylim([0 (num_colors+1)*size_unit]);
         % set(gca, 'XTick',[]);
         % set(gca, 'YTick',[]);
         set(gca,'Visible','off');
