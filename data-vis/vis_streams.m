@@ -142,6 +142,7 @@ for s = 1:numel(subs)
                     end
                 end
             end
+            MAX_COLOR = size(tmpcolors, 1);
             
             for c = 1:numel(data)
                 if ~isempty(data{c})
@@ -160,7 +161,18 @@ for s = 1:numel(subs)
                                 tmp = cev(i,:);
                                 width = tmp(2) - tmp(1);
                                 if width > 0
-                                    r = rectangle('Position', [tmp(1), bottom, width, height], 'facecolor', tmpcolors(tmp(3),:), 'edgecolor', 'none');
+                                    if tmp(3) > 0
+                                        coloridx = mod(tmp(3), MAX_COLOR);
+                                        if coloridx == 0
+                                            coloridx = MAX_COLOR;
+                                        end
+                                        thiscolor = this_args.colors(coloridx,:);
+                                    elseif tmp(3) == 0
+                                        thiscolor = [1 1 1];
+                                    else
+                                        error('Function cannot visualize cevents with negative values.')
+                                    end
+                                    r = rectangle('Position', [tmp(1), bottom, width, height], 'facecolor', thiscolor, 'edgecolor', 'none');
                                     if flag_edge
                                         set(r, 'edgecolor', 'black', 'linewidth', 0.5);
                                     end

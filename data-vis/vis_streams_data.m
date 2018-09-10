@@ -108,6 +108,8 @@ label_pos = [];
 cont_colormap = [];
 for d = 1:numel(celldata)
     this_args = args;
+    MAX_COLOR = size(this_args.colors, 1);
+    
     cev = celldata{d}; % cevent or cstream
     if ~isempty(cev)
         if isstruct(cev) && ~isempty(cev.data)
@@ -133,7 +135,18 @@ for d = 1:numel(celldata)
                         tmp = cevpart(i,:);
                         width = tmp(2) - tmp(1);
                         if width > 0
-                            r = rectangle('Position', [tmp(1), bottom, width, 1], 'facecolor', this_args.colors(tmp(3),:), 'edgecolor', 'none');
+                            if tmp(3) > 0
+                                coloridx = mod(tmp(3), MAX_COLOR);
+                                if coloridx == 0
+                                    coloridx = MAX_COLOR;
+                                end
+                                thiscolor = this_args.colors(coloridx,:);
+                            elseif tmp(3) == 0
+                                thiscolor = [1 1 1];
+                            else
+                                error('Function cannot visualize cevents with negative values.')
+                            end
+                            r = rectangle('Position', [tmp(1), bottom, width, 1], 'facecolor', thiscolor, 'edgecolor', 'none');
                             if this_args.draw_edge
                                 set(r, 'edgecolor', 'black', 'linewidth', 0.5);
                             end
