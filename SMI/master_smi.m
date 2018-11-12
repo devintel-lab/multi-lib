@@ -30,7 +30,8 @@ if ~exist('flag', 'var')
 end
 
 if ~exist('filename', 'var')
-    filename = 'Raw Data - Raw Data.txt';
+    %filename = 'Raw Data - Raw Data.txt';
+    filename = num2str(subID)
 end
 
 path = [get_subject_dir(subID) sep 'derived' sep]; 
