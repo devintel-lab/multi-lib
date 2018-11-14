@@ -31,7 +31,9 @@ end
 
 if ~exist('filename', 'var')
     %filename = 'Raw Data - Raw Data.txt';
-    filename = num2str(subID)
+    %filename = num2str(subID);
+    subj_info = get_subject_info(subID);
+    filename = [num2str(subj_info(4)), '.txt'];
 end
 
 path = [get_subject_dir(subID) sep 'derived' sep]; 
