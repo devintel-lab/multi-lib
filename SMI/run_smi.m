@@ -16,4 +16,5 @@ elseif isa(subIDs, 'double') & numel(subIDs)>=1
 else
     disp([-] The input data should be an experimentID, a subjectID or a list of subjectIDs)
 end
+disp('Warning: This function will be depricated in the future')
 end
