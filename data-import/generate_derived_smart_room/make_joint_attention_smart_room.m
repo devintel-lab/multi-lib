@@ -118,7 +118,7 @@ for i = 1 : size(sub_list,1)
                     % that is, one starts first, and the other joins in to create a
                     % joint moment
                     for n = 1 : size(cevent_joint{m},1)
-                        temp = cevent_before_certain_event(cevent_joint{m}(n,1), ...
+                        temp = cevent_before_certain_event(cevent_joint{m}(n,1) + 0.01, ... % +0.01 in case that the timestamp of joint_attention is not identical with the raw roi cevent data - DZ 
                             cevent_joint{m}(n,3),  chunks{1}{m},1);
                         
                         if isempty(temp)
@@ -128,7 +128,7 @@ for i = 1 : size(sub_list,1)
                         leading(n,1) = temp(1);
                         
                         
-                        temp = cevent_before_certain_event(cevent_joint{m}(n,1), ...
+                        temp = cevent_before_certain_event(cevent_joint{m}(n,1) + 0.01, ... % +0.01 same as above
                             cevent_joint{m}(n,3), ...
                             chunks{2}{m},1);
                         if isempty(temp)
