@@ -6,7 +6,7 @@ for i = 1:numel(formatted)
     while formatted(i) > timeData(tmpCounter)
         tmpCounter = tmpCounter + 1;
         if tmpCounter > numel(timeData)
-            if abs(formatted(i) - timeData(tmpCounter -1)) < 0.16
+            if abs(formatted(i) - timeData(tmpCounter -1)) < 0.016 % recording rate is 30, the interval between two frames is 0.33 secs, < 0.016 is less than half of the interval. 
                 indices(i) = tmpCounter - 1;
             else
                 indices(i) = NaN;
