@@ -54,7 +54,11 @@ for s = 1:numel(subs)
                     fixations = get_csv_data_v2([root fs 'supporting_files' fs 'fixation_frames_' agent '_reliability.txt']);
                 end
                 for f = 1:size(fixations, 1)
-                    data(fixations(f,1):fixations(f,2),2) = data(fixations(f,3),2);
+                    % data(fixations(f,1):fixations(f,2),2) = data(fixations(f,3),2);
+                    % the old script propagates the middle frame's ROI to the whole prefixation and 
+                    % replaces the other coded frames' value with the middle frame value; the updated
+                    % code only replaces 27s and 28s and keeps the other coding - DZ
+                    data((data(:, 2)==27 | data(:, 2)==28) & data(:, 1) >= fixations(f,1) & data(:, 1) < fixations(f,2), 2) = data(fixations(f,3),2);
                 end
                 log = ismember(data(:,2), [27 28]);
                 data(log,2) = -1;
