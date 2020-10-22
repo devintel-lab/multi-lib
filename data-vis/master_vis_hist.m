@@ -1,5 +1,5 @@
 function master_vis_hist(subexpIDs, option)
-% original version + error handling. Calls vis_hist_v2 (the modified one with error handling)
+% original version + error handling. Calls vis_hist (the modified one with error handling)
 % added case 5, which generates the head to head distances histogram
 
 vis_savepath = get_dir_vis();
@@ -25,7 +25,7 @@ switch option
         for v = 1:numel(varnames)
             try
                 varname = varnames{v};
-                vis_hist_v2(subs, varname, edges, directory, varname, flag_savefig);
+                vis_hist(subs, varname, edges, directory, varname, flag_savefig);
             catch ME
                 disp(ME.message)
                 disp('option: 1')
@@ -45,7 +45,7 @@ switch option
         for v = 1:numel(varnames)
             try
                 varname = varnames{v};
-                vis_hist_v2(subs, varname, edges, directory, varname, flag_savefig);
+                vis_hist(subs, varname, edges, directory, varname, flag_savefig);
             catch ME
                 disp(ME.message)
                 disp('option: 2')
@@ -63,7 +63,7 @@ switch option
         for v = 1:numel(varnames)
             try
                 varname = varnames{v};
-                vis_hist_v2(subs, varname, edges, directory, varname, flag_savefig);
+                vis_hist(subs, varname, edges, directory, varname, flag_savefig);
             catch ME
                 disp(ME.message)
                 disp('option: 3')
@@ -80,7 +80,7 @@ switch option
         for v = 1:numel(varnames)
             try
                 varname = varnames{v};
-                vis_hist_v2(subs, varname, edges, directory, varname, flag_savefig);
+                vis_hist(subs, varname, edges, directory, varname, flag_savefig);
             catch ME
                 disp(ME.message)
                 disp('option: 4')
@@ -96,7 +96,7 @@ switch option
         for v = 1:numel(varnames)
             try
                 varname = varnames{v};
-                vis_hist_v2(subs, varname, edges, directory, varname, flag_savefig);
+                vis_hist(subs, varname, edges, directory, varname, flag_savefig);
             catch ME
                 disp(ME.message)
                 disp('option: 5')
