@@ -45,11 +45,11 @@ if ~isfield(args, 'ylim')
     args.ylim = [-1700, 1700];
 end
 if ~isfield(args, 'xDir')
-    warning("[!] No args.xDir detected. Using default configurations: args.xDir = 'reverse'")
+    warning('[!] No args.xDir detected. Using default configurations: args.xDir = reverse')
     args.xDir = 'reverse';
 end
 if ~isfield(args, 'yDir')
-    warning("[!] No args.yDir detected. Using default configurations: args.yDir = 'normal'")
+    warning('[!] No args.yDir detected. Using default configurations: args.yDir = normal')
     args.yDir = 'normal';
 end
 if ~isfield(args, 'lineWidth')
@@ -87,7 +87,7 @@ if saveDir
             elseif strcmp(npt, 'n') || strcmp(npt, 'N')
                 error('[-] Save folder not created')
             else
-                npt = input("[UserInput] Not a valid input. Do you want to create the save folder automatically? (''y''/''n'')");
+                npt = input('[UserInput] Not a valid input. Do you want to create the save folder automatically? (y/n)');
             end
         end
     end
