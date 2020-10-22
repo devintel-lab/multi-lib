@@ -1,4 +1,4 @@
-function vis_hist(subexpIDs, varname, edges, directory, nametag, flag_savefig)
+function vis_hist_v2(subexpIDs, varname, edges, directory, nametag, flag_savefig)
 % see demo_vis_hist.m for documentation
 
 subs = cIDs(subexpIDs);
@@ -22,23 +22,27 @@ allx = cell(numel(subs), 1);
 hsubs = [];
 for s = 1:numel(subs)
     fprintf('%d\n', subs(s));
-    if has_variable(subs(s), varname)
-        hsubs = cat(1, hsubs, subs(s));
-        data = get_variable_by_trial_cat(subs(s), varname);
-        dim2 = size(data,2);
-        switch dim2
-            case 2
-                % raw values
-                values = data(:,2);
-            case 3
-                % durations
-                values = data(:,2)-data(:,1);
+    try
+        if has_variable(subs(s), varname)
+            hsubs = cat(1, hsubs, subs(s));
+            data = get_variable_by_trial_cat(subs(s), varname);
+            dim2 = size(data,2);
+            switch dim2
+                case 2
+                    % raw values
+                    values = data(:,2);
+                case 3
+                    % durations
+                    values = data(:,2)-data(:,1);
+            end
+            
+            x = histcounts(values, edges);
+            
+            allx{s,1} = x';
         end
-
-        
-        x = histcounts(values, edges);
-        
-        allx{s,1} = x';
+    catch ME
+        disp(ME.message)
+        continue
     end
 end
 
@@ -81,8 +85,11 @@ if flag_savefig
         if ~exist(dirname, 'dir')
             mkdir(dirname);
         end
-        export_fig(gcf, sprintf('%s/%s_individual/%d', directory, nametag, subs(c)), '-jpg', '-nocrop');
-        
+        try
+            export_fig(gcf, sprintf('%s/%s_individual/%d', directory, nametag, subs(c)), '-jpg', '-nocrop');
+        catch ME
+            disp(ME.message)
+        end
         clf(gcf);
     end
     
@@ -93,6 +100,11 @@ if flag_savefig
     set(gca, 'xticklabel', edges(1:2:end));
     xlabel('duration (sec)');
     ylabel('raw count');
+    % if the variable name is cont_motion_dist_head-head_child-parent (e.g.
+    % for exp 15), change teh x lable to distances
+    if strcmp(varname, 'cont_motion_dist_head-head_child-parent')
+        xlabel('distances (millimeters)');
+    end
     ylim([0 1]);
     title('all');
     
