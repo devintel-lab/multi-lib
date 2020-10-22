@@ -22,7 +22,7 @@ for e = 1:numel(exps)
     for v = 1:numel(vars)
         varname = vars{v};
         try
-            visualize_basic_stats_per_object_v2(exps(e), varname, fullfile(exp_root, labels{v}));
+            visualize_basic_stats_per_object(exps(e), varname, fullfile(exp_root, labels{v}));
         catch ME
             disp(ME.message)
         end
