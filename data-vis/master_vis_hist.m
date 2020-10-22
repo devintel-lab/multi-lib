@@ -34,7 +34,7 @@ switch option
         end
         
     case 2
-        subs = unique(cIDs([subexpIDs, 12]));
+        subs = unique(cIDs([subexpIDs; 12]));
         varnames = {
             'cont_motion_pos-speed_right-hand_child'
             'cont_motion_pos-speed_left-hand_child'
@@ -54,7 +54,7 @@ switch option
         end
         
     case 3
-        subs = unique(cIDs([subexpIDs, 12]));
+        subs = unique(cIDs([subexpIDs; 12]));
         varnames = {
             'cont_motion_rot-speed_head_child'
             'cont_motion_rot-speed_head_parent'
@@ -72,7 +72,7 @@ switch option
         end
         
     case 4
-        subs = unique(cIDs([subexpIDs, 12]));
+        subs = unique(cIDs([subexpIDs; 12]));
         varnames = {
             'cont_vision_size_obj1_child'
             'cont_vision_size_obj1_parent'};
