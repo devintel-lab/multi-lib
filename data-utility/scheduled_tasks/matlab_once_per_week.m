@@ -4,7 +4,6 @@
 % add exp [58 59 47 87 91:94 100:154] to all exps
 
 % add three functions: 1) draw_correlation_plots_v2 & 2) get_age_at_exp_v2 & 3) vis_spatial_ja to MATLAB search path
-addpath('Z:\dianzhi\scripts\visualization_routine')
 clear
 clc
 set(0,'DefaultFigureVisible','off')
