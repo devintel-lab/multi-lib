@@ -45,20 +45,20 @@ if ~isfield(args, 'ylim')
     args.ylim = [-1700, 1700];
 end
 if ~isfield(args, 'xDir')
-    warning('[!] No args.xDir detected. Using default configurations: args.xDir = reverse')
+    warning("[!] No args.xDir detected. Using default configurations: args.xDir = 'reverse'")
     args.xDir = 'reverse';
 end
 if ~isfield(args, 'yDir')
-    warning('[!] No args.yDir detected. Using default configurations: args.yDir = normal')
-    args.yDir = 'normal';
+    warning("[!] No args.yDir detected. Using default configurations: args.yDir = 'normal'")
+    args.yDir = 'reverse';
 end
 if ~isfield(args, 'lineWidth')
     warning('[!] No args.lineWidth detected. Using default configurations: args.lineWidth = 2')
     args.lineWidth = 1;
 end
 if ~isfield(args, 'xydataCol')
-    warning('[!] No args.xydataCol detected. Using default configurations: args.xydataCol = [2, 3]')
-    args.xydataCol = [2, 3];
+    warning('[!] No args.xydataCol detected. Using default configurations: args.xydataCol = [3, 2]')
+    args.xydataCol = [3, 2];
 end
 if ~isfield(args, 'dur2size_const')
     warning('[!] No args.dur2size_const detected. Using default configurations: args.dur2size_const = 3')
@@ -87,7 +87,7 @@ if saveDir
             elseif strcmp(npt, 'n') || strcmp(npt, 'N')
                 error('[-] Save folder not created')
             else
-                npt = input('[UserInput] Not a valid input. Do you want to create the save folder automatically? (y/n)');
+                npt = input("[UserInput] Not a valid input. Do you want to create the save folder automatically? (''y''/''n'')");
             end
         end
     end
