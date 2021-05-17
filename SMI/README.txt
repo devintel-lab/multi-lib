@@ -1,0 +1,1 @@
+The scripts in this folder are used for generating variables / visualizing data from the raw txt SMI output.

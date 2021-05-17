@@ -122,7 +122,7 @@ switch option
         subs = cIDs(subexpIDs);
         var_list = {
             'cstream_inhand_left-hand_obj-all_child'
-            'cstream_inhand_left-hand_obj-all_child'
+            'cstream_inhand_right-hand_obj-all_child'
             'cevent_eye_roi_child'
             'cevent_eye_joint-attend_child-lead_both'
             'cevent_eye_joint-attend_both'
@@ -138,7 +138,7 @@ switch option
         subs = cIDs(subexpIDs);
         var_list = {
             'cstream_inhand_left-hand_obj-all_child'
-            'cstream_inhand_left-hand_obj-all_child'
+            'cstream_inhand_right-hand_obj-all_child'
             'cevent_eye_roi_child'
             'cevent_eye_joint-attend_parent-lead_both'
             'cevent_eye_joint-attend_both'

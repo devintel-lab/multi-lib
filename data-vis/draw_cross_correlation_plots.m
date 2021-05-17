@@ -14,22 +14,27 @@ windowrange = range_samp(1):range_samp(2);
 for s = 1:numel(subs)
     sub = subs(s);
     fprintf('%d\n', sub);
-    log = cellfun(@(a) has_variable(sub, a), {var1, var2});
-    if all(log)
-        gt = get_trial_times(sub);
+    try
+        log = cellfun(@(a) has_variable(sub, a), {var1, var2});
+        if all(log)
+            gt = get_trial_times(sub);
         
-        tb = (gt(1,1):1/rate:gt(end,2))';
-        trials = get_variable(sub, 'cstream_trials');
-        x = get_variable(sub, var1);
-        y = get_variable(sub, var2);
+            tb = (gt(1,1):1/rate:gt(end,2))';
+            trials = get_variable(sub, 'cstream_trials');
+            x = get_variable(sub, var1);
+            y = get_variable(sub, var2);
         
-        [~,trials,x,y] = align_cstreams(tb, trials, x, y);
+            [~,trials,x,y] = align_cstreams(tb, trials, x, y);
         
-        lag = xcorrmod(x(:,2),y(:,2),trials(:,2),windowrange);
-        if ~all(lag==0)
-            lagall{s,1} = lag';
-            suball{1,s} = sub;
+            lag = xcorrmod(x(:,2),y(:,2),trials(:,2),windowrange);
+            if ~all(lag==0)
+                lagall{s,1} = lag';
+                suball{1,s} = sub;
+            end
         end
+    catch ME
+        disp(ME.message)
+        continue
     end
 end
 

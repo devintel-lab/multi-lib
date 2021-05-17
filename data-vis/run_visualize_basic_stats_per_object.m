@@ -1,5 +1,5 @@
 function run_visualize_basic_stats_per_object(subexpIDs)
-
+% original scripts + error handling around each subject's visualization
 vars = {
     'cevent_eye_roi_child'
     'cevent_eye_roi_parent'
@@ -21,6 +21,11 @@ for e = 1:numel(exps)
     end
     for v = 1:numel(vars)
         varname = vars{v};
-        visualize_basic_stats_per_object(exps(e), varname, fullfile(exp_root, labels{v}));
+        try
+            visualize_basic_stats_per_object(exps(e), varname, fullfile(exp_root, labels{v}));
+        catch ME
+            disp(ME.message)
+        end
     end
+end
 end

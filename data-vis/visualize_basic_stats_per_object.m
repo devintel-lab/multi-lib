@@ -21,11 +21,31 @@ end
 
 [subs, parttable] = cIDs(subexpIDs);
 
-if ismember(12, parttable(:,2))
+if ismember(12, parttable(:,2)) || ismember(58, parttable(:,2)) || ismember(59, parttable(:,2))
     args.categories = 1:25;
 end
 
+if ismember(15, parttable(:,2))
+    args.categories = 1:11;
+end
+
 args.persubject = 1;
+
+% adding the following lines to exclude problematic subjects
+%==========start==========
+new_subs = [];
+for i = 1:numel(subs)
+    try
+        if has_variable(subs(i), varname)
+            new_subs = [new_subs, subs(i)];
+        end
+    catch ME
+        warning(['[-] subject ' num2str(subs(i)) ' does not have variable ' varname])
+    end
+end
+subs = new_subs;
+%========== end ==========
+
 ex = extract_multi_measures(varname, subs, '', args);
 
 measures = {'prop', 'mean_dur', 'freq'};

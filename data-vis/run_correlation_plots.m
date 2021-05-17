@@ -53,7 +53,12 @@ switch option
             'cevent_motion-inhand_either-hand_active-parent'
             };
         for y = 1:numel(yvars)
-            draw_correlation_plots(subs, yvars{y}, cevmeasures, directory, yvars{y}, yargs);
+            try
+                draw_correlation_plots(subs, yvars{y}, cevmeasures, directory, yvars{y}, yargs);
+            catch ME
+                disp(ME.message);
+                continue
+            end
         end
         
         
@@ -74,7 +79,12 @@ switch option
             'cont_eye-vision_mean-dist_gaze-to-obj#_parent'
             };
         for y = 1:numel(yvars)
-            draw_correlation_plots(subs, yvars{y}, contmeasures, directory, yvars{y}, yargs);
+            try
+                draw_correlation_plots(subs, yvars{y}, contmeasures, directory, yvars{y}, yargs);
+            catch ME
+                disp(ME.message);
+                continue
+            end
         end
         
         
@@ -94,10 +104,19 @@ switch option
             };
         
         for y = 1:numel(yvars)
-            yargs.categories = 4;
-            draw_correlation_plots({subs, 12}, yvars{y}, cevmeasures, directory, nametags{y}, yargs);
-            yargs.categories = 25;
-            draw_correlation_plots(12, yvars{y}, cevmeasures, directory, [nametags{y} '_toyroom'], yargs);
+            try
+                yargs.categories = 4;
+                draw_correlation_plots({subs, 12}, yvars{y}, cevmeasures, directory, nametags{y}, yargs);
+                yargs.categories = 25;
+                draw_correlation_plots(12, yvars{y}, cevmeasures, directory, [nametags{y} '_toyroom'], yargs);
+                draw_correlation_plots(58, yvars{y}, cevmeasures, directory, nametags{y}, yargs);
+                draw_correlation_plots(59, yvars{y}, cevmeasures, directory, nametags{y}, yargs);
+                yargs.categories = 11;
+                draw_correlation_plots(15, yvars{y}, cevmeasures, directory, nametags{y}, yargs);
+            catch ME
+                disp(ME.message);
+                continue
+            end
         end
-        
+end
 end
