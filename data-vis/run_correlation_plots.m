@@ -106,16 +106,29 @@ switch option
         for y = 1:numel(yvars)
             try
                 yargs.categories = 4;
-                draw_correlation_plots({subs, 12}, yvars{y}, cevmeasures, directory, nametags{y}, yargs);
-                yargs.categories = 25;
-                draw_correlation_plots(12, yvars{y}, cevmeasures, directory, [nametags{y} '_toyroom'], yargs);
-                draw_correlation_plots(58, yvars{y}, cevmeasures, directory, nametags{y}, yargs);
-                draw_correlation_plots(59, yvars{y}, cevmeasures, directory, nametags{y}, yargs);
-                yargs.categories = 11;
-                draw_correlation_plots(15, yvars{y}, cevmeasures, directory, nametags{y}, yargs);
+                draw_correlation_plots(subs, yvars{y}, cevmeasures, directory, nametags{y}, yargs);
             catch ME
                 disp(ME.message);
-                continue
+            end
+
+            try
+                yargs.categories = 25;
+                draw_correlation_plots(12, yvars{y}, cevmeasures, directory, [nametags{y} '_toyroom'], yargs);
+            catch ME
+                disp(ME.message);
+            end
+
+            try
+                draw_correlation_plots([58 59], yvars{y}, cevmeasures, directory, [nametags{y} '_pbj'], yargs);
+            catch ME
+                disp(ME.message);
+            end
+
+            try
+                yargs.categories = 11;
+                draw_correlation_plots(15, yvars{y}, cevmeasures, directory, [nametags{y} '_home'], yargs);
+            catch ME
+                disp(ME.message);
             end
         end
 end
