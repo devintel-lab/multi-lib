@@ -119,6 +119,7 @@ switch option
             end
 
             try
+                yargs.categories = 25;
                 draw_correlation_plots([58 59], yvars{y}, cevmeasures, directory, [nametags{y} '_pbj'], yargs);
             catch ME
                 disp(ME.message);
