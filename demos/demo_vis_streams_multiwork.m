@@ -42,7 +42,7 @@ switch option
         subexpIDs = [7106 7107 7108]; % can also be experiment list
         vars = {'cevent_eye_roi_child', 'cevent_eye_roi_parent', 'cevent_eye_joint-attend_both'};
         streamlabels = {'ceye', 'peye', 'ja'};
-        directory = '/scratch/multimaster/demo_results/vis_streams_multiwork/case1';
+        directory = '/multi-lib/user_output/vis_streams_multiwork/case1';
         % note that directory = '.' will save in the current directory
         vis_streams_multiwork(subexpIDs, vars, streamlabels, directory);
         
@@ -53,7 +53,7 @@ switch option
         subexpIDs = [7106 7107 7108];
         vars = {'cevent_eye_roi_child', 'cevent_eye_roi_parent', 'cevent_eye_joint-attend_both'};
         streamlabels = {'ceye', 'peye', 'ja'};
-        directory = '/scratch/multimaster/demo_results/vis_streams_multiwork/case2';
+        directory = '/multi-lib/user_output/vis_streams_multiwork/case2';
         args.colors = 4;
         vis_streams_multiwork(subexpIDs, vars, streamlabels, directory, args);
         
@@ -64,7 +64,7 @@ switch option
         subexpIDs = [7106 7107 7108];
         vars = {'cevent_eye_roi_child', 'cevent_eye_roi_parent', 'cevent_eye_joint-attend_both'};
         streamlabels = {'ceye', 'peye', 'ja'};
-        directory = '/scratch/multimaster/demo_results/vis_streams_multiwork/case3';
+        directory = '/multi-lib/user_output/vis_streams_multiwork/case3';
         args.colors = [
             1 .5 0; % orange
             1 1 0; % yellow

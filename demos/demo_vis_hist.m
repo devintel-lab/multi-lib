@@ -46,7 +46,7 @@ switch option
         subexpIDs = 72;
         varname = 'cevent_eye_roi_child';
         nametag = 'child_eye';
-        directory = '/scratch/multimaster/demo_results/vis_hist/case1';
+        directory = '/multi-lib/user_output/vis_hist/case1';
         edges = 0:.25:10;
         flag_savefig = 1;
         vis_hist(subexpIDs, varname, edges, directory, nametag, flag_savefig);
@@ -57,7 +57,7 @@ switch option
         subexpIDs = 72;
         varname = 'cont_motion_pos-speed_right-hand_child';
         nametag = 'child_r_hand_speed';
-        directory = '/scratch/multimaster/demo_results/vis_hist/case2';
+        directory = '/multi-lib/user_output/vis_hist/case2';
         edges = 0:50:500;
         flag_savefig = 1;
         vis_hist(subexpIDs, varname, edges, directory, nametag, flag_savefig);  

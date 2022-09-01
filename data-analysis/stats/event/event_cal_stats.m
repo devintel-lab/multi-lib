@@ -167,19 +167,19 @@ results.total_duration = event_total_length(cat_chunks);
 results.individual_duration = individual_duration;
 
 % mean duration
-results.mean_dur = nanmean(cat_durations);
+results.mean_dur = mean(cat_durations,'omitnan');
 results.individual_mean_dur = individual_mean_dur;
 results.individual_std_dur = individual_std_dur;
 
 % median duration
-results.median_dur = nanmedian(cat_durations);
+results.median_dur = median(cat_durations,'omitnan');
 results.individual_median_dur = individual_median_dur;
 
 % proportion and frequency are only calculated when individual trial
 % time is included in input or when grouping is 'subject' and the subject
 % list is included
 if isfield(input, 'individual_range_dur')    
-    trial_time_total = nansum(individual_range_dur);
+    trial_time_total = sum(individual_range_dur,'omitnan');
     
     % proportions
     results.prop = results.mean_dur * results.total_number / trial_time_total;

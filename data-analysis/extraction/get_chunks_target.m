@@ -39,7 +39,7 @@ if size(chunks, 2) > 1
                     case 'cont'
                         tmp = cellfun(@(a) a(:,end), tmp, 'un', 0);
                         tmp = horzcat(tmp{:});
-                        tmp = nanmean(tmp,2);
+                        tmp = mean(tmp,2,'omitnan');
                         grouped{1,i}{k,1} = [time tmp];
                     case 'cevent'
                         tmp = vertcat(tmp{:});

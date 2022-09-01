@@ -204,28 +204,28 @@ if iscell(input.var_name)
                             for tmpci = 1:size(chunk_tmp, 1)
                                 tmp_one = horzcat(chunk_tmp{tmpci, :});
                                 if ~isempty(tmp_one)
-                                    chunk_tmp_new{tmpci,1} = [tmp_one(:,1) nanmax(tmp_one(:,regroup_op_idx), [], 2)];
+                                    chunk_tmp_new{tmpci,1} = [tmp_one(:,1) max(tmp_one(:,regroup_op_idx), [], 2,'omitnan')];
                                 end
                             end
                         case 'AVG'
                             for tmpci = 1:size(chunk_tmp, 1)
                                 tmp_one = horzcat(chunk_tmp{tmpci, :});
                                 if ~isempty(tmp_one)
-                                    chunk_tmp_new{tmpci,1} = [tmp_one(:,1) nanmean(tmp_one(:,regroup_op_idx), 2)];
+                                    chunk_tmp_new{tmpci,1} = [tmp_one(:,1) mean(tmp_one(:,regroup_op_idx), 2,'omitnan')];
                                 end
                             end
                         case 'SUM'
                             for tmpci = 1:size(chunk_tmp, 1)
                                 tmp_one = horzcat(chunk_tmp{tmpci, :});
                                 if ~isempty(tmp_one)
-                                    chunk_tmp_new{tmpci,1} = [tmp_one(:,1) nansum(tmp_one(:,regroup_op_idx), 2)];
+                                    chunk_tmp_new{tmpci,1} = [tmp_one(:,1) sum(tmp_one(:,regroup_op_idx), 2,'omitnan')];
                                 end
                             end
                         case 'AND'
                             for tmpci = 1:size(chunk_tmp, 1)
                                 tmp_one = horzcat(chunk_tmp{tmpci, :});
                                 if ~isempty(tmp_one)
-                                    chunk_tmp_new{tmpci,1} = [tmp_one(:,1) nanmin(tmp_one(:,regroup_op_idx), [], 2)];
+                                    chunk_tmp_new{tmpci,1} = [tmp_one(:,1) min(tmp_one(:,regroup_op_idx), [], 2,'omitnan')];
                                 end
                             end
                         otherwise

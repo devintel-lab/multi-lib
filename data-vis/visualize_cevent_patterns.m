@@ -230,8 +230,8 @@ for fidx = 1:num_figures
     start_time_idx = 1:LENGTH_CEVENT:size(sub_data_mat,2);
     end_time_idx = 2:LENGTH_CEVENT:size(sub_data_mat,2);
     
-    min_x = nanmin(nanmin(sub_data_mat(:,start_time_idx))) - 0.1;
-    max_x = nanmax(nanmax(sub_data_mat(:,end_time_idx))) + 0.1;
+    min_x = min(min(sub_data_mat(:,start_time_idx),[],'omitnan'),[],'omitnan') - 0.1;
+    max_x = max(max(sub_data_mat(:,end_time_idx),[],'omitnan'),[],'omitnan') + 0.1;
     max_y = 0;
     
     length_of_streams = length(unique(args.stream_position));
@@ -243,7 +243,7 @@ for fidx = 1:num_figures
             x = [min_x, min_x, min_x, min_x];
             y = [0.1, 1, 1, 0.1];
             color = args.colormap(lidx, :);
-            fill(x, y, color);
+            fill(x, y, cell2mat(color));
         end
     end
 
@@ -412,8 +412,8 @@ for fidx = 1:num_figures
         max_x = -99;        
         for rowidx = 1:rows_one
             vec = sub_cont_data_mat{rowidx,1};
-            tmp_min_x = nanmin(vec(:,1) - sub_time_ref(rowidx));
-            tmp_max_x = nanmax(vec(:,1) - sub_time_ref(rowidx));
+            tmp_min_x = min((vec(:,1) - sub_time_ref(rowidx)),[],'omitnan');
+            tmp_max_x = max((vec(:,1) - sub_time_ref(rowidx)),[],'omitnan');
             if tmp_min_x < min_x
                 min_x = tmp_min_x;
             end
@@ -584,7 +584,7 @@ function [x, y] = create_square(x1, x2, y1, cidx, color, args)
     
     x = [x1, x2, x2, x1];
     y = [y1-height, y1-height, y1+height, y1+height];
-    rect = fill(x, y, color, 'EdgeColor', edge_color);
+    rect = fill(x, y, cell2mat(color), 'EdgeColor', edge_color);
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -600,8 +600,8 @@ function ln = create_line(vec, row, time_ref, color, args)
     
     x = vec(:,1) - time_ref;
     y = vec(:,2);
-    max_y = nanmax(y);
-    min_y = nanmin(y);
+    max_y = max(y,[],'omitnan');
+    min_y = min(y,[],'omitnan');
     alpha = (1+each_stream_space)/(max_y - min_y);
     y = (y - min_y)*alpha + (row-1)*(1+each_stream_space);
     ln = line(x, y, 'Color', color, 'LineWidth', args.LineWidth);

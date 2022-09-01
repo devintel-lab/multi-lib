@@ -68,12 +68,12 @@ switch option
         % basic usage, assuming data is stored in files without headers,
         % and data is the first 2 or 3 colums of the file
         stream_files = {
-            '/scratch/multimaster/demo_results/vis_streams_files/case1/cevent_data1.csv'
-            '/scratch/multimaster/demo_results/vis_streams_files/case1/cevent_data2.csv'
-            '/scratch/multimaster/demo_results/vis_streams_files/case1/cevent_data3.csv'
+            '/multi-lib/user_output/vis_streams_files/case1/cevent_data1.csv'
+            '/multi-lib/user_output/vis_streams_files/case1/cevent_data2.csv'
+            '/multi-lib/user_output/vis_streams_files/case1/cevent_data3.csv'
             };
-        window_times_file = '/scratch/multimaster/demo_results/vis_streams_files/case1/window_times.csv';
-        savefilename = '/scratch/multimaster/demo_results/vis_streams_files/case1/case1.png';
+        window_times_file = '/multi-lib/user_output/vis_streams_files/case1/window_times.csv';
+        savefilename = '/multi-lib/user_output/vis_streams_files/case1/case1.png';
         streamlabels = {'ceye', 'peye', 'ja'};
         
         vis_streams_files(stream_files, window_times_file, savefilename, streamlabels);
@@ -83,17 +83,18 @@ switch option
         % you can also mismatch .mat and .csv files in input list
         % the stream_files can come from different directories as well
         stream_files = {
-            '/scratch/multimaster/demo_results/vis_streams_files/case2/cevent_data1.csv'
-            '/scratch/multimaster/demo_results/vis_streams_files/case2/cevent_data2.csv'
+            '/multi-lib/user_output/vis_streams_files/case2/cevent_data1.csv'
+            '/multi-lib/user_output/vis_streams_files/case2/cevent_data2.csv'
             '/bell/multiwork/experiment_72/included/__20141001_16579/derived/cevent_eye_joint-attend_both.mat'
             };
-        window_times_file = '/scratch/multimaster/demo_results/vis_streams_files/case2/window_times.csv';
-        savefilename = '/scratch/multimaster/demo_results/vis_streams_files/case2/case2.png';
+
+        window_times_file = '/multi-lib/user_output/vis_streams_files/case2/window_times.csv';
+        savefilename = '/multi-lib/user_output/vis_streams_files/case2/case2.png';
         streamlabels = {'ceye', 'peye', 'ja'};
         
-        args.stream_files_numheaders = [2 1 1];
-        args.stream_files_columns = {[2 3 4], [1 2 3], [1 2 3]};
-        args.titlelabel = '7206_data';
+        args.stream_files_numheaders = [1 1 1];
+        args.stream_files_columns = {[4 5 6], [4 5 6], [1 2 3]};
+        args.titlelabel = '7006_data';
         args.window_times_file_numheaders = 1;
         args.window_times_file_columns = [1 2];
         

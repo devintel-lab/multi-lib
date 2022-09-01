@@ -12,7 +12,7 @@ switch option
         varname = 'cevent_eye_roi_child';
         subexpIDs = [70 71 72 73 74 75];
         measures = {'prop', 'freq', 'mean_dur'};
-        directory = '/scratch/multimaster/demo_results/draw_correlation_plots/case1/';
+        directory = '/multi-lib/user_output/draw_correlation_plots/case1/';
         nametag = 'eye_roi_child';
         draw_correlation_plots(subexpIDs, varname, measures, directory, nametag);
         
@@ -22,7 +22,7 @@ switch option
         varname = 'cont_vision_size_obj#_child';
         subexpIDs = [70 71 72 73 74 75];
         measures = {'mean'};
-        directory = '/scratch/multimaster/demo_results/draw_correlation_plots/case2/';
+        directory = '/multi-lib/user_output/draw_correlation_plots/case2/';
         nametag = 'obj_size_child';
         draw_correlation_plots(subexpIDs, varname, measures, directory, nametag);
         
@@ -36,7 +36,7 @@ switch option
         args.label_matrix = [1 2 2; 2 1 2; 2 2 1];
         args.labels = {'target'};
         measures = {'prop'};
-        directory = '/scratch/multimaster/demo_results/draw_correlation_plots/case3/';
+        directory = '/multi-lib/user_output/draw_correlation_plots/case3/';
         nametag = 'eye_roi_child_target_during_naming';
         draw_correlation_plots(subexpIDs, varname, measures, directory, nametag, args);
         

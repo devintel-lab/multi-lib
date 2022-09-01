@@ -5,7 +5,7 @@ switch option
         subexpIDs = [7106 7107 7108];
         vars = {'cevent_eye_roi_child', 'cevent_eye_roi_parent', 'cevent_eye_joint-attend_both'};
         labels = {'ceye', 'peye', 'ja'};
-        directory = '/scratch/multimaster/demo_results/vis_streams/case1';
+        directory = '/multi-lib/user_output/vis_streams/case1';
         % note that directory = '.' will save in the current directory
         vis_streams(subexpIDs, vars, labels, directory);
         
@@ -16,7 +16,7 @@ switch option
         subexpIDs = [7106 7107 7108];
         vars = {'cevent_eye_roi_child', 'cevent_eye_roi_parent', 'cevent_eye_joint-attend_both'};
         labels = {'ceye', 'peye', 'ja'};
-        directory = '/scratch/multimaster/demo_results/vis_streams/case2';
+        directory = '/multi-lib/user_output/vis_streams/case2';
         setcolors = 4;
         vis_streams(subexpIDs, vars, labels, directory, setcolors);
         
@@ -26,7 +26,7 @@ switch option
         subexpIDs = [7106 7107 7108];
         vars = {'cevent_eye_roi_child', 'cevent_eye_roi_parent', 'cevent_eye_joint-attend_both'};
         labels = {'ceye', 'peye', 'ja'};
-        directory = '/scratch/multimaster/demo_results/vis_streams/case3';
+        directory = '/multi-lib/user_output/vis_streams/case3';
         setcolors = [
             1 .5 0; % orange
             1 1 0; % yellow
@@ -48,7 +48,7 @@ switch option
         
         vars = {data, 'cevent_eye_roi_parent', 'cevent_eye_joint-attend_both'};
         labels = {'ceye', 'peye', 'ja'};
-        directory = '/scratch/multimaster/demo_results/vis_streams/case4';
+        directory = '/multi-lib/user_output/vis_streams/case4';
         vis_streams(subexpIDs, vars, labels, directory);
         
     case 5
@@ -65,7 +65,7 @@ switch option
         for v = 1:3
             input{v,1} = cont2scaled(subexpIDs, vars{v}, 5, 10, 50, [1 1 1], colors(v,:));
         end
-        directory = '/scratch/multimaster/demo_results/vis_streams/case5';
+        directory = '/multi-lib/user_output/vis_streams/case5';
         vis_streams(subexpIDs, input, labels, directory);
         
     case 6
@@ -80,7 +80,7 @@ switch option
             'cevent_eye_roi_parent'
             };
         labels = {'null', 'ceye', 'peye'};
-        directory = '/scratch/multimaster/demo_results/vis_streams/case6';
+        directory = '/multi-lib/user_output/vis_streams/case6';
         % note that directory = '.' will save in the current directory
         vis_streams(subexpIDs, vars, labels, directory);
         

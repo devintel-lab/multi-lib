@@ -5,7 +5,7 @@ if exist(fullfile(root, csv), 'file')
     csv = fullfile(root, csv);
 end 
 
-data = dlmread(csv, ',', 1, 0);
+data = readmatrix(csv,NumHeaderLines=1);
 
 if sum(ismember(data(:,1), list_subjects())) ~= length(data(:,1))
     sprintf('First column in %s is not subject list', csv);

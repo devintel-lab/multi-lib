@@ -96,7 +96,7 @@ switch option
         args.pairtype = [1 1 1 2 2 2]; % one number per row in mapping. In this
         % case, when the categories match, it is type 1. If it matches with
         % face, it is type 2.
-        savefilename = '/scratch/multimaster/demo_results/extract_pairs_multiwork/case1/example1.csv';
+        savefilename = '/multi-lib/user_output/extract_pairs_multiwork/case1/example1.csv';
         extract_pairs_multiwork(subexpIDs, cev1, cev2, timing_relation, mapping, savefilename, args)
         
     case 2
@@ -124,7 +124,7 @@ switch option
         args.pairtype = [1 1 1 2 2 2]; % one number per row in mapping. In this
         % case, when the categories match, it is type 1. If it matches with
         % face, it is type 2.
-        savefilename = '/scratch/multimaster/demo_results/extract_pairs_multiwork/case2/example2.csv';
+        savefilename = '/multi-lib/user_output/extract_pairs_multiwork/case2/example2.csv';
         extract_pairs_multiwork(subexpIDs, cev1, cev2, timing_relation, mapping, savefilename, args)
         
         
@@ -147,7 +147,7 @@ switch option
         args.pairtype = [1 1 1 2 2 2]; % one number per row in mapping. In this
         % case, when the categories match, it is type 1. If it matches with
         % face, it is type 2.
-        savefilename = '/scratch/multimaster/demo_results/extract_pairs_multiwork/case3/example3.csv';
+        savefilename = '/multi-lib/user_output/extract_pairs_multiwork/case3/example3.csv';
         extract_pairs_multiwork(subexpIDs, cev1, cev2, timing_relation, mapping, savefilename, args)
         
         
@@ -188,7 +188,7 @@ switch option
         % args.first_n_cev1 and args.first_n_cev2 to grab the first and the
         % last events in the pairings
         
-        savefilename = '/scratch/multimaster/demo_results/extract_pairs_multiwork/case4/example4.csv';
+        savefilename = '/multi-lib/user_output/extract_pairs_multiwork/case4/example4.csv';
         extract_pairs_multiwork(subexpIDs, cev1, cev2, timing_relation, mapping, savefilename, args)
         
 end
