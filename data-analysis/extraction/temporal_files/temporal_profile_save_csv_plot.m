@@ -121,7 +121,7 @@ for eidx = 1:length(exp_list)
         profile_mat_exp = profile_mat(mask_select, :);
 
         if strcmp(str_var_type, 'cont')
-            profile_line_plot = nanmean(profile_mat_exp, 1);
+            profile_line_plot = mean(profile_mat_exp, 1,'omitnan');
         else
             num_valid_data = sum(~isnan(profile_mat_exp), 1);
             num_matches = sum(profile_mat_exp > 0 & profile_mat_exp < 2, 1);
@@ -130,7 +130,7 @@ for eidx = 1:length(exp_list)
 
         plot(time_base, profile_line_plot, 'Color', colormap{gidx});
         
-        max_y = nanmax(nanmax(profile_line_plot), max_y);
+        max_y = max(max(profile_line_plot,[],'omitnan'), max_y,'omitnan');
     end
 
     hold off;

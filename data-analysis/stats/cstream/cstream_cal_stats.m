@@ -117,7 +117,7 @@ end
 if ~is_temporal_only
     % proportion
     x_prop_total = cat_chunks(:,2) > 0;
-    results.prop = nansum(x_prop_total)/length(x_prop_total);
+    results.prop = sum(x_prop_total,'omitnan')/length(x_prop_total);
 
     % proportions for each category
     res_proportions = zeros(1, length(categories));
@@ -127,7 +127,7 @@ if ~is_temporal_only
 
         res_proportions(cidx) = sum(x_prop_one)/length(x_prop_one);
     end
-    results.prop_by_cat = res_proportions/nansum(res_proportions);
+    results.prop_by_cat = res_proportions/sum(res_proportions,'omitnan');
 
     % proportions for each individual chunk
     res_individual_prop_by_cat = zeros(length(chunks), length(categories));
@@ -145,11 +145,11 @@ if ~is_temporal_only
             end
         end
         res_individual_prop_by_cat(i,:) = res_individual_prop_by_cat(i,:)/ ...
-            nansum(res_individual_prop_by_cat(i,:));
+            sum(res_individual_prop_by_cat(i,:),'omitnan');
 
         if ~isempty(chunk)
             x_prop_total = chunk(:,2) > 0;
-            results.individual_prop(i, 1) = nansum(x_prop_total)/length(x_prop_total);
+            results.individual_prop(i, 1) = sum(x_prop_total,'omitnan')/length(x_prop_total);
         else
             results.individual_prop(i, 1) = NaN;
         end

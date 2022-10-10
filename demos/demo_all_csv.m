@@ -41,10 +41,10 @@ list_files('cstream inhand child age prop') % will list all files with those sub
 data = get_csv_data('cevent_inhand-eye_child-child_freq_vs_age_all.csv');
 
 % Optionally, you can specify a subject list or experiment list
-data = get_csv_data('cevent_inhand-eye_child-child_freq_vs_age_all.csv', [], [43 32]);
+%data = get_csv_data('cevent_inhand-eye_child-child_freq_vs_age_all.csv', [], [43 32]);
 
 % Lastly, you can also specify which columns of data you want
-data = get_csv_data('cevent_inhand-eye_child-child_freq_vs_age_all.csv', 2, [43 44]);
+%data = get_csv_data('cevent_inhand-eye_child-child_freq_vs_age_all.csv', 2, [43 44]);
 
 % data is a structure with these fields:
 % sub_list

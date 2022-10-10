@@ -91,27 +91,27 @@ cat_chunks = cat(1,chunks{:});
 
 % mean and median
 res_mean = cellfun(@cont_mean,chunks,'UniformOutput', false);
-res_std = cellfun(@(chunk) nanstd(chunk(:,2:end)), chunks,'UniformOutput', false);
+res_std = cellfun(@(chunk) std(chunk(:,2:end),'omitnan'), chunks,'UniformOutput', false);
 res_median = cellfun(@cont_median,chunks,'UniformOutput', false);
 res_min = cellfun(@cont_min,chunks,'UniformOutput', false);
 res_max = cellfun(@cont_max,chunks,'UniformOutput', false);
 res_nonnan = cellfun(@(chunk) sum(~isnan(chunk(:,2)))/size(chunk,1), chunks,'UniformOutput', false);
 results.mean = cont_mean(cat_chunks);
 results.individual_mean = cat(1,res_mean{:});
-results.mean_mean = nanmean(results.individual_mean, 1);
-results.std = nanstd(cat_chunks(:,2:end));
+results.mean_mean = mean(results.individual_mean, 1,'omitnan');
+results.std = std(cat_chunks(:,2:end),'omitnan');
 results.individual_std = cat(1,res_std{:});
-results.mean_std = nanmean(results.individual_std, 1);
+results.mean_std = mean(results.individual_std, 1,'omitnan');
 results.median = cont_median(cat_chunks);
 results.individual_median = cat(1,res_median{:});
-results.mean_median = nanmean(results.individual_median, 1);
-results.min = nanmin(cat_chunks(:,2:end));
+results.mean_median = mean(results.individual_median, 1,'omitnan');
+results.min = min(cat_chunks(:,2:end),'omitnan');
 results.individual_min = cat(1,res_min{:});
-results.mean_min = nanmean(results.individual_min, 1);
-results.max = nanmax(cat_chunks(:,2:end));
+results.mean_min = mean(results.individual_min, 1,'omitnan');
+results.max = max(cat_chunks(:,2:end),'omitnan');
 results.individual_max = cat(1,res_max{:});
-results.mean_max = nanmean(results.individual_max, 1);
-results.max = nanmax(cat_chunks(:,2:end));
+results.mean_max = mean(results.individual_max, 1,'omitnan');
+results.max = max(cat_chunks(:,2:end),'omitnan');
 results.nonnan = sum(~isnan(cat_chunks(:,2)))/size(cat_chunks,1);
 results.individual_nonnan = cat(1,res_nonnan{:});
 
@@ -187,6 +187,6 @@ end
 if is_cal_temporal
     res_temporal = align_streams(time_base, chunks, 'ForceZero');
     results.temporal_time = time_base - time_base(1) + offset;
-    results.temporal_mean = nanmean(res_temporal, 2);
+    results.temporal_mean = mean(res_temporal, 2,'omitnan');
     results.temporal_chunk = res_temporal;
 end

@@ -142,6 +142,6 @@ end
 combined_stats = cat(1, all_stats{:});
 
 % for convenient viewing, let's dump the array and stats into a .csv file using write2csv. We provide the array, a filename, and comma-separated headers for each column
-write2csv(combined_stats, '/space/sbf/matlab_tutorial_part_1.csv', {'subid, onset, offset, category, proportion, non_target_proportion, mean_duration, non_target_mean_duration, frequency, non_target_frequency, number, non_target_number'});
+write2csv(combined_stats, '/multi-lib/user_output/matlab_tutorial/matlab_tutorial_part_1.csv', {'subid, onset, offset, category, proportion, non_target_proportion, mean_duration, non_target_mean_duration, frequency, non_target_frequency, number, non_target_number'});
 
 % There ya go, in about 50 lines of code, you can essentially replicate extract_multi_measures.

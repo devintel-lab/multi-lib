@@ -1,0 +1,10 @@
+#more(on1;_on2;_2)_&_less(on1;_on2;_5),/multi-lib/demo_results/extract_pairs_files/case1/cevent_eye_roi_child.csv,,,/multi-lib/demo_results/extract_pairs_files/case1/cevent_eye_roi_parent.csv,,,,,
+#onset,offset,cat,index,onset,offset,cat,index,trialid,pairid
+97.4,98.433,2,17,100.13,100.6,2,44,1,1
+407.23,407.97,2,135,409.9,410.8,2,250,1,1
+540.37,546.8,1,172,542.37,543.77,1,315,1,1
+540.37,546.8,1,172,544.17,545.17,1,317,1,1
+547.8,554.33,1,174,550.67,551.3,1,323,1,1
+547.8,554.33,1,174,551.93,552.23,1,324,1,1
+547.8,554.33,1,174,552.67,552.93,4,325,1,1
+565.4,571.47,1,177,567.8,568.53,1,332,1,1

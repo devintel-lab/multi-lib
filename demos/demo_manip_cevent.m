@@ -32,7 +32,7 @@ for s = 1:numel(subs)
          
          % view new JA with original eye streams and save image to folder
          vis_streams_data({child_eye_orig, parent_eye_orig, JA}, [], {'ceye', 'peye', 'ja'});
-         export_fig(sprintf('demo_manip_cevent/%d.png', subid));
+         export_fig(sprintf('/multi-lib/user_output/demo_manip_cevent/%d.png', subid));
          close(gcf);
          
      end

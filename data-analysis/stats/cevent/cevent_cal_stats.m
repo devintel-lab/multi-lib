@@ -159,7 +159,7 @@ end
 if all(cellfun(@isempty, chunks))
     max_category = 1;
 else
-    max_category = nanmax(nanmax(cat_chunks(:,3)), max(categories));
+    max_category = max(max(cat_chunks(:,3),[],'omitnan'), max(categories),'omitnan');
 end
 
 % the calculation of individual_range_dur should be done
@@ -359,8 +359,8 @@ res_total_number_by_cat = cellfun(@event_number,cat_chunks_by_cat, ...
 results.total_number_by_cat = horzcat(res_total_number_by_cat{:});
 results.individual_number = individual_number;
 results.individual_number_by_cat = individual_number_by_cat;
-results.mean_number = nanmean(individual_number);
-results.mean_number_by_cat = nanmean(individual_number_by_cat, 1);
+results.mean_number = mean(individual_number,'omitnan');
+results.mean_number_by_cat = mean(individual_number_by_cat, 1,'omitnan');
 
 % mean duration
 % overal mean
@@ -371,8 +371,8 @@ res_mean_dur_by_cat = cellfun(@event_average_dur, cat_chunks_by_cat, ...
 results.mean_dur_by_cat = horzcat(res_mean_dur_by_cat{:});
 results.individual_mean_dur = individual_mean_dur;
 results.individual_mean_dur_by_cat = individual_mean_dur_by_cat;
-results.mean_mean_dur = nanmean(results.individual_mean_dur);
-results.mean_mean_dur_by_cat = nanmean(results.individual_mean_dur_by_cat, 1);
+results.mean_mean_dur = mean(results.individual_mean_dur,'omitnan');
+results.mean_mean_dur_by_cat = mean(results.individual_mean_dur_by_cat, 1,'omitnan');
 results.individual_std_dur = individual_std_dur;
 % median durations
 results.median_dur = event_median_dur(cat_chunks);
@@ -381,12 +381,12 @@ res_median_dur_by_cat = cellfun(@event_median_dur, cat_chunks_by_cat, ...
 results.median_dur_by_cat = horzcat(res_median_dur_by_cat{:});
 results.individual_median_dur = individual_median_dur;
 results.individual_median_dur_by_cat = individual_median_dur_by_cat;
-results.mean_median_dur = nanmean(results.individual_median_dur);
-results.mean_median_dur_by_cat = nanmean(results.individual_median_dur_by_cat, 1);
+results.mean_median_dur = mean(results.individual_median_dur,'omitnan');
+results.mean_median_dur_by_cat = mean(results.individual_median_dur_by_cat, 1,'omitnan');
 % proportion and frequency are only calculated when individual trial
 % time is included in input
 if isfield(input, 'individual_range_dur')
-    range_time_total = nansum(individual_range_dur);
+    range_time_total = sum(individual_range_dur,'omitnan');
     mean_dur_tmp = results.mean_dur;
     mean_dur_tmp(isnan(mean_dur_tmp)) = 0;
     mean_dur_by_cat_tmp = results.mean_dur_by_cat;
@@ -406,8 +406,8 @@ if isfield(input, 'individual_range_dur')
         ./ repmat(individual_range_dur, 1, length(categories));
 
     % mean proportions
-    results.mean_prop = nanmean(results.individual_prop);
-    results.mean_prop_by_cat = nanmean(results.individual_prop_by_cat, 1);
+    results.mean_prop = mean(results.individual_prop,'omitnan');
+    results.mean_prop_by_cat = mean(results.individual_prop_by_cat, 1,'omitnan');
     
     % frequency
     results.freq = results.total_number / (range_time_total/60);
@@ -416,8 +416,8 @@ if isfield(input, 'individual_range_dur')
     results.individual_freq_by_cat = results.individual_number_by_cat ...
         ./ repmat((individual_range_dur/60), 1, length(categories));
     
-    results.mean_freq = nanmean(results.individual_freq);
-    results.mean_freq_by_cat = nanmean(results.individual_freq_by_cat, 1);
+    results.mean_freq = mean(results.individual_freq,'omitnan');
+    results.mean_freq_by_cat = mean(results.individual_freq_by_cat, 1,'omitnan');
     results.range_time_total = range_time_total;
     results.individual_range_dur = individual_range_dur;
 end
@@ -431,11 +431,11 @@ individual_switches = vertcat(individual_switches{:});
 % results.switches = nansum(individual_switches);
 % results.individual_switches = individual_switches;
 if isfield(input, 'individual_range_dur')
-    results.switches_freq = nansum(individual_switches) / (range_time_total/60);
+    results.switches_freq = sum(individual_switches,'omitnan') / (range_time_total/60);
     results.individual_switches_freq = individual_switches ./ ...
         (input.individual_range_dur/60);
 else
-    results.switches = nansum(individual_switches);
+    results.switches = sum(individual_switches,'omitnan');
     results.individual_switches = individual_switches;
 end
 

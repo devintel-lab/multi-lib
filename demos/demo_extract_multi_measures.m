@@ -95,7 +95,7 @@ switch option
         % 'cont_vision_obj2_child', and 'cont_vision_obj3_child'
         var_list = {'cevent_inhand_child', 'cevent_eye_roi_child', 'cont_vision_size_obj#_child'};
         subexpIDs = [32]; % this can also be a list of experiments
-        filename = '/scratch/multimaster/demo_results/extract_multi_measures/example1.csv';
+        filename = '/multi-lib/user_output/extract_multi_measures/example1.csv';
         args = [];
         extract_multi_measures(var_list, subexpIDs, filename, args);
         
@@ -104,7 +104,7 @@ switch option
         
         var_list = {'cevent_inhand_child', 'cevent_eye_roi_child', 'cont_vision_size_obj#_child'};
         subexpIDs = [32]; % this can also be a list of experiments
-        filename = '/scratch/multimaster/demo_results/extract_multi_measures/example2.csv';
+        filename = '/multi-lib/user_output/extract_multi_measures/example2.csv';
         args.persubject = 1;
         extract_multi_measures(var_list, subexpIDs, filename, args);
         
@@ -113,7 +113,7 @@ switch option
         
         var_list = {'cevent_inhand_child', 'cevent_eye_roi_child', 'cont_vision_size_obj#_child'};
         subexpIDs = [32]; % this can also be a list of experiments
-        filename = '/scratch/multimaster/demo_results/extract_multi_measures/example3.csv';
+        filename = '/multi-lib/user_output/extract_multi_measures/example3.csv';
         args.cevent_name = 'cevent_speech_naming_local-id'; % these are the windows of time, or instances, from which data will be extracted and measured
         args.cevent_values = 1:3; % which categories in cevent_name you wish to use
         %% label_matrix explanation
@@ -162,7 +162,7 @@ switch option
         
         var_list = {'cevent_inhand_child', 'cevent_eye_roi_does_not_exist', 'cont_vision_size_obj#_child'};
         subexpIDs = [32]; % this can also be a list of experiments
-        filename = '/scratch/multimaster/demo_results/extract_multi_measures/example4.csv';
+        filename = '/multi-lib/user_output/extract_multi_measures/example4.csv';
         args = [];
         extract_multi_measures(var_list, subexpIDs, filename, args);
         
@@ -181,7 +181,7 @@ switch option
         
         var_list = {'cevent_inhand_child', 'cevent_eye_roi_child', 'cont_vision_size_obj#_child', 'cevent_eye_joint-attend_both'};
         subexpIDs = [32]; % this can also be a list of experiments
-        filename = '/scratch/multimaster/demo_results/extract_multi_measures/example5.csv';
+        filename = '/multi-lib/user_output/extract_multi_measures/example5.csv';
         args.cevent_name = 'cevent_speech_naming_local-id';
         args.cevent_values = 1:3;
         args.label_matrix = [
@@ -194,11 +194,11 @@ switch option
     case 6
         %% use custom ranges based on 2 or 3 columns in a csv file
         
-        csvdata = get_csv_form('/scratch/multimaster/demo_results/extract_pairs_multiwork/case1/example1.csv', [2 6]);
+        csvdata = get_csv_form('/scratch/multimaster/user_output/extract_pairs_multiwork/case1/example1.csv', [2 6]);
         subexpIDs = csvdata.sub_list;
         args.event_ranges = csvdata.ranges; % of if cevent, args.cevent_ranges
         var_list = {'cevent_inhand_child', 'cevent_eye_roi_child', 'cont_vision_size_obj#_child', 'cevent_eye_joint-attend_both'};
-        filename = '/scratch/multimaster/demo_results/extract_multi_measures/example6.csv';
+        filename = '/multi-lib/user_output/extract_multi_measures/example6.csv';
         extract_multi_measures(var_list, subexpIDs, filename, args);
         
     case 7
@@ -206,7 +206,7 @@ switch option
         
         var_list = {'cevent_inhand_child', 'cevent_eye_roi_child', 'cont_vision_size_obj#_child', 'cevent_eye_joint-attend_both'};
         subexpIDs = [32]; % this can also be a list of experiments
-        filename = '/scratch/multimaster/demo_results/extract_multi_measures/example7.csv';
+        filename = '/multi-lib/user_output/extract_multi_measures/example7.csv';
         args.cevent_name = 'cevent_speech_naming_local-id';
         args.cevent_values = 1:3;
         args.within_ranges = 0; % 1 is the default behavior, 0 is between ranges. Will get all non-naming moments.
@@ -218,7 +218,7 @@ switch option
         
         var_list = {'cevent_eye_roi_child', 'cevent_eye_roi_parent'};
         subexpIDs = [32]; % this can also be a list of experiments
-        filename = '/scratch/multimaster/demo_results/extract_multi_measures/example8.csv';
+        filename = '/multi-lib/user_output/extract_multi_measures/example8.csv';
         args.whence = 'start'; % the point of reference, which is either the 'start' of the cevent (onset), or the 'end' of the cevent (offset)
         args.interval = [-5 0]; % the shift relative to the point of reference indicated in whence.
         % [-5 0] means 5 seconds before each event, up to the onset of that
@@ -240,7 +240,7 @@ switch option
         
         var_list = {'cevent_eye_roi_child', 'cont_vision_size_obj#_child'};
         subexpIDs = [32]; % this can also be a list of experiments
-        filename = '/scratch/multimaster/demo_results/extract_multi_measures/example9.csv';
+        filename = '/multi-lib/user_output/extract_multi_measures/example9.csv';
         args.cevent_measures = {'individual_prop'};
         args.cont_measures = {'individual_mean'};
         extract_multi_measures(var_list, subexpIDs, filename, args);

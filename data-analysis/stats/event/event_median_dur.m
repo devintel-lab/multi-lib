@@ -5,5 +5,5 @@ function [dur] = event_median_dur(cevent)
 if isempty(cevent)
     dur = NaN;
 else
-    dur = nanmedian(cevent(:,2) - cevent(:,1));
+    dur = median((cevent(:,2) - cevent(:,1)),'omitnan');
 end

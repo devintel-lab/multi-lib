@@ -1,9 +1,10 @@
-% function results = demo_get_variable_by_grouping(DEMO_ID)
+function results = demo_get_variable_by_grouping(DEMO_ID)
 % This is a script for demonstrating how to use the function 
 % get_variable_by_grouping
 
-clear all
-DEMO_ID = 1;
+% clear all
+% DEMO_ID = 1;
+disp(DEMO_ID)
 
 exp_id = 70;
 sub_list = list_subjects(exp_id);

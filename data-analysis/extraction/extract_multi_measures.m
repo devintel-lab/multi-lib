@@ -44,6 +44,7 @@ else
     persubject = args.persubject;
 end
 
+
 subs = cIDs(subexpID);
 
 numvar = numel(var_list);
@@ -230,7 +231,7 @@ for s = 1:numel(subs)
                     end
 
                     if persubject
-                        prearray(:,log) = nanmean(thisstat, 1);
+                        prearray(:,log) = mean(thisstat, 1,'omitnan');
                     else
                         prearray(:,log) = thisstat;
                     end

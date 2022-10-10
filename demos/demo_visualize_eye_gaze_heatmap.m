@@ -2,7 +2,7 @@ clear all;
 
 exp_id = 32;
 % save_path = ['M:\experiment_' int2str(exp_id) '\gaze_heatmap_by_subject'];
-save_path = '.';
+save_path = '/multi-lib/user_output/parent_eye_gaze_heatmap/';
 img_w = 720;
 img_h = 480;
 agent = 'parent';
@@ -107,6 +107,7 @@ for sidx = 1:length(sub_list)
 
     filename = sprintf('%d_%s_gaze_heatmap', sub_id, agent);
     saveas(h, fullfile(save_path, filename), graph_format);
+    disp(save_path);
     close(h);
 % pause
 end

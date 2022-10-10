@@ -1,6 +1,6 @@
 clear all;
 
-DEMO_ID = 3;
+DEMO_ID = 1;
 
 % The function will only generate data for subjects that have all the
 % variables, and inform the user about the missing ones.
@@ -46,7 +46,7 @@ if DEMO_ID == 1
     %              var_name: {1x3 cell}
     
     % Then the result can be plotted and saved
-    temporal_profile_save_csv_plot(profile_data, '.')
+    temporal_profile_save_csv_plot(profile_data, '/multi-lib/user_output/temporal_profile_by_cevent/')
     % temporal_profile_save_csv_plot(profile_data, save_dir)
     
     
@@ -75,7 +75,7 @@ elseif DEMO_ID == 2
     profile_input.groupid_label = {'target', 'non-target', 'face'};
    
     profile_data = temporal_profile_generate_by_cevent(profile_input);
-    temporal_profile_save_csv_plot(profile_data, '.');
+    temporal_profile_save_csv_plot(profile_data, '/multi-lib/user_output/temporal_profile_by_cevent/');
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% demo case 3: get temporal probability profile of child holding target vs non-target
@@ -108,5 +108,5 @@ elseif DEMO_ID == 3
     % holding the object, function provides user the option to combine two
     % profile data using logical operators "or" "and"
     profile_data = temporal_profile_logical_operation(profile_lefthand, profile_righthand, 'or');
-    temporal_profile_save_csv_plot(profile_data, '.');
+    temporal_profile_save_csv_plot(profile_data, '/multi-lib/user_output/temporal_profile_by_cevent/');
 end

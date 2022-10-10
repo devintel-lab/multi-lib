@@ -41,7 +41,7 @@ end
 suball = horzcat(suball{:});
 lagall = horzcat(lagall{:});
 
-lagmean = nanmean(lagall,2);
+lagmean = mean(lagall,2, 'omitnan');
 
 lagall = cat(2, (windowrange/rate)', lagall, lagmean);
 

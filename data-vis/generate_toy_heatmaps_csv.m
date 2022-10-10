@@ -31,6 +31,10 @@ function [SUB_LIST] = generate_toy_heatmaps_csv(SUBJECT, FOLDER, CSV_FILE, COLS,
         error('Need at least 3 arguments: subject, folder, csv file');
     end
 
+    disp(CSV_FILE);
+    disp(COLS);
+    disp(NUM_HEAD);
+
     % get a struct with all subject_ids and cevents from CSV file
     CEVENTS = get_cevents_from_csv(CSV_FILE, COLS, NUM_HEAD);
     

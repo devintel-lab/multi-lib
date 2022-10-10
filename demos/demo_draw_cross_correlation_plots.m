@@ -17,7 +17,7 @@ switch option
         var1 = 'cevent_eye_roi_child';
         var2 = 'cevent_eye_roi_parent';
         range_sec = [-10 10];
-        directory = '/scratch/multimaster/demo_results/draw_cross_correlation_plots/case1/';
+        directory = '/multi-lib/user_output/draw_cross_correlation_plots/case1/';
         nametag = 'ceye_peye';
         draw_cross_correlation_plots(subexpIDs, var1, var2, range_sec, directory, nametag);
         
@@ -26,7 +26,7 @@ switch option
         var1 = 'cevent_eye_roi_child';
         var2 = 'cevent_eye_joint-attend_child-lead-moment_both';
         range_sec = [-10 10];
-        directory = '/scratch/multimaster/demo_results/draw_cross_correlation_plots/case2/';
+        directory = '/multi-lib/user_output/draw_cross_correlation_plots/case2/';
         nametag = 'ceye_JA-child-lead';
         draw_cross_correlation_plots(subexpIDs, var1, var2, range_sec, directory, nametag);
         

@@ -109,19 +109,19 @@ function demo_extract_pairs_files(option)
 switch option
     case 1
         % basic usage
-        filename1 = '/scratch/multimaster/demo_results/extract_pairs_files/case1/cevent_data1.csv';
-        filename2 = '/scratch/multimaster/demo_results/extract_pairs_files/case1/cevent_data2.csv';
+        filename1 = '/multi-lib/user_output/extract_pairs_files/case1/cevent_eye_roi_child.csv';
+        filename2 = '/multi-lib/user_output/extract_pairs_files/case1/cevent_eye_roi_parent.csv';
         timing_relation = 'more(on1, on2, 2) & less(on1, on2, 5)';
         mapping = [1 1; 2 2 ; 3 3; 1 4; 2 4; 3 4; 4 4; 4 1; 4 2; 4 3];
-        savefilename = '/scratch/multimaster/demo_results/extract_pairs_files/case1/case1_pairs.csv';
+        savefilename = '/multi-lib/user_output/extract_pairs_files/case1/case1_pairs.csv';
         extract_pairs_files(filename1, filename2, timing_relation, mapping, savefilename);
         
     case 2
         % some of these may be option, see above for details
         
-        filename1 = '/scratch/multimaster/demo_results/extract_pairs_files/case2/cevent_data1.csv';
-        filename2 = '/scratch/multimaster/demo_results/extract_pairs_files/case2/cevent_data2.csv';
-        args.cevent_trials = '/scratch/multimaster/demo_results/extract_pairs_files/case2/cevent_trials.csv';
+        filename1 = '/multi-lib/user_output/extract_pairs_files/case2/cevent_data1.csv';
+        filename2 = '/multi-lib/user_output/extract_pairs_files/case2/cevent_data2.csv';
+        args.cevent_trials = '/multi-lib/user_output/extract_pairs_files/case2/cevent_trials.csv';
         args.files_numheaders = [0 0]; % zero headers in filename1 and filename2
         args.files_columns = {[1 2 3], [1 2 3]}; % grab first 3 columns of filename1 and filename2
         args.cevent_trials_numheaders = 0;
@@ -134,7 +134,7 @@ switch option
         args.first_n_cev2 = 1;
         args.last_n_cev1 = 1;
         args.last_n_cev2 = 1;
-        savefilename = '/scratch/multimaster/demo_results/extract_pairs_files/case2/case2_pairs.csv';
+        savefilename = '/multi-lib/user_output/extract_pairs_files/case2/case2_pairs.csv';
         extract_pairs_files(filename1, filename2, timing_relation, mapping, savefilename, args);
 end
 end
