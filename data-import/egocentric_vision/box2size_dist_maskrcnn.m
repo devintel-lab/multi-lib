@@ -176,4 +176,3 @@ w = min(max(0, w), n_cols - x);
 h = min(max(0, h), n_rows - y);
 box = [x y w h];
 end
-
